@@ -1,0 +1,104 @@
+[
+	{
+		"Name": "Sewer Syrup",
+		"ModelID": 2923,
+		"Rank": "B",
+		"MapTerritory": "WesternThanalan"
+	},
+	{
+		"Name": "Ovjang",
+		"ModelID": 2924,
+		"Rank": "B",
+		"MapTerritory": "CentralThanalan"
+	},
+	{
+		"Name": "Gatling",
+		"ModelID": 2925,
+		"Rank": "B",
+		"MapTerritory": "EasternThanalan"
+	},
+	{
+		"Name": "Albin the Ashen",
+		"ModelID": 2926,
+		"Rank": "B",
+		"MapTerritory": "SouthernThanalan"
+	},
+	{
+		"Name": "Flame Sergeant Dalvag",
+		"ModelID": 2927,
+		"Rank": "B",
+		"MapTerritory": "NorthernThanalan"
+	},
+	{
+		"Name": "White Joker",
+		"ModelID": 2919,
+		"Rank": "B",
+		"MapTerritory": "CentralShroud"
+	},
+	{
+		"Name": "Stinging Sophie",
+		"ModelID": 2920,
+		"Rank": "B",
+		"MapTerritory": "EastShroud"
+	},
+	{
+		"Name": "Monarch Ogrefly",
+		"ModelID": 2921,
+		"Rank": "B",
+		"MapTerritory": "SouthShroud"
+	},
+	{
+		"Name": "Phecda",
+		"ModelID": 2922,
+		"Rank": "B",
+		"MapTerritory": "NorthShroud"
+	},
+	{
+		"Name": "Skogs Fru",
+		"ModelID": 2928,
+		"Rank": "B",
+		"MapTerritory": "MiddleLaNoscea"
+	},
+	{
+		"Name": "Barbastelle",
+		"ModelID": 2929,
+		"Rank": "B",
+		"MapTerritory": "LowerLaNoscea"
+	},
+	{
+		"Name": "Bloody Mary",
+		"ModelID": 2930,
+		"Rank": "B",
+		"MapTerritory": "EasternLaNoscea"
+	},
+	{
+		"Name": "Dark Helmet",
+		"ModelID": 2931,
+		"Rank": "B",
+		"MapTerritory": "WesternLaNoscea"
+	},
+	{
+		"Name": "Myradrosh",
+		"ModelID": 2932,
+		"Rank": "B",
+		"MapTerritory": "UpperLaNoscea"
+	},
+	{
+		"Name": "Vuokho",
+		"ModelID": 2933,
+		"Rank": "B",
+		"MapTerritory": "OuterLaNoscea"
+	},
+	{
+		"Name": "Naul",
+		"ModelID": 2934,
+		"Rank": "B",
+		"MapTerritory": "CoerthasCentralHighlands"
+	},
+	{
+		"Name": "Leech King",
+		"ModelID": 2935,
+		"Rank": "B",
+		"MapTerritory": "MorDhona"
+	}
+]

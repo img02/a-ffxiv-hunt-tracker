@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "Mirka",
+		"ModelID": 4362,
+		"Rank": "A",
+		"MapTerritory": "CoerthasWesternHighlands"
+	},
+	{
+		"Name": "Lyuba",
+		"ModelID": 4363,
+		"Rank": "A",
+		"MapTerritory": "CoerthasWesternHighlands"
+	},
+	{
+		"Name": "Agathos",
+		"ModelID": 4369,
+		"Rank": "A",
+		"MapTerritory": "TheChurningMists"
+	},
+	{
+		"Name": "Bune",
+		"ModelID": 4368,
+		"Rank": "A",
+		"MapTerritory": "TheChurningMists"
+	},
+	{
+		"Name": "Campacti",
+		"ModelID": 4372,
+		"Rank": "A",
+		"MapTerritory": "AzysLla"
+	},
+	{
+		"Name": "stench blossom",
+		"ModelID": 4373,
+		"Rank": "A",
+		"MapTerritory": "AzysLla"
+	},
+	{
+		"Name": "Pylraster",
+		"ModelID": 4364,
+		"Rank": "A",
+		"MapTerritory": "TheDravanianForelands"
+	},
+	{
+		"Name": "Lord of the Wyverns",
+		"ModelID": 4365,
+		"Rank": "A",
+		"MapTerritory": "TheDravanianForelands"
+	},
+	{
+		"Name": "Slipkinx Steeljoints",
+		"ModelID": 4366,
+		"Rank": "A",
+		"MapTerritory": "TheDravanianHinterlands"
+	},
+	{
+		"Name": "Stolas",
+		"ModelID": 4367,
+		"Rank": "A",
+		"MapTerritory": "TheDravanianHinterlands"
+	},
+	{
+		"Name": "Slipkinx Steeljoints",
+		"ModelID": 4370,
+		"Rank": "A",
+		"MapTerritory": "TheSeaofClouds"
+	},
+	{
+		"Name": "Stolas",
+		"ModelID": 4371,
+		"Rank": "A",
+		"MapTerritory": "TheSeaofClouds"
+	}
+]

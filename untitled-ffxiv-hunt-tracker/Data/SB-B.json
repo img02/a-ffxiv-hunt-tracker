@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "Shadow-dweller Yamini",
+		"ModelID": 6008,
+		"Rank": "B",
+		"MapTerritory": "TheFringes"
+	},
+	{
+		"Name": "Ouzelum",
+		"ModelID": 6009,
+		"Rank": "B",
+		"MapTerritory": "TheFringes"
+	},
+	{
+		"Name": "Gwas-y-neidr",
+		"ModelID": 6010,
+		"Rank": "B",
+		"MapTerritory": "ThePeaks"
+	},
+	{
+		"Name": "Buccaboo",
+		"ModelID": 6011,
+		"Rank": "B",
+		"MapTerritory": "ThePeaks"
+	},
+	{
+		"Name": "Manes",
+		"ModelID": 6012,
+		"Rank": "B",
+		"MapTerritory": "TheLochs"
+	},
+	{
+		"Name": "Kiwa",
+		"ModelID": 6013,
+		"Rank": "B",
+		"MapTerritory": "TheLochs"
+	},
+	{
+		"Name": "Gauki Strongblade",
+		"ModelID": 6002,
+		"Rank": "B",
+		"MapTerritory": "TheRubySea"
+	},
+	{
+		"Name": "Guhuo Niao",
+		"ModelID": 6003,
+		"Rank": "B",
+		"MapTerritory": "TheRubySea"
+	},
+	{
+		"Name": "Deidar",
+		"ModelID": 6004,
+		"Rank": "B",
+		"MapTerritory": "Yanxia"
+	},
+	{
+		"Name": "Gyorai Quickstrike",
+		"ModelID": 6005,
+		"Rank": "B",
+		"MapTerritory": "Yanxia"
+	},
+	{
+		"Name": "Aswang",
+		"ModelID": 6007,
+		"Rank": "B",
+		"MapTerritory": "TheAzimSteppe"
+	},
+	{
+		"Name": "Kurma",
+		"ModelID": 6006,
+		"Rank": "B",
+		"MapTerritory": "TheAzimSteppe"
+	}
+]

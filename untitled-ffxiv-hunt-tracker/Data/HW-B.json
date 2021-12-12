@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "Alteci",
+		"ModelID": 4350,
+		"Rank": "B",
+		"MapTerritory": "CoerthasWesternHighlands"
+	},
+	{
+		"Name": "Kreutzet",
+		"ModelID": 4351,
+		"Rank": "B",
+		"MapTerritory": "CoerthasWesternHighlands"
+	},
+	{
+		"Name": "Lycidas",
+		"ModelID": 4360,
+		"Rank": "B",
+		"MapTerritory": "AzysLla"
+	},
+	{
+		"Name": "Omni",
+		"ModelID": 4361,
+		"Rank": "B",
+		"MapTerritory": "AzysLla"
+	},
+	{
+		"Name": "Gnath cometdrone",
+		"ModelID": 4352,
+		"Rank": "B",
+		"MapTerritory": "TheDravanianForelands"
+	},
+	{
+		"Name": "Pterygotus",
+		"ModelID": 4354,
+		"Rank": "B",
+		"MapTerritory": "TheDravanianForelands"
+	},
+	{
+		"Name": "false gigantopithecus",
+		"ModelID": 4355,
+		"Rank": "B",
+		"MapTerritory": "TheDravanianHinterlands"
+	},
+	{
+		"Name": "Stolas",
+		"ModelID": 4367,
+		"Rank": "B",
+		"MapTerritory": "TheDravanianHinterlands"
+	},
+	{
+		"Name": "The Scarecrow",
+		"ModelID": 4357,
+		"Rank": "B",
+		"MapTerritory": "TheChurningMists"
+	},
+	{
+		"Name": "Scitalis",
+		"ModelID": 4356,
+		"Rank": "B",
+		"MapTerritory": "TheChurningMists"
+	},
+	{
+		"Name": "Squonk",
+		"ModelID": 4358,
+		"Rank": "B",
+		"MapTerritory": "TheSeaofClouds"
+	},
+	{
+		"Name": "Sanu Vali of Dancing Wings",
+		"ModelID": 4359,
+		"Rank": "B",
+		"MapTerritory": "TheSeaofClouds"
+	}
+]

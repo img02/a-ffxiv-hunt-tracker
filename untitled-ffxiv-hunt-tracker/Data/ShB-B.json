@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "Domovoi",
+		"ModelID": 8656,
+		"Rank": "B",
+		"MapTerritory": "IlMheg"
+	},
+	{
+		"Name": "Vulpangue",
+		"ModelID": 8657,
+		"Rank": "B",
+		"MapTerritory": "IlMheg"
+	},
+	{
+		"Name": "Mindmaker",
+		"ModelID": 8893,
+		"Rank": "B",
+		"MapTerritory": "TheRaktikaGreatwood"
+	},
+	{
+		"Name": "Pachamama",
+		"ModelID": 8894,
+		"Rank": "B",
+		"MapTerritory": "TheRaktikaGreatwood"
+	},
+	{
+		"Name": "Gilshs Aath Swiftclaw",
+		"ModelID": 8898,
+		"Rank": "B",
+		"MapTerritory": "TheTempest"
+	},
+	{
+		"Name": "Deacon",
+		"ModelID": 8899,
+		"Rank": "B",
+		"MapTerritory": "TheTempest"
+	},
+	{
+		"Name": "Worm of the Well",
+		"ModelID": 8903,
+		"Rank": "B",
+		"MapTerritory": "AmhAraeng"
+	},
+	{
+		"Name": "Juggler Hecatomb",
+		"ModelID": 8904,
+		"Rank": "B",
+		"MapTerritory": "AmhAraeng"
+	},
+	{
+		"Name": "La Velue",
+		"ModelID": 8908,
+		"Rank": "B",
+		"MapTerritory": "Lakeland"
+	},
+	{
+		"Name": "Itzpapalotl",
+		"ModelID": 8909,
+		"Rank": "B",
+		"MapTerritory": "Lakeland"
+	},
+	{
+		"Name": "Coquecigrue",
+		"ModelID": 8913,
+		"Rank": "B",
+		"MapTerritory": "Kholusia"
+	},
+	{
+		"Name": "Indomitable",
+		"ModelID": 8914,
+		"Rank": "B",
+		"MapTerritory": "Kholusia"
+	}
+]

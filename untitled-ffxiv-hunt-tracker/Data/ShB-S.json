@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "Aglaope",
+		"ModelID": 8653,
+		"Rank": "S",
+		"MapTerritory": "IlMheg"
+	},
+	{
+		"Name": "Ixtab",
+		"ModelID": 8890,
+		"Rank": "S",
+		"MapTerritory": "TheRaktikaGreatwood"
+	},
+	{
+		"Name": "Gunitt",
+		"ModelID": 8895,
+		"Rank": "S",
+		"MapTerritory": "TheTempest"
+	},
+	{
+		"Name": "Tarchia",
+		"ModelID": 8900,
+		"Rank": "S",
+		"MapTerritory": "AmhAraeng"
+	},
+	{
+		"Name": "Tyger",
+		"ModelID": 8905,
+		"Rank": "S",
+		"MapTerritory": "Lakeland"
+	},
+	{
+		"Name": "Forgiven Pedantry",
+		"ModelID": 8910,
+		"Rank": "S",
+		"MapTerritory": "Kholusia"
+	},
+	{
+		"Name": "Forgiven Rebellion",
+		"ModelID": 8915,
+		"Rank": "SS",
+		"MapTerritory":  "AmhAraeng" 
+	},
+	{
+		"Name": "Forgiven Rebellion",
+		"ModelID": 8915,
+		"Rank": "SS",
+		"MapTerritory":  "IlMheg" 
+	},
+	{
+		"Name": "Forgiven Rebellion",
+		"ModelID": 8915,
+		"Rank": "SS",
+		"MapTerritory":  "Kholusia" 
+	},
+	{
+		"Name": "Forgiven Rebellion",
+		"ModelID": 8915,
+		"Rank": "SS",
+		"MapTerritory":  "Lakeland" 
+	},
+	{
+		"Name": "Forgiven Rebellion",
+		"ModelID": 8915,
+		"Rank": "SS",
+		"MapTerritory":  "TheRaktikaGreatwood" 
+	},
+	{
+		"Name": "Forgiven Rebellion",
+		"ModelID": 8915,
+		"Rank": "SS",
+		"MapTerritory":  "TheTempest" 
+	}
+	]

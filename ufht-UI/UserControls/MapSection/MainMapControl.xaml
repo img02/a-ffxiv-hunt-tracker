@@ -1,0 +1,189 @@
+﻿<UserControl x:Class="ufht_UI.UserControls.MainMapControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ufht_UI.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="1000">
+
+    <Grid>
+        <Image Name="MapImage"
+               MinHeight="512" MinWidth="512" MouseMove="MapImage_OnMouseMove" MouseLeave="MapImage_OnMouseLeave"
+
+               Source="{Binding CurrentPlayer.CurrentMapImagePath,
+                        Converter={StaticResource FileToBitmapConverter}}"/>
+        <!-- Map ToolTip Popup -->
+        <Popup Name="MapTT" Placement="Relative">
+            <Border CornerRadius="5" Padding="5, 2,5,2" 
+                    Background="Azure" IsHitTestVisible="False">
+                <TextBlock Text="{DynamicResource _mapMouseOver}" />
+
+            </Border>
+        </Popup>
+        <!-- END Map ToolTip Popup -->
+
+        <Canvas Name="PlayerIconCanvas"  Opacity="1"
+                Height="{Binding ElementName=MapImage, Path=ActualHeight}"
+                Width="{Binding ElementName=MapImage, Path=ActualWidth}">
+
+            <Image Name="PlayerIcon" Opacity="{DynamicResource _playerIconOpacity}"
+                   Canvas.ZIndex ="0"
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Canvas.Left="{DynamicResource _playerIconX}"
+                   Canvas.Top="{DynamicResource _playerIconY}"
+
+                   MouseMove="PlayerIcon_OnMouseMove"
+                   MouseLeave="PlayerIcon_OnMouseLeave"
+
+                   Height="32" 
+                   Width="32"
+                   Source="{Binding CurrentPlayer.PlayerIconImagePath,
+                        Converter={StaticResource FileToBitmapConverter}}"
+                   RenderTransformOrigin="0.5, 0.5">
+
+                <Image.RenderTransform>
+                    <RotateTransform Angle="{DynamicResource _playerIconRotation}" />
+                </Image.RenderTransform>
+
+            </Image>
+
+            <!-- Player ToolTip Popup -->
+            <Popup Name="PlayerTT" Placement="Relative">
+                <Border CornerRadius="5" Padding="5, 2,5,2" 
+                        Background="Azure" IsHitTestVisible="False">
+                    <TextBlock Text="{DynamicResource _playerToolTipInfo}" />
+                </Border>
+            </Popup>
+            <!-- END Player ToolTip Popup -->
+
+            <Image Name="ARank" 
+                   
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Canvas.Left="{DynamicResource _ARankIconX}"
+                   Canvas.Top="{DynamicResource _ARankIconY}"
+
+                   MouseMove="ARank_OnMouseMove"
+                   MouseLeave="ARank_OnMouseLeave"
+
+                   Height="64" 
+                   Width="64"
+
+                   />
+
+            <!-- A Rank ToolTip Popup -->
+            <Popup Name="ARankTT" Placement="Relative">
+                <Border CornerRadius="5" Padding="5, 2,5,2" 
+                        Background="Azure" IsHitTestVisible="False">
+                    <TextBlock Text="{DynamicResource _nearbyA}" />
+
+                </Border>
+            </Popup>
+            <!-- END A Rank ToolTip Popup -->
+
+            <Image Name="ARank2" 
+                   
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Canvas.Left="{DynamicResource _ARank2IconX}"
+                   Canvas.Top="{DynamicResource _ARank2IconY}"
+
+                   MouseMove="ARank_OnMouseMove"
+                   MouseLeave="ARank_OnMouseLeave"
+
+                   Height="64" 
+                   Width="64"
+
+                   />
+
+            <!-- A Rank ToolTip Popup -->
+            <Popup Name="ARank2TT" Placement="Relative">
+                <Border CornerRadius="5" Padding="5, 2,5,2" 
+                        Background="Azure" IsHitTestVisible="False">
+                    <TextBlock Text="{DynamicResource _nearbyA2}" />
+
+                </Border>
+            </Popup>
+            <!-- END A Rank ToolTip Popup -->
+
+            <Image Name="SRank" 
+                   
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Canvas.Left="{DynamicResource _SRankIconX}"
+                   Canvas.Top="{DynamicResource _SRankIconY}"
+                   
+                   MouseMove="SRank_OnMouseMove"
+                   MouseLeave="SRank_OnMouseLeave"
+            
+                   Height="64" 
+                   Width="64"
+
+                   />
+
+            <!-- S Rank ToolTip Popup -->
+            <Popup Name="SRankTT" Placement="Relative">
+                <Border CornerRadius="5" Padding="5, 2,5,2" 
+                        Background="Azure" IsHitTestVisible="False">
+                    <TextBlock Text="{DynamicResource _nearbyS}" />
+
+                </Border>
+            </Popup>
+            <!-- END S Rank ToolTip Popup -->
+
+            <Image Name="SSRank" 
+                   
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Canvas.Left="{DynamicResource _SSRankIconX}"
+                   Canvas.Top="{DynamicResource _SSRankIconY}"
+
+                   MouseMove="SSRank_OnMouseMove"
+                   MouseLeave="SSRank_OnMouseLeave"
+            
+                   Height="64" 
+                   Width="64"
+
+            />
+
+            <!-- SS Rank ToolTip Popup -->
+            <Popup Name="SSRankTT" Placement="Relative">
+                <Border CornerRadius="5" Padding="5, 2,5,2" 
+                        Background="Azure" IsHitTestVisible="False">
+                    <TextBlock Text="{DynamicResource _nearbySS}" />
+
+                </Border>
+            </Popup>
+            <!-- END SS Rank ToolTip Popup -->
+
+            <Image Name="BRank" 
+                   
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   Canvas.Left="{DynamicResource _BRankIconX}"
+                   Canvas.Top="{DynamicResource _BRankIconY}"
+
+                   MouseMove="BRank_OnMouseMove"
+                   MouseLeave="BRank_OnMouseLeave"
+            
+                   Height="64" 
+                   Width="64"
+                   />
+
+            <!-- B Rank ToolTip Popup -->
+            <Popup Name="BRankTT" Placement="Relative">
+                <Border CornerRadius="5" Padding="5, 2,5,2" 
+                        Background="Azure" IsHitTestVisible="False">
+                    <TextBlock Text="{DynamicResource _nearbyB}" />
+
+                </Border>
+            </Popup>
+            <!-- END B Rank ToolTip Popup -->
+
+        </Canvas>
+    </Grid>
+
+
+</UserControl>

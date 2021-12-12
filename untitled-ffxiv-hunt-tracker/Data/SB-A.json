@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "Orcus",
+		"ModelID": 5990,
+		"Rank": "A",
+		"MapTerritory": "TheFringes"
+	},
+	{
+		"Name": "Erle",
+		"ModelID": 5991,
+		"Rank": "A",
+		"MapTerritory": "TheFringes"
+	},
+	{
+		"Name": "Vochstein",
+		"ModelID": 5992,
+		"Rank": "A",
+		"MapTerritory": "ThePeaks"
+	},
+	{
+		"Name": "Aqrabuamelu",
+		"ModelID": 5993,
+		"Rank": "A",
+		"MapTerritory": "ThePeaks"
+	},
+	{
+		"Name": "Mahisha",
+		"ModelID": 5994,
+		"Rank": "A",
+		"MapTerritory": "TheLochs"
+	},
+	{
+		"Name": "Luminare",
+		"ModelID": 5995,
+		"Rank": "A",
+		"MapTerritory": "TheLochs"
+	},
+	{
+		"Name": "Funa Yurei",
+		"ModelID": 5996,
+		"Rank": "A",
+		"MapTerritory": "TheRubySea"
+	},
+	{
+		"Name": "Oni Yumemi",
+		"ModelID": 5997,
+		"Rank": "A",
+		"MapTerritory": "TheRubySea"
+	},
+	{
+		"Name": "Gajasura",
+		"ModelID": 5998,
+		"Rank": "A",
+		"MapTerritory": "Yanxia"
+	},
+	{
+		"Name": "Angada",
+		"ModelID": 5999,
+		"Rank": "A",
+		"MapTerritory": "Yanxia"
+	},
+	{
+		"Name": "Girimekhala",
+		"ModelID": 6000,
+		"Rank": "A",
+		"MapTerritory": "TheAzimSteppe"
+	},
+	{
+		"Name": "Sum",
+		"ModelID": 6001,
+		"Rank": "A",
+		"MapTerritory": "TheAzimSteppe"
+	}
+]

@@ -1,0 +1,104 @@
+[
+	{
+		"Name": "Alectryon",
+		"ModelID": 2940,
+		"Rank": "A",
+		"MapTerritory": "WesternThanalan"
+	},
+	{
+		"Name": "Sabotender Bailarina",
+		"ModelID": 2941,
+		"Rank": "A",
+		"MapTerritory": "CentralThanalan"
+	},
+	{
+		"Name": "Maahes",
+		"ModelID": 2942,
+		"Rank": "A",
+		"MapTerritory": "EasternThanalan"
+	},
+	{
+		"Name": "Zanig'oh",
+		"ModelID": 2943,
+		"Rank": "A",
+		"MapTerritory": "SouthernThanalan"
+	},
+	{
+		"Name": "Dalvag's Final Flame",
+		"ModelID": 2944,
+		"Rank": "A",
+		"MapTerritory": "NorthernThanalan"
+	},
+	{
+		"Name": "Forneus",
+		"ModelID": 2936,
+		"Rank": "A",
+		"MapTerritory": "CentralShroud"
+	},
+	{
+		"Name": "Melt",
+		"ModelID": 2937,
+		"Rank": "A",
+		"MapTerritory": "EastShroud"
+	},
+	{
+		"Name": "Ghede Ti Malice",
+		"ModelID": 2938,
+		"Rank": "A",
+		"MapTerritory": "SouthShroud"
+	},
+	{
+		"Name": "Girtab",
+		"ModelID": 2939,
+		"Rank": "A",
+		"MapTerritory": "NorthShroud"
+	},
+	{
+		"Name": "Vogaal Ja",
+		"ModelID": 2945,
+		"Rank": "A",
+		"MapTerritory": "MiddleLaNoscea"
+	},
+	{
+		"Name": "Unktehi",
+		"ModelID": 2946,
+		"Rank": "A",
+		"MapTerritory": "LowerLaNoscea"
+	},
+	{
+		"Name": "Hellsclaw",
+		"ModelID": 2947,
+		"Rank": "A",
+		"MapTerritory": "EasternLaNoscea"
+	},
+	{
+		"Name": "Nahn",
+		"ModelID": 2948,
+		"Rank": "A",
+		"MapTerritory": "WesternLaNoscea"
+	},
+	{
+		"Name": "Marberry",
+		"ModelID": 2949,
+		"Rank": "A",
+		"MapTerritory": "UpperLaNoscea"
+	},
+	{
+		"Name": "Cornu",
+		"ModelID": 2950,
+		"Rank": "A",
+		"MapTerritory": "OuterLaNoscea"
+	},
+	{
+		"Name": "Marraco",
+		"ModelID": 2951,
+		"Rank": "A",
+		"MapTerritory": "CoerthasCentralHighlands"
+	},
+	{
+		"Name": "Kurrea",
+		"ModelID": 2952,
+		"Rank": "A",
+		"MapTerritory": "MorDhona"
+	}
+]

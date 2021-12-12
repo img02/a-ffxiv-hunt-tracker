@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "The Mudman",
+		"ModelID": 8654,
+		"Rank": "A",
+		"MapTerritory": "IlMheg"
+	},
+	{
+		"Name": "O Poorest Pauldia",
+		"ModelID": 8655,
+		"Rank": "A",
+		"MapTerritory": "IlMheg"
+	},
+	{
+		"Name": "Supay",
+		"ModelID": 8891,
+		"Rank": "A",
+		"MapTerritory": "TheRaktikaGreatwood"
+	},
+	{
+		"Name": "Grassman",
+		"ModelID": 8892,
+		"Rank": "A",
+		"MapTerritory": "TheRaktikaGreatwood"
+	},
+	{
+		"Name": "Rusalka",
+		"ModelID": 8896,
+		"Rank": "A",
+		"MapTerritory": "TheTempest"
+	},
+	{
+		"Name": "Baal",
+		"ModelID": 8897,
+		"Rank": "A",
+		"MapTerritory": "TheTempest"
+	},
+	{
+		"Name": "Maliktender",
+		"ModelID": 8901,
+		"Rank": "A",
+		"MapTerritory": "AmhAraeng"
+	},
+	{
+		"Name": "Sugaar",
+		"ModelID": 8902,
+		"Rank": "A",
+		"MapTerritory": "AmhAraeng"
+	},
+	{
+		"Name": "Nuckelavee",
+		"ModelID": 8906,
+		"Rank": "A",
+		"MapTerritory": "Lakeland"
+	},
+	{
+		"Name": "Nariphon",
+		"ModelID": 8907,
+		"Rank": "A",
+		"MapTerritory": "Lakeland"
+	},
+	{
+		"Name": "Li'l Murderer",
+		"ModelID": 8911,
+		"Rank": "A",
+		"MapTerritory": "Kholusia"
+	},
+	{
+		"Name": "Huracan",
+		"ModelID": 8912,
+		"Rank": "A",
+		"MapTerritory": "Kholusia"
+	}
+]

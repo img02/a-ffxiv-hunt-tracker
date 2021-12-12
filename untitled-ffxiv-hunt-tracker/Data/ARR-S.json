@@ -1,0 +1,104 @@
+[
+	{
+		"Name": "Laideronnette",
+		"ModelID": 2953,
+		"Rank": "S",
+		"MapTerritory": "CentralShroud"
+	},
+	{
+		"Name": "Wulgaru",
+		"ModelID": 2954,
+		"Rank": "S",
+		"MapTerritory": "EastShroud"
+	},
+	{
+		"Name": "Mindflayer",
+		"ModelID": 2955,
+		"Rank": "S",
+		"MapTerritory": "SouthShroud"
+	},
+	{
+		"Name": "Thousand-cast Theda",
+		"ModelID": 2956,
+		"Rank": "S",
+		"MapTerritory": "NorthShroud"
+	},
+	{
+		"Name": "Zona Seeker",
+		"ModelID": 2957,
+		"Rank": "S",
+		"MapTerritory": "WesternThanalan"
+	},
+	{
+		"Name": "Brontes",
+		"ModelID": 2958,
+		"Rank": "S",
+		"MapTerritory": "CentralThanalan"
+	},
+	{
+		"Name": "Lampaluga",
+		"ModelID": 2959,
+		"Rank": "S",
+		"MapTerritory": "EasternThanalan"
+	},
+	{
+		"Name": "Nunyunuwi",
+		"ModelID": 2960,
+		"Rank": "S",
+		"MapTerritory": "SouthernThanalan"
+	},
+	{
+		"Name": "Minhocao",
+		"ModelID": 2961,
+		"Rank": "S",
+		"MapTerritory": "NorthernThanalan"
+	},
+	{
+		"Name": "Croque-Mitaine",
+		"ModelID": 2962,
+		"Rank": "S",
+		"MapTerritory": "MiddleLaNoscea"
+	},
+	{
+		"Name": "Croakadile",
+		"ModelID": 2963,
+		"Rank": "S",
+		"MapTerritory": "LowerLaNoscea"
+	},
+	{
+		"Name": "The Garlok",
+		"ModelID": 2964,
+		"Rank": "S",
+		"MapTerritory": "EasternLaNoscea"
+	},
+	{
+		"Name": "Bonnacon",
+		"ModelID": 2965,
+		"Rank": "S",
+		"MapTerritory": "WesternLaNoscea"
+	},
+	{
+		"Name": "Nandi",
+		"ModelID": 2966,
+		"Rank": "S",
+		"MapTerritory": "UpperLaNoscea"
+	},
+	{
+		"Name": "Chernobog",
+		"ModelID": 2967,
+		"Rank": "S",
+		"MapTerritory": "OuterLaNoscea"
+	},
+	{
+		"Name": "Safat",
+		"ModelID": 2968,
+		"Rank": "S",
+		"MapTerritory": "CoerthasCentralHighlands"
+	},
+	{
+		"Name": "Agrippa The Mighty",
+		"ModelID": 2969,
+		"Rank": "S",
+		"MapTerritory": "MorDhona"
+	}
+]

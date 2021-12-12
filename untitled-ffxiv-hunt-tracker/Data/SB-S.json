@@ -1,0 +1,38 @@
+[
+	{
+		"Name": "Okina",
+		"ModelID": 5984,
+		"Rank": "S",
+		"MapTerritory": "TheRubySea"
+	},
+	{
+		"Name": "Gamma",
+		"ModelID": 5985,
+		"Rank": "S",
+		"MapTerritory": "Yanxia"
+	},
+	{
+		"Name": "Orghana",
+		"ModelID": 5986,
+		"Rank": "S",
+		"MapTerritory": "TheAzimSteppe"
+	},
+	{
+		"Name": "Udumbara",
+		"ModelID": 5987,
+		"Rank": "S",
+		"MapTerritory": "TheFringes"
+	},
+	{
+		"Name": "Bone Crawler",
+		"ModelID": 5988,
+		"Rank": "S",
+		"MapTerritory": "ThePeaks"
+	},
+	{
+		"Name": "Salt and Light",
+		"ModelID": 5989,
+		"Rank": "S",
+		"MapTerritory": "TheLochs"
+	}
+]

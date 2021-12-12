@@ -1,0 +1,77 @@
+﻿<Window x:Class="ufht_UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:untitled_ffxiv_hunt_tracker.ViewModels;assembly=untitled_ffxiv_hunt_tracker"
+        d:DataContext="{d:DesignInstance viewModels:Session}"
+        mc:Ignorable="d"
+        Title="MainWindow" SizeToContent="Width"
+        MinHeight="512" MinWidth="812" Background="AntiqueWhite"
+        Name="MainWindow1">
+
+    <Grid Name="Base"
+          VerticalAlignment="Center"
+          HorizontalAlignment="Center"
+          Background="Beige">
+
+        <!-- Row and Column Definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <!-- End of Row and Column Definitions -->
+
+        <!-- Main Window/Panel for Map -->
+        <Grid 
+              HorizontalAlignment="Center"
+              MinHeight="512" MinWidth="512" Name ="MainGrid">
+        </Grid>
+
+        <!-- Side Info Panel -->
+        <Grid Grid.Column="1" Grid.Row="0"
+              Width="300" Background="Azure"
+              MinHeight="512" MinWidth="300" Name ="InfoGrid"
+               >
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0" Grid.Row="0"
+                  Name="ListSection">
+            </Grid>
+
+
+            <Grid Grid.Column="0" Grid.Row="1"
+                  Name="BottomButtons">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0" Content="Trains" Click="TrainButton_OnClick"/>
+                <Button Grid.Column="1" Content="Nearby" Click="NeabyButton_OnCLick"/>
+                <Button Grid.Column="2">idk button</Button>
+                <Button Grid.Column="3">Record / Stop</Button>
+            </Grid>
+
+        </Grid>
+       
+
+
+    </Grid>
+
+</Window>

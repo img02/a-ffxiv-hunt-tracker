@@ -1,0 +1,38 @@
+[
+	{
+		"Name": "Kaiser Behemoth",
+		"ModelID": 4374,
+		"Rank": "S",
+		"MapTerritory": "CoerthasWesternHighlands"
+	},
+	{
+		"Name": "Senmurv",
+		"ModelID": 4375,
+		"Rank": "S",
+		"MapTerritory": "TheDravanianForelands"
+	},
+	{
+		"Name": "The Pale Rider",
+		"ModelID": 4376,
+		"Rank": "S",
+		"MapTerritory": "TheDravanianHinterlands"
+	},
+	{
+		"Name": "Gandarewa",
+		"ModelID": 4377,
+		"Rank": "S",
+		"MapTerritory": "TheChurningMists"
+	},
+	{
+		"Name": "Bird of Paradise",
+		"ModelID": 4378,
+		"Rank": "S",
+		"MapTerritory": "TheSeaofClouds"
+	},
+	{
+		"Name": "Leucrotta",
+		"ModelID": 4380,
+		"Rank": "S",
+		"MapTerritory": "AzysLla"
+	}
+]
