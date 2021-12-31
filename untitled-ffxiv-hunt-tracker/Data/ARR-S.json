@@ -36,7 +36,7 @@
 		"MapTerritory": "CentralThanalan"
 	},
 	{
-		"Name": "Lampaluga",
+		"Name": "Lampalagua",
 		"ModelID": 2959,
 		"Rank": "S",
 		"MapTerritory": "EasternThanalan"
@@ -54,7 +54,7 @@
 		"MapTerritory": "NorthernThanalan"
 	},
 	{
-		"Name": "Croque-Mitaine",
+		"Name": "Croque-mitaine",
 		"ModelID": 2962,
 		"Rank": "S",
 		"MapTerritory": "MiddleLaNoscea"

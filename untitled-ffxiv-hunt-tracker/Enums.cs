@@ -61,6 +61,16 @@ namespace untitled_ffxiv_hunt_tracker
         AmhAraeng = 815,
         IlMheg = 816,
         TheRaktikaGreatwood = 817,
-        TheTempest = 818
+        TheTempest = 818,
+
+        //endwalker
+
+        Labyrinthos = 956,
+        Thavnair = 957,
+        Garlemald = 958,
+        MareLamentorum = 959,
+        UltimaThule = 960,
+        Elpis = 961
+
     }
 }

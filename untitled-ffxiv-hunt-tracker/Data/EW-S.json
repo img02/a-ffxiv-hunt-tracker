@@ -1,0 +1,62 @@
+[
+	{
+		"Name": "Armstrong",
+		"ModelID": 10619,
+		"Rank": "S",
+		"MapTerritory": "Garlemald"
+	},
+	{
+		"Name": "Narrow-rift",
+		"ModelID": 10622,
+		"Rank": "S",
+		"MapTerritory": "UltimaThule"
+	},
+	{
+		"Name": "Ophioneus",
+		"ModelID": 8895,
+		"Rank": "S",
+		"MapTerritory": "Elpis"
+	},
+	{
+		"Name": "Ruminator",
+		"ModelID": 8900,
+		"Rank": "S",
+		"MapTerritory": "MareLamentorum"
+	},
+  {
+    "Name": "Ker",
+    "ModelID": 8900,
+    "Rank": "SS",
+    "MapTerritory": "MareLamentorum"
+  },
+	{
+		"Name": "Ker",
+		"ModelID": 8900,
+		"Rank": "SS",
+		"MapTerritory": "Garlemald"
+	},
+	{
+		"Name": "Ker",
+		"ModelID": 8900,
+		"Rank": "SS",
+		"MapTerritory": "UltimaThule"
+	},
+	{
+		"Name": "Ker",
+		"ModelID": 8900,
+		"Rank": "SS",
+		"MapTerritory": "Elpis"
+	},
+	{
+		"Name": "Ker",
+		"ModelID": 8900,
+		"Rank": "SS",
+		"MapTerritory": "Thavnair"
+	},
+	{
+		"Name": "Ker",
+		"ModelID": 8900,
+		"Rank": "SS",
+		"MapTerritory": "Labyrinthos"
+	}
+	]

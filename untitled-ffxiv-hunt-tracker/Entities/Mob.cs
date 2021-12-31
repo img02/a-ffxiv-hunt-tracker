@@ -29,7 +29,6 @@ namespace untitled_ffxiv_hunt_tracker.Entities
 
         public event EventHandler<Coords> CoordsChanged;
         public event PropertyChangedEventHandler PropertyChanged;
-
         public string GetCoords() => Coordinates.ToString();
         public string Name { get; set; }
         public int ModelID { get; set; }
@@ -38,6 +37,7 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         public MapID MapTerritory { get; set; } //change this to int / enum?
         public string MapImagePath { get; set; }
         public new double HPPercent
+
         {
             get => _hPPercent;
             set
@@ -92,6 +92,7 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         public void UnregisterHandlers()
         {
             CoordsChanged = null;
+            PropertyChanged = null;
         }
         public void SetHPPercent()
         {

@@ -13,6 +13,7 @@
 
                Source="{Binding CurrentPlayer.CurrentMapImagePath,
                         Converter={StaticResource FileToBitmapConverter}}"/>
+
         <!-- Map ToolTip Popup -->
         <Popup Name="MapTT" Placement="Relative">
             <Border CornerRadius="5" Padding="5, 2,5,2" 
@@ -27,7 +28,28 @@
                 Height="{Binding ElementName=MapImage, Path=ActualHeight}"
                 Width="{Binding ElementName=MapImage, Path=ActualWidth}">
 
-            <Image Name="PlayerIcon" Opacity="{DynamicResource _playerIconOpacity}"
+            
+            <Ellipse Name="PlayerRadius" 
+                     Canvas.Left="{DynamicResource _playerRadiusX}"
+                     Canvas.Top="{DynamicResource _playerRadiusY}"
+
+                    Width ="{DynamicResource _playerRadiusWidth}"
+                    Height="{DynamicResource _playerRadiusHeight}"
+                    StrokeThickness="2"
+            >
+                <Ellipse.Fill>
+                    <SolidColorBrush Color="DodgerBlue" 
+                                     Opacity="{DynamicResource _playerRadiusOpacity}"/>
+                </Ellipse.Fill>
+                <Ellipse.Stroke>
+                        <SolidColorBrush Color="Gold" 
+                                         Opacity="{DynamicResource _playerRadiusStrokeOpacity}"/>
+                </Ellipse.Stroke>
+
+            </Ellipse>
+
+
+                <Image Name="PlayerIcon" Opacity="{DynamicResource _playerIconOpacity}"
                    Canvas.ZIndex ="0"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
@@ -44,7 +66,9 @@
                    RenderTransformOrigin="0.5, 0.5">
 
                 <Image.RenderTransform>
+                    <TransformGroup>
                     <RotateTransform Angle="{DynamicResource _playerIconRotation}" />
+                    </TransformGroup>
                 </Image.RenderTransform>
 
             </Image>
@@ -64,6 +88,7 @@
                    VerticalAlignment="Center"
                    Canvas.Left="{DynamicResource _ARankIconX}"
                    Canvas.Top="{DynamicResource _ARankIconY}"
+                   Canvas.ZIndex ="2"
 
                    MouseMove="ARank_OnMouseMove"
                    MouseLeave="ARank_OnMouseLeave"
@@ -89,7 +114,7 @@
                    VerticalAlignment="Center"
                    Canvas.Left="{DynamicResource _ARank2IconX}"
                    Canvas.Top="{DynamicResource _ARank2IconY}"
-
+                   Canvas.ZIndex ="2"
                    MouseMove="ARank_OnMouseMove"
                    MouseLeave="ARank_OnMouseLeave"
 
@@ -114,7 +139,7 @@
                    VerticalAlignment="Center"
                    Canvas.Left="{DynamicResource _SRankIconX}"
                    Canvas.Top="{DynamicResource _SRankIconY}"
-                   
+                   Canvas.ZIndex ="3"
                    MouseMove="SRank_OnMouseMove"
                    MouseLeave="SRank_OnMouseLeave"
             
@@ -139,6 +164,7 @@
                    VerticalAlignment="Center"
                    Canvas.Left="{DynamicResource _SSRankIconX}"
                    Canvas.Top="{DynamicResource _SSRankIconY}"
+                   Canvas.ZIndex ="4"
 
                    MouseMove="SSRank_OnMouseMove"
                    MouseLeave="SSRank_OnMouseLeave"
@@ -164,6 +190,7 @@
                    VerticalAlignment="Center"
                    Canvas.Left="{DynamicResource _BRankIconX}"
                    Canvas.Top="{DynamicResource _BRankIconY}"
+                   Canvas.ZIndex ="1"
 
                    MouseMove="BRank_OnMouseMove"
                    MouseLeave="BRank_OnMouseLeave"

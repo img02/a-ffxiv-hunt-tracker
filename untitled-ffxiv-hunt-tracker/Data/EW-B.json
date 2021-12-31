@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "Green Archon",
+		"ModelID": 10635,
+		"Rank": "B",
+		"MapTerritory": "Labyrinthos"
+	},
+	{
+		"Name": "Ü-u-ü-u",
+		"ModelID": 10636,
+		"Rank": "B",
+		"MapTerritory": "Labyrinthos"
+	},
+	{
+		"Name": "Vajrakumara",
+		"ModelID": 10637,
+		"Rank": "B",
+		"MapTerritory": "Thavnair"
+	},
+	{
+		"Name": "Iravati",
+		"ModelID": 10638,
+		"Rank": "B",
+		"MapTerritory": "Thavnair"
+	},
+	{
+		"Name": "Warmonger",
+		"ModelID": 10639,
+		"Rank": "B",
+		"MapTerritory": "Garlemald"
+	},
+	{
+		"Name": "Emperor's Rose",
+		"ModelID": 10640,
+		"Rank": "B",
+		"MapTerritory": "Garlemald"
+	},
+	{
+		"Name": "Daphnia Magna",
+		"ModelID": 10641,
+		"Rank": "B",
+		"MapTerritory": "MareLamentorum"
+	},
+	{
+		"Name": "Genesis Rock",
+		"ModelID": 10642,
+		"Rank": "B",
+		"MapTerritory": "MareLamentorum"
+	},
+	{
+		"Name": "Level Cheater",
+		"ModelID": 10645,
+		"Rank": "B",
+		"MapTerritory": "UltimaThule"
+	},
+	{
+		"Name": "Oskh Rhei",
+		"ModelID": 10646,
+		"Rank": "B",
+		"MapTerritory": "UltimaThule"
+	},
+	{
+		"Name": "Shockmaw",
+		"ModelID": 10644,
+		"Rank": "B",
+		"MapTerritory": "Elpis"
+	},
+	{
+		"Name": "Yumcax",
+		"ModelID": 10643,
+		"Rank": "B",
+		"MapTerritory": "Elpis"
+	}
+]

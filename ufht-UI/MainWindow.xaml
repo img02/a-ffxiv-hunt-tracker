@@ -6,8 +6,14 @@
         xmlns:viewModels="clr-namespace:untitled_ffxiv_hunt_tracker.ViewModels;assembly=untitled_ffxiv_hunt_tracker"
         d:DataContext="{d:DesignInstance viewModels:Session}"
         mc:Ignorable="d"
-        Title="MainWindow" SizeToContent="Width"
-        MinHeight="512" MinWidth="812" Background="AntiqueWhite"
+        Title="UFHT" 
+
+        d:DesignHeight="1000" d:DesignWidth="1000"
+        Width="1024"
+        Height="1048"
+        WindowStyle="SingleBorderWindow"
+
+        MinHeight="512" MinWidth="512" Background="AntiqueWhite"
         Name="MainWindow1">
 
     <Grid Name="Base"
@@ -30,12 +36,131 @@
         <Grid 
               HorizontalAlignment="Center"
               MinHeight="512" MinWidth="512" Name ="MainGrid">
+
+            <Grid Name="MainGrid2" > 
+
+            </Grid>
+
+            <Grid Name="MainGrid3">
+                <Button 
+                    FocusVisualStyle ="{x:Null}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Click="SidePanelToggleButton_OnClick" >
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <StackPanel>
+                                <ContentPresenter Content="{TemplateBinding Content}" />
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Path Data="M 0,0 L 15,10 L 0,20" Fill="Black" Opacity=".69"/>
+                </Button>
+            </Grid>
+
+            <!---  Priority Mob Info at top of window, that thing on the black part of the map   -->
+            <Grid Name ="PriorityMobGridOuter">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height=".06*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.98*"/>
+                    <ColumnDefinition Width="0.8*"/>
+                    <ColumnDefinition Width="1.2*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="1" BorderBrush="GreenYellow" BorderThickness="0">
+
+                <Grid Name="PriorityMobGridInner"
+                      Grid.Column="1"
+                      Background="{DynamicResource PriorityMobGridBackground}">
+
+                    <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width=".6*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width=".7*"/>
+                    </Grid.ColumnDefinitions>
+
+
+                    <Label Name="PriorityMobRank"
+                           Grid.Column="0"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource PriorityMobTextColour}"
+                           FontSize="{DynamicResource PriorityMobTextRankFontSize}"
+                           Visibility="{DynamicResource PriorityMobTextVisibility}"
+                           Content="{DynamicResource PriorityMobTextRank}"/>
+
+                    <Label Name="PriorityMobName"
+                           Grid.Column="1"
+                           Grid.Row="0"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+
+                           Padding="0"
+                           FontWeight="DemiBold"
+                           Foreground="{DynamicResource PriorityMobTextColour}"
+                           FontSize="{DynamicResource PriorityMobTextFontSize}"
+                           Visibility="{DynamicResource PriorityMobTextVisibility}"
+                           Content="{DynamicResource PriorityMobTextName}"/>
+                   
+                    <Label Name="PriorityMobCoords"
+                           Grid.Column="1"
+                           Grid.Row="1"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           
+                           Padding="0"
+                           FontWeight="DemiBold"
+                           Foreground="{DynamicResource PriorityMobTextColour}"
+                           FontSize="{DynamicResource PriorityMobTextFontSize}"
+                           Visibility="{DynamicResource PriorityMobTextVisibility}"
+                           Content="{DynamicResource PriorityMobTextCoords}"/>
+                          
+
+
+                    <Label Name="PriorityMobHPP"
+                           Grid.Column="2"
+                           Grid.Row="0"
+                           Grid.RowSpan="2"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+
+                           FontWeight="Bold"
+                           Foreground="{DynamicResource PriorityMobTextColour}"
+                           FontSize="{DynamicResource PriorityMobTextHPPFontSize}"
+                           Visibility="{DynamicResource PriorityMobTextVisibility}"
+                           Content="{DynamicResource PriorityMobTextHPP}"/>
+
+
+                </Grid>
+
+                </Border>
+
+            </Grid>
+
+            <!--- Priority Mob Section END-->
+
         </Grid>
 
         <!-- Side Info Panel -->
         <Grid Grid.Column="1" Grid.Row="0"
-              Width="300" Background="Azure"
-              MinHeight="512" MinWidth="300" Name ="InfoGrid"
+              Width="{DynamicResource _sidePanelStartingWidth}" 
+              Background="Azure"
+              MinHeight="512" MinWidth="0" Name ="InfoGrid"
                >
 
             <Grid.ColumnDefinitions>
@@ -62,10 +187,10 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content="Trains" Click="TrainButton_OnClick"/>
-                <Button Grid.Column="1" Content="Nearby" Click="NeabyButton_OnCLick"/>
-                <Button Grid.Column="2">idk button</Button>
-                <Button Grid.Column="3">Record / Stop</Button>
+                <Button Grid.Column="0" Content="Future" />
+                <Button Grid.Column="1" Content="Features" />
+                <Button Grid.Column="2">But</Button>
+                <Button Grid.Column="3">Lazy</Button>
             </Grid>
 
         </Grid>

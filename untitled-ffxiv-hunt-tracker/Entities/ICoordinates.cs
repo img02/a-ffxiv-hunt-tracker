@@ -22,6 +22,7 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         public double X { get; set; }
         public double Y { get; set; }
 
-        public override string ToString() => $"({X,0:0.0}, {Y,0:0.0})";
+        //public override string ToString() => $"({X,0:0.0}, {Y,0:0.0})";
+        public override string ToString() => $"({Math.Floor(Math.Floor(X*100)/10)/10}, {Math.Floor(Math.Floor(Y * 100) / 10) / 10})";
     }
 }

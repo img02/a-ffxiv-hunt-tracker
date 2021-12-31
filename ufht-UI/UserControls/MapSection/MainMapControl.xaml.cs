@@ -10,6 +10,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using untitled_ffxiv_hunt_tracker;
 using untitled_ffxiv_hunt_tracker.Entities;
 using untitled_ffxiv_hunt_tracker.ViewModels;
 
@@ -75,7 +76,6 @@ namespace ufht_UI.UserControls
 
 
 
-
         private void PlayerIconMove(object o, Coords coords)
         {
             /* var windowHeight = MapImage.ActualHeight;
@@ -93,8 +93,20 @@ namespace ufht_UI.UserControls
                 //separate map image size into 41 chunks,
                 //each in-game whole coordinate = map image pixel / 41
 
+                //Trace.WriteLine($"X = {coords.X}, y = {coords.Y}");
+                //Trace.WriteLine($"X = {_playerIconX}, y = {_playerIconY}");
+
                 Application.Current.Resources["_playerIconX"] = _playerIconX;
                 Application.Current.Resources["_playerIconY"] = _playerIconY;
+
+                //Radius circle stuff
+                Application.Current.Resources["_playerRadiusX"] = _playerIconX - (PlayerRadius.ActualWidth / 2) + (PlayerIcon.ActualWidth / 2);
+                Application.Current.Resources["_playerRadiusY"] = _playerIconY - (PlayerRadius.ActualHeight / 2) + (PlayerIcon.ActualHeight / 2);
+
+                Application.Current.Resources["_playerRadiusWidth"] = (MapImage.ActualHeight / 41) * 4; //roughly 2 squares --actual detection seems a little larger.
+                Application.Current.Resources["_playerRadiusHeight"] = (MapImage.ActualHeight / 41) * 4;
+                //End Radius Circle stuff
+
 
                 //put this into own method, add event for player.heading? or good enough.
                 _playerIconRotation = _session.CurrentPlayer.Heading * (180 / Math.PI);
@@ -148,7 +160,7 @@ namespace ufht_UI.UserControls
 
                         this.Dispatcher.Invoke(() =>
                         {
-                            if (ARank.Source == null)
+                            if (ARank.Source == null || ARank2.Source == null)
                             {
                                 ARank.Source = _mobIconA;
                             }
@@ -164,6 +176,7 @@ namespace ufht_UI.UserControls
 
                             Application.Current.Resources["_ARankIconX"] = _ARankIconX;
                             Application.Current.Resources["_ARankIconY"] = _ARankIconY;
+
                         });
                         m.CoordsChanged += UpdateNearbyMobIcon;
                     }
@@ -186,7 +199,6 @@ namespace ufht_UI.UserControls
 
                     _BRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
                     _BRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
-
 
                     Application.Current.Resources["_BRankIconX"] = _BRankIconX;
                     Application.Current.Resources["_BRankIconY"] = _BRankIconY;
@@ -221,7 +233,7 @@ namespace ufht_UI.UserControls
 
                     //_SSRankIconX = UpdatePositionOnMapImage(m.Coordinates.X);
                     //_SSRankIconY = UpdatePositionOnMapImage(m.Coordinates.Y);
-                    
+
                     _SSRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
                     _SSRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
 
@@ -257,8 +269,8 @@ namespace ufht_UI.UserControls
 
                 //var iconX = UpdatePositionOnMapImage(coords.X);
                 //var iconY = UpdatePositionOnMapImage(coords.Y);
-                var iconX = UpdatePositionOnMapImageForMobs(coords.X);
-                var iconY = UpdatePositionOnMapImageForMobs(coords.Y);
+                var iconX = UpdatePositionOnMapImageForMobs(mob.Coordinates.X);
+                var iconY = UpdatePositionOnMapImageForMobs(mob.Coordinates.Y);
 
                 var toolTipInfo = mob.ToString();
 
@@ -268,10 +280,11 @@ namespace ufht_UI.UserControls
                     /*var ARankTotalDif = (Canvas.GetLeft(ARank) - iconX) + (Canvas.GetTop(ARank) - iconY);
                     var ARank2TotalDif = (Canvas.GetLeft(ARank2) - iconX) + (Canvas.GetTop(ARank2) - iconY);*/
 
-
                     Application.Current.Resources["_ARankIconX"] = iconX;
                     Application.Current.Resources["_ARankIconY"] = iconY;
                     Application.Current.Resources["_nearbyA"] = toolTipInfo;
+
+
                     if (mob.HPPercent == 0)
                     {
                         Dispatcher.Invoke(() => ARank.Source = null);
@@ -317,7 +330,9 @@ namespace ufht_UI.UserControls
         private double UpdatePositionOnMapImage(double coordinateValue)
         {
             //image height and width should be the same
+            //Trace.WriteLine($"{((coordinateValue - 1) * (MapImage.ActualHeight / 41) - PlayerIcon.ActualHeight / 2)}");
             return ((coordinateValue - 1) * (MapImage.ActualHeight / 41) - PlayerIcon.ActualHeight / 2);
+
         }
 
         //idk if i decide to make icons resizable...

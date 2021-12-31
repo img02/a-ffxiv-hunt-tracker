@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using untitled_ffxiv_hunt_tracker;
 using untitled_ffxiv_hunt_tracker.Entities;
 using untitled_ffxiv_hunt_tracker.ViewModels;
 
@@ -27,14 +28,15 @@ namespace ufht_UI.UserControls.InfoSection
     {
         private Session _session;
         private ObservableCollection<Mob> _nearbyMobs;
+        internal Mob priorityMob;
 
 
-        public InfoSectionControl(Session session)
+        public InfoSectionControl(Session session, ObservableCollection<Mob> nearbyMobs)
         {
             _session = session;
-            _session.CurrentNearbyMobs.CollectionChanged += CurrentNearbyMobs_CollectionChanged;
+           //_session.CurrentNearbyMobs.CollectionChanged += CurrentNearbyMobs_CollectionChanged;
 
-            _nearbyMobs = new ObservableCollection<Mob>();
+            _nearbyMobs = nearbyMobs;
 
             InitializeComponent();
 
@@ -50,6 +52,39 @@ namespace ufht_UI.UserControls.InfoSection
 
         private void CurrentNearbyMobs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
+            //BROKEN MODELID VERSION
+            /* if (sender is ObservableCollection<Mob> mobCollection)
+             {
+
+                 Dispatcher.Invoke(() =>
+                 {
+                     //Application.Current.Resources["_nearbyMobs"] = _nearbyMobs;
+                     var toRemove = new ObservableCollection<Mob>();
+                     foreach (var m in _nearbyMobs)
+                     {
+                         if (mobCollection.FirstOrDefault(m1 => m1.ModelID == m.ModelID) == null)
+                         {
+                             toRemove.Add(m);
+                         }
+                     }
+
+                     foreach (var m in toRemove)
+                     {
+                         _nearbyMobs.Remove(m);
+                     }
+
+
+                     foreach (var m in mobCollection)
+                     {
+                         if (_nearbyMobs.FirstOrDefault(m1 => m1.ModelID == m.ModelID) == null)
+                         {
+                             _nearbyMobs.Add(m);
+                         }
+                     }
+                 });
+             }*/
+
+
             if (sender is ObservableCollection<Mob> mobCollection)
             {
 
@@ -59,7 +94,7 @@ namespace ufht_UI.UserControls.InfoSection
                     var toRemove = new ObservableCollection<Mob>();
                     foreach (var m in _nearbyMobs)
                     {
-                        if (mobCollection.FirstOrDefault(m1 => m1.ModelID == m.ModelID) == null)
+                        if (mobCollection.FirstOrDefault(m1 => m1.Name == m.Name) == null)
                         {
                             toRemove.Add(m);
                         }
@@ -73,9 +108,27 @@ namespace ufht_UI.UserControls.InfoSection
 
                     foreach (var m in mobCollection)
                     {
-                        if (_nearbyMobs.FirstOrDefault(m1 => m1.ModelID == m.ModelID) == null)
+                        if (_nearbyMobs.FirstOrDefault(m1 => m1.Name == m.Name) == null)
                         {
                             _nearbyMobs.Add(m);
+                        }
+                    }
+
+                    //set priority mob
+                    if (_nearbyMobs.Count == 0)
+                    {
+                        priorityMob = null;
+                    }
+                    else
+                    {
+                        foreach (var m in _nearbyMobs)
+                        {
+                            if (priorityMob == null ||
+                                (HuntRank)Enum.Parse(typeof(HuntRank), m.Rank) >
+                                (HuntRank)Enum.Parse(typeof(HuntRank), priorityMob.Rank))
+                            {
+                                priorityMob = m;
+                            }
                         }
                     }
                 });

@@ -27,6 +27,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         private readonly Dictionary<HuntRank, List<Mob>> HWDict;
         private readonly Dictionary<HuntRank, List<Mob>> SBDict;
         private readonly Dictionary<HuntRank, List<Mob>> ShBDict;
+        private readonly Dictionary<HuntRank, List<Mob>> EWDict;
         private readonly Dictionary<HuntRank, List<Mob>> TestDict;
 
         private ObservableCollection<Mob> _currentNearbyMobs;
@@ -61,6 +62,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             HWDict = HWMobFactory.GetHWDict();
             SBDict = SBMobFactory.GetSBDict();
             ShBDict = ShBMobFactory.GetShBDict();
+            EWDict = EWMobFactory.GetEWDict();
             TestDict = TestMobFactory.GetTestDict();
 
             Trains = new Dictionary<string, List<Mob>>();
@@ -120,16 +122,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
 
         public void Start()
         {
-            //readhing chat log throws arithmetic / overflow error if user logs out and logs back in. idk how 2 fix pls
-           /* _ = Task.Run(() => //read chatlog for stuff, don't wait for this to finish before continuing .
-           {
-               while (true)
-               {
-                   ReadChatLog();
-                   Thread.Sleep(100); //if you want to only read chat log / refresh every x seconds
-               }
-           });*/
-           Trace.WriteLine($"can get process? {_memoryReader.CanGetProcess} has exited? {_memoryReader.ProcessHasExited}");
+            Trace.WriteLine($"can get process? {_memoryReader.CanGetProcess} has exited? {_memoryReader.ProcessHasExited}");
             while (true)
             {
                 //Trace.WriteLine($"1inside loop can get process? {_memoryReader.CanGetProcess} has exited? {_memoryReader.ProcessHasExited}");
@@ -140,14 +133,9 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                     Thread.Sleep(2000);
                     SetUpMemReaderAndChatLogReader();
                 }
-                //i'm stupid btw.
-                //Console.Clear();
+                
                 GetUser();
                 SearchNearbyMobs();
-                //GetMobs();
-                //GetNearbyMobs();
-
-                //await Task.Run(() => chatLog.ReadChatLog());
 
                 //1000/144 = 6.94 - so this should refresh a bit more than 144 times per sec, so animation should be 144+fps, right? seems legit. def smoother. cpu usage low.
                 Thread.Sleep(6);
@@ -156,7 +144,6 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
 
         public void SearchNearbyMobs()
         {
-            //CurrentNearbyMobs.Clear();
             var tempNearbyList = new ObservableCollection<Mob>();
 
             var map = CurrentPlayer.MapTerritory;
@@ -167,7 +154,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 return;
             }
 
-            var expansionDict = map < 180 ? ARRDict : map < 402 ? HWDict : map < 622 ? SBDict : ShBDict; //818 the tempest
+            var expansionDict = map <= 180 ? ARRDict : map <= 402 ? HWDict : map <= 622 ? SBDict : map <= 818 ? ShBDict : EWDict;
 
             foreach (var actor in actors)
             {
@@ -175,30 +162,54 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 if (actor.Value.HPMax > 25000000)
                 {
                     var m = actor.Value;
-                    Console.WriteLine($"{m.Name} - ({ConvertPos(m.X)}, {ConvertPos(m.Y)}) - {m.HPMax}");
+                    Console.WriteLine(
+                        $"|{m.Name}| - ({ConvertPos(m.X)}, {ConvertPos(m.Y)}) - HP: {m.HPMax} , MAP TERRITORY = {m.MapTerritory}");
                 }
+
+                if (actor.Value.HPMax > 100000)
+                {
+                    var m = actor.Value;
+                    Console.WriteLine($"---------------------------------------------------------\n" +
+                                      $"|{m.Name}| - ({ConvertPos(m.X)}, {ConvertPos(m.Y)}) - HP: {m.HPMax} , MAP TERRITORY = {m.MapTerritory}" +
+                                      $"\n---------------------------------------------------------\n");
+                }
+                
+
+
                 //END TEST PRINT
 
-                List<Mob> tempList = expansionDict.Values.FirstOrDefault(l =>
-                    (l.FirstOrDefault(m =>
-                    m.ModelID == actor.Value.ModelID
+                var tempList = expansionDict.Values.FirstOrDefault(l =>
+                    (l.FirstOrDefault(m => 
+                    m.Name.ToLower() == actor.Value.Name.ToLower()
                         && (uint)m.MapTerritory == actor.Value.MapTerritory) != null));
+
+                if (tempList == null)
+                {
+                    Console.WriteLine($"Null List - {expansionDict[HuntRank.S][0]}");
+                }
 
                 if (tempList != null)
                 {
+                    var m = actor.Value;
+                    Console.WriteLine($"---------------------------------------------------------\n" +
+                                      $"|{m.Name}| - ({ConvertPos(m.X)}, {ConvertPos(m.Y)}) - HP: {m.HPMax} , MAP TERRITORY = {m.MapTerritory}" +
+                                      $"\n---------------------------------------------------------\n");
+                    
                     var mob = new Mob
                     {
                         Name = actor.Value.Name,
                         ModelID = (int)actor.Value.ModelID,
                         MapTerritory = (MapID)actor.Value.MapTerritory,
-                        Rank = tempList.FirstOrDefault(m => m.ModelID == actor.Value.ModelID)?.Rank,
+                        //Rank = tempList.FirstOrDefault(m => m.ModelID == actor.Value.ModelID)?.Rank,
+                        Rank = tempList.FirstOrDefault(m => m.Name.ToLower() == actor.Value.Name.ToLower())?.Rank,
                         Coordinates = new Coords(ConvertPos(actor.Value.X), ConvertPos(actor.Value.Y)),
-                        MapImagePath = tempList.FirstOrDefault(m => m.ModelID == actor.Value.ModelID)?.MapImagePath ?? "no image path",
+                        //MapImagePath = tempList.FirstOrDefault(m => m.ModelID == actor.Value.ModelID)?.MapImagePath ?? "no image path",
+                        MapImagePath = tempList.FirstOrDefault(m => m.Name.ToLower() == actor.Value.Name.ToLower())?.MapImagePath ?? "no image path",
                         HP = actor.Value.HPMax,
                         X = actor.Value.X,
                         Y = actor.Value.Y,
                         Coordinate = actor.Value.Coordinate,
-                        HPPercent = actor.Value.HPPercent
+                        HPPercent = actor.Value.HPPercent,
                     };
 
 
@@ -255,8 +266,9 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             }
 
 
+            //bsaed on modelID - broken
 
-            var toRemove = new List<int>();
+        /*    var toRemove = new List<int>();
             //remove any old mobs that don't exist in the new list
             foreach (var mob in new Collection<Mob>(CurrentNearbyMobs))
             {
@@ -273,7 +285,6 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 CurrentNearbyMobs.Remove(mob);
             });
 
-
             //add new mobs, update oldmobs coords.
             foreach (var tMob in tempNearbyList)
             {
@@ -284,6 +295,43 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 else
                 {
                     var mob = CurrentNearbyMobs.FirstOrDefault(m => m.ModelID == tMob.ModelID);
+                    mob.Coordinates = tMob.Coordinates;
+                    mob.HPPercent = tMob.HPPercent;
+                }
+            }*/
+
+
+            //based on Name
+            var toRemoveName = new List<string>();
+            //remove any old mobs that don't exist in the new list
+            foreach (var mob in new Collection<Mob>(CurrentNearbyMobs))
+            {
+                if (tempNearbyList.FirstOrDefault(m => m.Name.ToLower() == mob.Name.ToLower()) == null)
+                {
+                    toRemoveName.Add(mob.Name);
+                }
+
+            }
+
+            toRemoveName.ForEach(i =>
+            {
+                var mob = CurrentNearbyMobs.FirstOrDefault(m => m.Name.ToLower() == i.ToLower());
+                mob.UnregisterHandlers(); // remove handlers from event
+                CurrentNearbyMobs.Remove(mob);
+            });
+
+
+            //add new mobs, update oldmobs coords.
+            foreach (var tMob in tempNearbyList)
+            {
+                if (CurrentNearbyMobs.FirstOrDefault(m => m.Name.ToLower() == tMob.Name.ToLower()) == null)
+                {
+                    CurrentNearbyMobs.Add(tMob);
+                    //tts here?
+                }
+                else
+                {
+                    var mob = CurrentNearbyMobs.FirstOrDefault(m => m.Name.ToLower() == tMob.Name.ToLower());
                     mob.Coordinates = tMob.Coordinates;
                     mob.HPPercent = tMob.HPPercent;
                 }
@@ -411,10 +459,6 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             // Console.WriteLine($"Heading: {CurrentPlayer.Heading}");
             CurrentPlayer.HPPercent = user.HPPercent;
 
-            //TEST PRINT
-          /*  Console.WriteLine($"Name: {user.Name} - Coords: {CurrentPlayer.Coordinates} - ({user.X}, {user.Y}) -" +
-                              $" HP: {CurrentPlayer.HPPercent*100.00} " +
-                              $"MapID: {user.MapTerritory} , {Helpers.GetMapName(user.MapTerritory)}");*/
         }
 
         public ConcurrentDictionary<uint, ActorItem> GetMobs()
@@ -427,8 +471,12 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         #region Helpers
         private double ConvertPos(double num) //works for ShB
         {
-            //this converts into  x y pos on arr world maps, doesn't work for city states, residential areas, gold saucer etc.
-            return (Math.Floor((21.5 + (Convert.ToDouble(num) / 50)) * 10)) / 10;
+            //this converts into  x y pos on arr world maps, doesn't work for city states, residential areas, gold saucer etc
+            //idk 21.48 seems more accurate than 21.5. can't remember how I got this initially... something to do with 42 coords on map, + 0.5 becwause ?
+            //but actually shown as to 41.9, in-game excludes second decimal - so actually 41.96ish? idk idk idk
+            //Trace.WriteLine(((Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100));
+
+            return ( (Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100 ); 
         }
 
 

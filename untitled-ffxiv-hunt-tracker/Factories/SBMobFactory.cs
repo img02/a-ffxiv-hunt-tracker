@@ -47,9 +47,9 @@ namespace untitled_ffxiv_hunt_tracker.Factories
 
 #if FACTORYTEST
             Console.WriteLine("=====\nStormblood\n====");
-            A.ForEach((m) => Console.WriteLine($"{m.Name} \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
-            B.ForEach((m) => Console.WriteLine($"{m.Name} \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
-            S.ForEach((m) => Console.WriteLine($"{m.Name} \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
+            A.ForEach((m) => Console.WriteLine($"|{m.Name}| \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
+            B.ForEach((m) => Console.WriteLine($"|{m.Name}| \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
+            S.ForEach((m) => Console.WriteLine($"|{m.Name}| \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
 #endif
         }
 

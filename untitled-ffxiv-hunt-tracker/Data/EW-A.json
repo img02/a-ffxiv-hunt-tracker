@@ -1,0 +1,74 @@
+[
+	{
+		"Name": "Storsie",
+		"ModelID": 10623,
+		"Rank": "A",
+		"MapTerritory": "Labyrinthos"
+	},
+	{
+		"Name": "Hulder",
+		"ModelID": 10624,
+		"Rank": "A",
+		"MapTerritory": "Labyrinthos"
+	},
+	{
+		"Name": "Yilan",
+		"ModelID": 10625,
+		"Rank": "A",
+		"MapTerritory": "Thavnair"
+	},
+	{
+		"Name": "Sugriva",
+		"ModelID": 10626,
+		"Rank": "A",
+		"MapTerritory": "Thavnair"
+	},
+	{
+		"Name": "Minerva",
+		"ModelID": 10627,
+		"Rank": "A",
+		"MapTerritory": "Garlemald"
+	},
+	{
+		"Name": "Aegeiros",
+		"ModelID": 10628,
+		"Rank": "A",
+		"MapTerritory": "Garlemald"
+	},
+	{
+		"Name": "Lunatender Queen",
+		"ModelID": 10629,
+		"Rank": "A",
+		"MapTerritory": "MareLamentorum"
+	},
+	{
+		"Name": "Mousse Princess",
+		"ModelID": 10630,
+		"Rank": "A",
+		"MapTerritory": "MareLamentorum"
+	},
+	{
+		"Name": "Arch-Eta",
+		"ModelID": 10634,
+		"Rank": "A",
+		"MapTerritory": "UltimaThule"
+	},
+	{
+		"Name": "Fan Ail",
+		"ModelID": 10633,
+		"Rank": "A",
+		"MapTerritory": "UltimaThule"
+	},
+	{
+		"Name": "Petalodus",
+		"ModelID": 10632,
+		"Rank": "A",
+		"MapTerritory": "Elpis"
+	},
+	{
+		"Name": "Gurangatch",
+		"ModelID": 10631,
+		"Rank": "A",
+		"MapTerritory": "Elpis"
+	}
+]

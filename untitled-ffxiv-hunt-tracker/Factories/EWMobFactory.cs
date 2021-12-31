@@ -10,26 +10,26 @@ using untitled_ffxiv_hunt_tracker.Utilities;
 
 namespace untitled_ffxiv_hunt_tracker.Factories
 {
-    static class ShBMobFactory
+    static class EWMobFactory
     {
 
-        private static Dictionary<HuntRank, List<Mob>> ShBDictionary = new Dictionary<HuntRank, List<Mob>>();
+        private static Dictionary<HuntRank, List<Mob>> EWDictionary = new Dictionary<HuntRank, List<Mob>>();
 
         //load mob objects from json file,
 
         //return a List of mobs.
 
-        static ShBMobFactory()
+        static EWMobFactory()
         {
-            var A = JsonConvert.DeserializeObject<List<Mob>>(File.ReadAllText("./data/ShB-A.json"));
-            var B = JsonConvert.DeserializeObject<List<Mob>>(File.ReadAllText("./data/ShB-B.json"));
-            var S = JsonConvert.DeserializeObject<List<Mob>>(File.ReadAllText("./data/ShB-S.json"));
+            var A = JsonConvert.DeserializeObject<List<Mob>>(File.ReadAllText("./data/EW-A.json"));
+            var B = JsonConvert.DeserializeObject<List<Mob>>(File.ReadAllText("./data/EW-B.json"));
+            var S = JsonConvert.DeserializeObject<List<Mob>>(File.ReadAllText("./data/EW-S.json"));
 
-            ShBDictionary.Add(HuntRank.A, A);
-            ShBDictionary.Add(HuntRank.B, B);
-            ShBDictionary.Add(HuntRank.S, S);
+            EWDictionary.Add(HuntRank.A, A);
+            EWDictionary.Add(HuntRank.B, B);
+            EWDictionary.Add(HuntRank.S, S);
 
-            foreach (var list in ShBDictionary.Values)
+            foreach (var list in EWDictionary.Values)
             {
                 list.ForEach(m =>
                 {
@@ -53,23 +53,22 @@ namespace untitled_ffxiv_hunt_tracker.Factories
                         Console.WriteLine(imagePath);
 
                         m.MapImagePath = imagePath;
-                    }
 #endif
-
+                    }
                 });
             }
 
 #if FACTORYTEST
-            Console.WriteLine("=====\nShadowbringers\n====");
+            Console.WriteLine("=====\nEndwalker\n====");
             A.ForEach((m) => Console.WriteLine($"{m.Name} \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
             B.ForEach((m) => Console.WriteLine($"{m.Name} \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
             S.ForEach((m) => Console.WriteLine($"{m.Name} \t\t\t| {m.Rank} \t\t\t| {m.MapTerritory}"));
 #endif
         }
 
-        public static Dictionary<HuntRank, List<Mob>> GetShBDict()
+        public static Dictionary<HuntRank, List<Mob>> GetEWDict()
         {
-            return ShBDictionary;
+            return EWDictionary;
         }
     }
 }
