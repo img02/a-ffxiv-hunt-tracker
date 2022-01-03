@@ -21,8 +21,6 @@ namespace untitled_ffxiv_hunt_tracker
             {
                 session.GetUser();
                 session.SearchNearbyMobs();
-                //session.GetMobs();
-                //session.GetNearbyMobs();
                 Thread.Sleep(1000);
             }
         }
