@@ -34,10 +34,9 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         public int ModelID { get; set; }
         public string Rank { get; set; }
         public double HP { get; set; }
-        public MapID MapTerritory { get; set; } //change this to int / enum?
+        public MapID MapTerritory { get; set; }
         public string MapImagePath { get; set; }
         public new double HPPercent
-
         {
             get => _hPPercent;
             set
@@ -47,7 +46,8 @@ namespace untitled_ffxiv_hunt_tracker.Entities
 
                 HPPercentAsPercentage = Math.Round(_hPPercent * 100, 2);
             } }
-        public new double HPPercentAsPercentage
+
+        public double HPPercentAsPercentage
         {
             get => _hPPercentAsPercentage;
             private set
@@ -56,8 +56,6 @@ namespace untitled_ffxiv_hunt_tracker.Entities
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HPPercentAsPercentage)));
             }
         }
-
-        public string AsString => ToString();
 
         public Mob()
         {
@@ -93,10 +91,6 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         {
             CoordsChanged = null;
             PropertyChanged = null;
-        }
-        public void SetHPPercent()
-        {
-            HPPercent = Math.Round(HPPercent * 100, 2);
         }
 
         public override string ToString()

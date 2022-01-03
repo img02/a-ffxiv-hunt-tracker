@@ -6,7 +6,6 @@
 
     <Application.Resources>
         <converters:FileToBitmapConverter x:Key="FileToBitmapConverter"/>
-        <converters:FileToBitmapConverter x:Key="MobHPConverter"/>
     </Application.Resources>
 
 </Application>

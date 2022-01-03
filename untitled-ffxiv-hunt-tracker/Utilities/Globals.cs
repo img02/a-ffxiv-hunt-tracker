@@ -12,8 +12,6 @@ namespace untitled_ffxiv_hunt_tracker.Utilities
         public static GameLanguage Language = GameLanguage.English; //set this as changeable in settings
         public static string ImageRootDir = "./Images/";
         public static string ImageRootDirForgivenRebellion = "./Images/Forgiven Rebellion/";
-        public static string PlayerIconImagePath = "./Images/Icons/Pointers/dragoon.png";
-            
-
+        public static string PlayerIconImagePath = "./Images/Icons/Player Icon/Player.png";
     }
 }

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using ufht_UI.UserControls;
 using ufht_UI.UserControls.InfoSection;
@@ -23,11 +24,12 @@ namespace ufht_UI
     public partial class MainWindow : Window
     {
         private Session _session;
-        private InfoSectionControl _listSectionMain;
-        private InfoSectionTrainListControl _listSectionTrainList;
 
+        //side panel section
+        private InfoSectionControl _listSectionMain;
+
+        //main map section
         private MainMapControl _mainMap;
-        private TrainMapControl _trainMap;
 
         private ObservableCollection<Mob> _nearbyMobs;
         internal Mob priorityMob;
@@ -39,63 +41,43 @@ namespace ufht_UI
             Application.Current.Resources["_sidePanelStartingWidth"] = 0.0;
 
             Application.Current.Resources["PriorityMobTextVisibility"] = Visibility.Hidden;
+            Application.Current.Resources["PriorityMobGridInnerVisibility"] = Visibility.Hidden;
 
             //Application.Current.Resources["PriorityMobTextColour"] = Brushes.Aquamarine;
             Application.Current.Resources["PriorityMobTextColour"] = Brushes.WhiteSmoke;
-            //Application.Current.Resources["PriorityMobGridBackground"] = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#444444")); 
-            
+            /*Application.Current.Resources["PriorityMobGridBackground"] = new System.Windows.Media.SolidColorBrush(
+                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#444444")); */
+            Application.Current.Resources["PriorityMobGridBackground"] = Brushes.Transparent;
 
-            Application.Current.Resources["PriorityMobTextFontSize"] = 20.0;
+            Application.Current.Resources["PriorityMobTextNamFontSize"] = 20.0;
+            Application.Current.Resources["PriorityMobTextCoordsFontSize"] = 20.0;
             Application.Current.Resources["PriorityMobTextRankFontSize"] = 35.0;
             Application.Current.Resources["PriorityMobTextHPPFontSize"] = 26.0;
+            Application.Current.Resources["PriorityMobTTFontSize"] = 20.0;
 
+            Application.Current.Resources["ProgramOpacity"] = 1.0;
+            Application.Current.Resources["ProgramTopMost"] = false;
 
             InitializeComponent();
             _nearbyMobs = new ObservableCollection<Mob>();
             _ = Task.Run(() =>
             {
-                Trace.WriteLine("session initializing");
                 _session = new Session();
-                Trace.WriteLine("session initialized, calling start()");
 
-                
                 Dispatcher.Invoke(() =>
                 {
                     _listSectionMain = new InfoSectionControl(_session, _nearbyMobs);
                     _session.CurrentNearbyMobs.CollectionChanged += CurrentNearbyMobs_CollectionChanged;
 
-                    _listSectionTrainList = new InfoSectionTrainListControl(_session);
-
                     _mainMap = new MainMapControl(_session);
-                    _trainMap = new TrainMapControl();
 
                     MainGrid2.Children.Add(_mainMap);
-
                     ListSection.Children.Add(_listSectionMain);
-                    DataContext = _session;
 
+                    DataContext = _session;
                 });
-                
                 _session.Start();
             });
-
-        }
-
-        private void SidePanelToggleButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (InfoGrid.Width == 0)
-            {
-                //ListSection.Children.Add(_listSectionMain);
-                MainWindow1.Width += 300;
-                InfoGrid.Width = 300;
-
-            }
-            else
-            {
-                //ListSection.Children.Clear();
-                MainWindow1.Width -= 300;
-                InfoGrid.Width = 0;
-            }
 
         }
 
@@ -172,8 +154,8 @@ namespace ufht_UI
                         {
                             priorityMob.UnregisterHandlers();
                             priorityMob = null;
-                            //Application.Current.Resources["buttontext"] = "";
                             Application.Current.Resources["PriorityMobTextVisibility"] = Visibility.Hidden;
+                            Application.Current.Resources["PriorityMobGridInnerVisibility"] = Visibility.Hidden;
                         }
                     }
 
@@ -185,7 +167,6 @@ namespace ufht_UI
                         {
                             priorityMob = m;
                             priorityMob.PropertyChanged += PriorityMob_OnPropertyChanged;
-                           // Application.Current.Resources["buttontext"] = $"{priorityMob.Rank} {priorityMob.ToString()}";
                         }
                     }
 
@@ -194,18 +175,179 @@ namespace ufht_UI
 
         }
 
+        #region Event Handlers
+
+        //set current into for priority mob
         private void PriorityMob_OnPropertyChanged(object o, PropertyChangedEventArgs e)
         {
-            /*Application.Current.Resources["buttontext"] = $"{priorityMob.Rank}\t{priorityMob.Name} \n" +
-                                                          $"\t{priorityMob.GetCoords()}      {priorityMob.HPPercent*100, 0:0.00}%"*/;
-
             Application.Current.Resources["PriorityMobTextRank"] = priorityMob.Rank;
             Application.Current.Resources["PriorityMobTextName"] = priorityMob.Name;
+            Application.Current.Resources["PriorityMobTTText"] = priorityMob.Name;
             Application.Current.Resources["PriorityMobTextCoords"] = priorityMob.GetCoords();
             Application.Current.Resources["PriorityMobTextHPP"] = $"{priorityMob.HPPercentAsPercentage,0:0}%";
 
             Application.Current.Resources["PriorityMobTextVisibility"] = Visibility.Visible;
+            Application.Current.Resources["PriorityMobGridInnerVisibility"] = Visibility.Visible;
         }
 
+
+        //priority mob tool tip
+        private void PriorityMobText_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            PriorityMobTT.IsOpen = true;
+            PriorityMobTT.VerticalOffset = PriorityMobGridInner.ActualHeight * .8;
+        }
+
+        private void PriorityMobText_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            PriorityMobTT.IsOpen = false;
+        }
+
+        //priority mob row - make top black bar close program on double click.
+        private void PriorityMobTopBar_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                SystemCommands.CloseWindow(this);
+            }
+        }
+
+        //make the whole window draggable
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        #region Button event handlers
+
+        //side panel toggle -- not needed if using command
+        private void SidePanelToggleButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (InfoGrid.Width == 0)
+            {
+                InfoGrid.Width = 300;
+                MainWindow1.Width += 300;
+               
+
+            }
+            else
+            {
+                InfoGrid.Width = 0;
+                MainWindow1.Width -= 300;
+                
+            }
+        }
+
+/*  -- no longer used, using commands instead
+        private void OnTop_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!MainWindow1.Topmost)
+            {
+                Application.Current.Resources["ProgramTopMost"] = true;
+            }
+            else
+            {
+                Application.Current.Resources["ProgramTopMost"] = false;
+            }
+        }
+
+        private void Opacity_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (MainWindow1.Opacity == 1.0)
+            {
+                Application.Current.Resources["ProgramOpacity"] = 0.7;
+            }
+            else
+            {
+                Application.Current.Resources["ProgramOpacity"] = 1.0;
+            }
+        }*/
+
+        //exit button
+        private void Exit_OnClick(object sender, RoutedEventArgs e)
+        {
+            SystemCommands.CloseWindow(this);
+        }
+
+        #endregion
+
+
+        #endregion
+
+
+        #region Commands
+
+        /*       KeyDown="UIElement_OnKeyDown" in xaml window
+             private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
+             {
+                 if (e.Key == Key.A && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
+                 {
+                     if (MainWindow1.Opacity == 1.0)
+                     {
+                         Application.Current.Resources["ProgramOpacity"] = 0.7;
+                     }
+                     else
+                     {
+                         Application.Current.Resources["ProgramOpacity"] = 1.0;
+                     }
+                 }
+             }*/
+
+
+        private void OnTop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void OnTop_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (!MainWindow1.Topmost)
+            {
+                Application.Current.Resources["ProgramTopMost"] = true;
+            }
+            else
+            {
+                Application.Current.Resources["ProgramTopMost"] = false;
+            }
+        }
+
+        private void OpacityToggle_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void OpacityToggle_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (MainWindow1.Opacity == 1.0)
+            {
+                Application.Current.Resources["ProgramOpacity"] = 0.7;
+            }
+            else
+            {
+                Application.Current.Resources["ProgramOpacity"] = 1.0;
+            }
+        }
+
+        private void SidePanelToggle_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void SidePanelToggle_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (InfoGrid.Width == 0)
+            {
+                InfoGrid.Width = 300;
+                MainWindow1.Width += 300;
+            }
+            else
+            {
+                InfoGrid.Width = 0;
+                MainWindow1.Width -= 300;
+            }
+        }
+
+        #endregion
     }
 }

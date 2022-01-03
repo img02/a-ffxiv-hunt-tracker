@@ -53,9 +53,8 @@ namespace untitled_ffxiv_hunt_tracker.Factories
                         Console.WriteLine(imagePath);
 
                         m.MapImagePath = imagePath;
-                    }
 #endif
-
+                    }
                 });
             }
 

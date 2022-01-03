@@ -27,15 +27,12 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         }
 
         public new double HPPercent { get; set; }
-
-
+        
         public event EventHandler<Coords> CoordsChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string GetCoords() => Coordinates.ToString();
-        //public string Name { get; set; }
         public string CurrentWorld { get; set; }
-        //public uint MapTerritory { get; set; }
         public string PlayerIconImagePath { get; set; }
 
         public string CurrentMapImagePath
@@ -64,7 +61,7 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         public void SetMapImagePath()
         {
             var mapName = Helpers.GetMapName((uint)MapTerritory).Replace(" ", "_");
-            CurrentMapImagePath = $"{Globals.ImageRootDir}{mapName}-data.jpg";
+            CurrentMapImagePath = $"{Globals.ImageRootDir}/Maps/{mapName}-data.jpg";
         }
 
         public override string ToString()

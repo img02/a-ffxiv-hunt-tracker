@@ -26,23 +26,19 @@ namespace ufht_UI.UserControls.InfoSection
     /// </summary>
     public partial class InfoSectionControl : UserControl
     {
-        private Session _session;
-        private ObservableCollection<Mob> _nearbyMobs;
-        internal Mob priorityMob;
+        private readonly Session _session;
+        private readonly ObservableCollection<Mob> _nearbyMobs;
+        internal Mob PriorityMob; //contains single mob, used to display into at top of map image. SS > S > A > B
 
 
         public InfoSectionControl(Session session, ObservableCollection<Mob> nearbyMobs)
         {
             _session = session;
-           //_session.CurrentNearbyMobs.CollectionChanged += CurrentNearbyMobs_CollectionChanged;
-
             _nearbyMobs = nearbyMobs;
-
             InitializeComponent();
 
             Application.Current.Resources["_nearbyMobs"] = _nearbyMobs;
             DataGridInfo.LostFocus += DataGridInfoOnLostFocus;
-
         }
 
         private void DataGridInfoOnLostFocus(object sender, RoutedEventArgs e)
@@ -90,7 +86,6 @@ namespace ufht_UI.UserControls.InfoSection
 
                 Dispatcher.Invoke(() =>
                 {
-                    //Application.Current.Resources["_nearbyMobs"] = _nearbyMobs;
                     var toRemove = new ObservableCollection<Mob>();
                     foreach (var m in _nearbyMobs)
                     {
@@ -117,23 +112,22 @@ namespace ufht_UI.UserControls.InfoSection
                     //set priority mob
                     if (_nearbyMobs.Count == 0)
                     {
-                        priorityMob = null;
+                        PriorityMob = null;
                     }
                     else
                     {
                         foreach (var m in _nearbyMobs)
                         {
-                            if (priorityMob == null ||
+                            if (PriorityMob == null ||
                                 (HuntRank)Enum.Parse(typeof(HuntRank), m.Rank) >
-                                (HuntRank)Enum.Parse(typeof(HuntRank), priorityMob.Rank))
+                                (HuntRank)Enum.Parse(typeof(HuntRank), PriorityMob.Rank))
                             {
-                                priorityMob = m;
+                                PriorityMob = m;
                             }
                         }
                     }
                 });
             }
-
         }
     }
 }

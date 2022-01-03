@@ -21,7 +21,7 @@ namespace ufht_UI.UserControls
     /// </summary>
     public partial class MainMapControl : UserControl
     {
-        private Session _session;
+        private readonly Session _session;
 
         private ObservableCollection<Mob> _nearbyMobs;
 
@@ -41,10 +41,10 @@ namespace ufht_UI.UserControls
         private double _SSRankIconX;
         private double _SSRankIconY;
 
-        private BitmapImage _mobIconA;
-        private BitmapImage _mobIconB;
-        private BitmapImage _mobIconS;
-        private BitmapImage _mobIconSS;
+        private readonly BitmapImage _mobIconA;
+        private readonly BitmapImage _mobIconB;
+        private readonly BitmapImage _mobIconS;
+        private readonly BitmapImage _mobIconSS;
 
 
         public MainMapControl(Session session)
@@ -55,19 +55,19 @@ namespace ufht_UI.UserControls
             _nearbyMobs = _session.CurrentNearbyMobs;
 
             _mobIconA = new BitmapImage((new Uri(
-                $"{AppDomain.CurrentDomain.BaseDirectory}./Images/Icons/Gpose Stickers/Doodles/076960_hr1.png",
+                $"{AppDomain.CurrentDomain.BaseDirectory}./Images/Icons/Mob Icons/A.png",
                 UriKind.Absolute)));
 
             _mobIconB = new BitmapImage((new Uri(
-                $"{AppDomain.CurrentDomain.BaseDirectory}./Images/Icons/Gpose Stickers/Doodles/076962_hr1.png",
+                $"{AppDomain.CurrentDomain.BaseDirectory}./Images/Icons/Mob Icons/B.png",
                 UriKind.Absolute)));
 
             _mobIconS = new BitmapImage((new Uri(
-                $"{AppDomain.CurrentDomain.BaseDirectory}./Images/Icons/Gpose Stickers/Doodles/076952_hr1.png",
+                $"{AppDomain.CurrentDomain.BaseDirectory}./Images/Icons/Mob Icons/S.png",
                 UriKind.Absolute)));
 
             _mobIconSS = new BitmapImage((new Uri(
-                $"{AppDomain.CurrentDomain.BaseDirectory}./Images/Icons/Gpose Stickers/Doodles/076964_hr1.png",
+                $"{AppDomain.CurrentDomain.BaseDirectory}./Images/Icons/Mob Icons/SS.png",
                 UriKind.Absolute)));
 
             _session.CurrentPlayer.CoordsChanged += PlayerIconMove;
@@ -78,12 +78,6 @@ namespace ufht_UI.UserControls
 
         private void PlayerIconMove(object o, Coords coords)
         {
-            /* var windowHeight = MapImage.ActualHeight;
-             var windowWidth = MapImage.ActualWidth;
-             //scale not used
-             var scaleX = windowHeight / 1024;
-             var scaleY = windowWidth / 1024;*/
-
             _ = Task.Run(() =>
             {
 
@@ -99,7 +93,7 @@ namespace ufht_UI.UserControls
                 Application.Current.Resources["_playerIconX"] = _playerIconX;
                 Application.Current.Resources["_playerIconY"] = _playerIconY;
 
-                //Radius circle stuff
+                //Radius detection circle stuff
                 Application.Current.Resources["_playerRadiusX"] = _playerIconX - (PlayerRadius.ActualWidth / 2) + (PlayerIcon.ActualWidth / 2);
                 Application.Current.Resources["_playerRadiusY"] = _playerIconY - (PlayerRadius.ActualHeight / 2) + (PlayerIcon.ActualHeight / 2);
 
@@ -127,13 +121,13 @@ namespace ufht_UI.UserControls
             int SCount = 0;
             int SSCount = 0;
 
-            #region idk could use something like this instead to dynamically add as many as needed, but need to workout how to remove/update em...
+            #region idk could use something like this instead to dynamically add as many as needed, but need to workout how to remove/update em... list?
 
             /*
                         Dispatcher.Invoke(() =>
                         {
                             var image = new Image();
-                            image.Source = _mobIconA;
+                            image.Source = _mobIconA; //etc
                             image.HorizontalAlignment = HorizontalAlignment.Center;
                             image.VerticalAlignment = VerticalAlignment.Center;
                             image.Height = 64;
@@ -168,9 +162,6 @@ namespace ufht_UI.UserControls
 
                         _ = Task.Run(() =>
                         {
-                            /*_ARankIconX = UpdatePositionOnMapImage(x);
-                            _ARankIconY = UpdatePositionOnMapImage(y);*/
-
                             _ARankIconX = UpdatePositionOnMapImageForMobs(x);
                             _ARankIconY = UpdatePositionOnMapImageForMobs(y);
 
@@ -188,14 +179,7 @@ namespace ufht_UI.UserControls
                     this.Dispatcher.Invoke(() =>
                     {
                         BRank.Source = _mobIconB;
-                        //BRank.RenderTransformOrigin = new Point(0.5, 0.5);
-                        //resize example
-                        /*BRank.Height = 32;
-                        BRank.Width = 32;*/
                     });
-
-                    /*_BRankIconX = UpdatePositionOnMapImage(m.Coordinates.X);
-                    _BRankIconY = UpdatePositionOnMapImage(m.Coordinates.Y);*/
 
                     _BRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
                     _BRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
@@ -213,9 +197,6 @@ namespace ufht_UI.UserControls
 
                     Trace.WriteLine("S added");
 
-                    //_SRankIconX = UpdatePositionOnMapImage(m.Coordinates.X);
-                    //_SRankIconX = UpdatePositionOnMapImage(m.Coordinates.Y);
-
                     _SRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
                     _SRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
 
@@ -230,9 +211,6 @@ namespace ufht_UI.UserControls
                     this.Dispatcher.Invoke(() => { SSRank.Source = _mobIconSS; });
 
                     Trace.WriteLine("SS added");
-
-                    //_SSRankIconX = UpdatePositionOnMapImage(m.Coordinates.X);
-                    //_SSRankIconY = UpdatePositionOnMapImage(m.Coordinates.Y);
 
                     _SSRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
                     _SSRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
@@ -267,8 +245,6 @@ namespace ufht_UI.UserControls
             {
                 var rank = mob.Rank;
 
-                //var iconX = UpdatePositionOnMapImage(coords.X);
-                //var iconY = UpdatePositionOnMapImage(coords.Y);
                 var iconX = UpdatePositionOnMapImageForMobs(mob.Coordinates.X);
                 var iconY = UpdatePositionOnMapImageForMobs(mob.Coordinates.Y);
 
@@ -276,10 +252,6 @@ namespace ufht_UI.UserControls
 
                 if (rank == "A")
                 {
-
-                    /*var ARankTotalDif = (Canvas.GetLeft(ARank) - iconX) + (Canvas.GetTop(ARank) - iconY);
-                    var ARank2TotalDif = (Canvas.GetLeft(ARank2) - iconX) + (Canvas.GetTop(ARank2) - iconY);*/
-
                     Application.Current.Resources["_ARankIconX"] = iconX;
                     Application.Current.Resources["_ARankIconY"] = iconY;
                     Application.Current.Resources["_nearbyA"] = toolTipInfo;
@@ -338,28 +310,10 @@ namespace ufht_UI.UserControls
         //idk if i decide to make icons resizable...
         private double UpdatePositionOnMapImageForMobs(double coordinateValue)
         {
-            var mobIconHeight = 64; //make this settable somewhere.... and ARank, BRank, etc, height and width equal this...
+            var mobIconHeight = 64; //make this settable somewhere....? and ARank, BRank, etc, height and width equal this...
             //image height and width should be the same
             return ((coordinateValue - 1) * (MapImage.ActualHeight / 41) - mobIconHeight / 2);
         }
-
-
-        //using this slows things down idk
-        private void NearbyMobIconHelper(Mob m, string dynamicResourceName)
-        {
-
-            var iconX = UpdatePositionOnMapImage(m.Coordinates.X);
-            var iconY = UpdatePositionOnMapImage(m.Coordinates.Y);
-
-            var nameX = dynamicResourceName + "X";
-            var nameY = dynamicResourceName + "Y";
-
-            Application.Current.Resources[nameX] = iconX;
-            Application.Current.Resources[nameY] = iconX;
-            m.CoordsChanged += UpdateNearbyMobIcon;
-        }
-
-
 
 
 
@@ -387,7 +341,7 @@ namespace ufht_UI.UserControls
 
         private void MapImage_OnMouseLeave(object sender, MouseEventArgs e)
         {
-            //this doesn't work 100% :(.. how could they both be false if it's over one?
+            //this doesn't work 100% :(
             if (!MapTT.IsMouseOver && !MapImage.IsMouseOver)
             {
                 MapTT.IsOpen = false;

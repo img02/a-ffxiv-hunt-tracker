@@ -29,7 +29,7 @@ namespace ufht_UI.CustomConverters
                 _playerIconOpacity = 0;
                 _playerRadiusOpacity = 0;
                 _playerRadiusStrokeOpacity = 0;
-                filename = "./Images//Icons/086139_hr1.png"; //change this to error image
+                filename = "./Images/NoMap.png"; //change this to error image
             }
             else
             {

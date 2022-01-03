@@ -96,10 +96,7 @@
             <!-- Datagrid Styling END -->
 
         </DataGrid>
-
-
-
-        <!-- Thirteenth  Row  -->
+      
        
     </Grid>
 </UserControl>

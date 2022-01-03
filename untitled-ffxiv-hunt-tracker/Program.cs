@@ -17,32 +17,14 @@ namespace untitled_ffxiv_hunt_tracker
             Console.WriteLine("Hello World!");
             var session = new Session();
 
-            _ = Task.Run(() => //read chatlog for stuff, don't wait for this to finish before continuing .
-            {
-                while (true)
-                {
-                    session.ReadChatLog();
-                    //Thread.Sleep(3000); if you want to only read chat log / refresh every x seconds
-                }
-            });
-
             while (true)
             {
-                //i'm stupid btw.
-                //Console.Clear();
                 session.GetUser();
                 session.SearchNearbyMobs();
-                session.GetMobs();
-                session.GetNearbyMobs();
-                
-                //await Task.Run(() => chatLog.ReadChatLog());
-
-
+                //session.GetMobs();
+                //session.GetNearbyMobs();
                 Thread.Sleep(1000);
             }
-
-            Console.ReadLine();
         }
     }
-
 }

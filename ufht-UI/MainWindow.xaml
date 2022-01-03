@@ -4,17 +4,43 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:untitled_ffxiv_hunt_tracker.ViewModels;assembly=untitled_ffxiv_hunt_tracker"
+        xmlns:ufhtUi="clr-namespace:ufht_UI"
         d:DataContext="{d:DesignInstance viewModels:Session}"
         mc:Ignorable="d"
         Title="UFHT" 
 
         d:DesignHeight="1000" d:DesignWidth="1000"
-        Width="1024"
-        Height="1048"
-        WindowStyle="SingleBorderWindow"
 
-        MinHeight="512" MinWidth="512" Background="AntiqueWhite"
-        Name="MainWindow1">
+        Width="1024"
+        Height="1024"
+
+        AllowsTransparency="True" WindowStyle="None"
+        Background="Transparent"
+        Opacity="{DynamicResource ProgramOpacity}"
+
+        MinHeight="512" 
+        MinWidth="512" 
+        
+        Name="MainWindow1"
+        SnapsToDevicePixels="True"
+        Topmost="{DynamicResource ProgramTopMost}"
+
+        MouseDown="Window_MouseDown">
+
+    <Window.CommandBindings>
+        <CommandBinding Command="ufhtUi:Commands.OnTop"
+                        CanExecute="OnTop_CanExecute"
+                        Executed="OnTop_Executed" />
+
+        <CommandBinding Command="ufhtUi:Commands.OpacityToggle" 
+                        CanExecute="OpacityToggle_CanExecute"
+                        Executed="OpacityToggle_Executed" />
+
+        <CommandBinding Command="ufhtUi:Commands.SidePanelToggle" 
+                        CanExecute="SidePanelToggle_CanExecute"
+                        Executed="SidePanelToggle_Executed" />
+    </Window.CommandBindings>
+
 
     <Grid Name="Base"
           VerticalAlignment="Center"
@@ -37,7 +63,7 @@
               HorizontalAlignment="Center"
               MinHeight="512" MinWidth="512" Name ="MainGrid">
 
-            <Grid Name="MainGrid2" > 
+            <Grid Name="MainGrid2" >
 
             </Grid>
 
@@ -62,7 +88,8 @@
             <Grid Name ="PriorityMobGridOuter">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height=".06*"/>
+                    <RowDefinition Height=".03*"/> <!--- split up into 0.3 to give a narrower top bar for double click close -->
+                    <RowDefinition Height=".03*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
@@ -73,25 +100,37 @@
 
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Column="1" BorderBrush="GreenYellow" BorderThickness="0">
+                <!--- used for double click close -->
+                <Grid  
+                    Name ="PriorityMobTopBar" 
+                    Grid.ColumnSpan="3"
+                    MouseDown="PriorityMobTopBar_OnMouseDown"
+                    Background="Transparent"/>
 
-                <Grid Name="PriorityMobGridInner"
+                <Border Grid.Column="1" Grid.RowSpan="2"
+                        BorderBrush="FloralWhite"
+                        BorderThickness="1 0 1 0">
+
+                    <Grid Name="PriorityMobGridInner"
                       Grid.Column="1"
-                      Background="{DynamicResource PriorityMobGridBackground}">
+                      Background="{DynamicResource PriorityMobGridBackground}"
+                      Visibility="{DynamicResource PriorityMobGridInnerVisibility}"
 
-                    <Grid.RowDefinitions>
+                      MouseMove="PriorityMobText_OnMouseMove"
+                      MouseLeave="PriorityMobText_OnMouseLeave">
+
+                        <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                        </Grid.RowDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width=".6*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width=".7*"/>
-                    </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".6*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width=".7*"/>
+                        </Grid.ColumnDefinitions>
 
-
-                    <Label Name="PriorityMobRank"
+                        <Label Name="PriorityMobRank"
                            Grid.Column="0"
                            Grid.Row="0"
                            Grid.RowSpan="2"
@@ -104,7 +143,7 @@
                            Visibility="{DynamicResource PriorityMobTextVisibility}"
                            Content="{DynamicResource PriorityMobTextRank}"/>
 
-                    <Label Name="PriorityMobName"
+                        <Label Name="PriorityMobName"
                            Grid.Column="1"
                            Grid.Row="0"
                            HorizontalAlignment="Center"
@@ -113,11 +152,11 @@
                            Padding="0"
                            FontWeight="DemiBold"
                            Foreground="{DynamicResource PriorityMobTextColour}"
-                           FontSize="{DynamicResource PriorityMobTextFontSize}"
+                           FontSize="{DynamicResource PriorityMobTextNamFontSize}"
                            Visibility="{DynamicResource PriorityMobTextVisibility}"
                            Content="{DynamicResource PriorityMobTextName}"/>
-                   
-                    <Label Name="PriorityMobCoords"
+
+                        <Label Name="PriorityMobCoords"
                            Grid.Column="1"
                            Grid.Row="1"
                            HorizontalAlignment="Center"
@@ -126,13 +165,11 @@
                            Padding="0"
                            FontWeight="DemiBold"
                            Foreground="{DynamicResource PriorityMobTextColour}"
-                           FontSize="{DynamicResource PriorityMobTextFontSize}"
+                           FontSize="{DynamicResource PriorityMobTextCoordsFontSize}"
                            Visibility="{DynamicResource PriorityMobTextVisibility}"
                            Content="{DynamicResource PriorityMobTextCoords}"/>
-                          
 
-
-                    <Label Name="PriorityMobHPP"
+                        <Label Name="PriorityMobHPP"
                            Grid.Column="2"
                            Grid.Row="0"
                            Grid.RowSpan="2"
@@ -145,8 +182,17 @@
                            Visibility="{DynamicResource PriorityMobTextVisibility}"
                            Content="{DynamicResource PriorityMobTextHPP}"/>
 
+                        <Popup 
+                            Name="PriorityMobTT" 
+                            Placement="Center">
 
-                </Grid>
+                            <Border CornerRadius="5" Padding="5, 2,5,2" 
+                                    Background="Azure" IsHitTestVisible="False">
+                                <TextBlock Text="{DynamicResource PriorityMobTTText}" 
+                                           FontSize="{DynamicResource PriorityMobTTFontSize}"/>
+                            </Border>
+                        </Popup>
+                    </Grid>
 
                 </Border>
 
@@ -166,7 +212,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="20"/>
@@ -188,15 +234,12 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0" Content="Future" />
-                <Button Grid.Column="1" Content="Features" />
-                <Button Grid.Column="2">But</Button>
-                <Button Grid.Column="3">Lazy</Button>
+                <Button Grid.Column="1"  Command="ufhtUi:Commands.OnTop" Content="Features" />
+                <Button Grid.Column="2" Command="ufhtUi:Commands.OpacityToggle" >But</Button>
+                <Button Grid.Column="3" Click="Exit_OnClick">Lazy</Button>
             </Grid>
 
         </Grid>
-       
-
-
     </Grid>
 
 </Window>

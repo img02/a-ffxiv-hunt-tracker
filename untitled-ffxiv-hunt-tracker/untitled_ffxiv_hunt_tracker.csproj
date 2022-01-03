@@ -9,7 +9,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>x64</PlatformTarget>
-    <DefineConstants>TRACE;FACTORYTEST;FACTORYTESTIMAGE</DefineConstants>
+    <DefineConstants>TRACE;</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -63,207 +63,152 @@
     <None Update="Data\ShB-S.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\test.json">
+    <None Update="Images\Icons\Mob Icons\A-border.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Amh_Araeng-data.jpg">
+    <None Update="Images\Icons\Mob Icons\A.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Azys_Lla-data.jpg">
+    <None Update="Images\Icons\Mob Icons\B.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Central_Shroud-data.jpg">
+    <None Update="Images\Icons\Mob Icons\S.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Central_Thanalan-data.jpg">
+    <None Update="Images\Icons\Mob Icons\SS.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Coerthas_Central_Highlands-data.jpg">
+    <None Update="Images\Icons\Player Icon\Player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Coerthas_Western_Highlands-data.jpg">
+    <None Update="Images\Maps\Amh_Araeng-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Eastern_La_Noscea-data.jpg">
+    <None Update="Images\Maps\Azys_Lla-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Eastern_Thanalan-data.jpg">
+    <None Update="Images\Maps\Central_Shroud-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\East_Shroud-data.jpg">
+    <None Update="Images\Maps\Central_Thanalan-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Elpis-data.jpg">
+    <None Update="Images\Maps\Coerthas_Central_Highlands-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Garlemald-data.jpg">
+    <None Update="Images\Maps\Coerthas_Western_Highlands-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\086139_hr1.png">
+    <None Update="Images\Maps\Eastern_La_Noscea-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076951_hr1.png">
+    <None Update="Images\Maps\Eastern_Thanalan-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076952_hr1.png">
+    <None Update="Images\Maps\East_Shroud-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076953_hr1.png">
+    <None Update="Images\Maps\Elpis-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076954_hr1.png">
+    <None Update="Images\Maps\Garlemald-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076955_hr1.png">
+    <None Update="Images\Maps\Il_Mheg-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076956_hr1.png">
+    <None Update="Images\Maps\Kholusia-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076957_hr1.png">
+    <None Update="Images\Maps\Labyrinthos-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076958_hr1.png">
+    <None Update="Images\Maps\Lakeland-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076959_hr1.png">
+    <None Update="Images\Maps\Lower_La_Noscea-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076960_hr1 - Copy.png">
+    <None Update="Images\Maps\Mare_Lamentorum-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076960_hr1.png">
+    <None Update="Images\Maps\Middle_La_Noscea-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076961_hr1.png">
+    <None Update="Images\Maps\Mor_Dhona-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076962_hr1.png">
+    <None Update="Images\Maps\Northern_Thanalan-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076963_hr1.png">
+    <None Update="Images\Maps\North_Shroud-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Gpose Stickers\Doodles\076964_hr1.png">
+    <None Update="Images\Maps\Outer_La_Noscea-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\archer.png">
+    <None Update="Images\Maps\Southern_Thanalan-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\blackmage.png">
+    <None Update="Images\Maps\South_Shroud-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\dancer.png">
+    <None Update="Images\Maps\Thavnair-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\dragoon - Copy.png">
+    <None Update="Images\Maps\The_Azim_Steppe-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\dragoon.png">
+    <None Update="Images\Maps\The_Churning_Mists-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\fisher.png">
+    <None Update="Images\Maps\The_Dravanian_Forelands-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\lancer.png">
+    <None Update="Images\Maps\The_Dravanian_Hinterlands-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\summoner.png">
+    <None Update="Images\Maps\The_Fringes-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Icons\Pointers\whitemage.png">
+    <None Update="Images\Maps\The_Lochs-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Il_Mheg-data.jpg">
+    <None Update="Images\Maps\The_Peaks-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Kholusia-data.jpg">
+    <None Update="Images\Maps\The_Rak%27tika_Greatwood-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Labyrinthos-data.jpg">
+    <None Update="Images\Maps\The_Ruby_Sea-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Lakeland-data.jpg">
+    <None Update="Images\Maps\The_Sea_of_Clouds-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Lower_La_Noscea-data.jpg">
+    <None Update="Images\Maps\The_Tempest-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Mare_Lamentorum-data.jpg">
+    <None Update="Images\Maps\Ultima_Thule-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Middle_La_Noscea-data.jpg">
+    <None Update="Images\Maps\Upper_La_Noscea-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Mor_Dhona-data.jpg">
+    <None Update="Images\Maps\Western_La_Noscea-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Northern_Thanalan-data.jpg">
+    <None Update="Images\Maps\Western_Thanalan-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\North_Shroud-data.jpg">
+    <None Update="Images\Maps\Yanxia-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Images\Outer_La_Noscea-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Southern_Thanalan-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\South_Shroud-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Thavnair-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Azim_Steppe-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Churning_Mists-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Dravanian_Forelands-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Dravanian_Hinterlands-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Fringes-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Lochs-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Peaks-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Rak%27tika_Greatwood-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Ruby_Sea-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Sea_of_Clouds-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\The_Tempest-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Ultima_Thule-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Upper_La_Noscea-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Western_La_Noscea-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Western_Thanalan-data.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="Images\Yanxia-data.jpg">
+    <None Update="Images\NoMap.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
+
+  
 
 </Project>
