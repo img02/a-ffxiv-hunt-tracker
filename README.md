@@ -9,7 +9,7 @@ All at a smooooooth 166.66 refresh rate.
 
 # How do I use it?
 
-[Insert GIF of Player FINDING A RANK]
+![GFYCAT OF THIS PROGRAM IN ACTION](https://gfycat.com/bigyoungicefish)
 
 When in a map with hunt mobs, the relevant map image will appear and a player icon with a detection circle will appear in relation to the players position.
 
