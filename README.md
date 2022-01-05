@@ -1,4 +1,4 @@
-# a-ffxiv-hunt-tracker
+# a-ffxiv-hunt-tracker [WIP]
 
 ### A(n) FFXIV Hunt Map / Radar
 
@@ -57,8 +57,10 @@ The current images and shortcuts are placeholders.
 - Resize Window - maintaining aspect ratio
 - Customisable opacity 
 - Save and load settings
+- 'Record' and save a list of mob info for 'hunt trains'
 - TTS (suggest using triggernometry tbh)
-- ACT plugin
+- ACT plugin version
+- ..tbd
 
 
 ### Credits and other stuff
