@@ -37,8 +37,8 @@ You can also mouse over anywhere on the map to get the equivalent in-game **(XX.
 
 
 ### Current (hardcoded) shortcuts:
-- **CTRL + A**  - ALWAYS ON TOP
-- **CTRL + S**  - 70% OPACITY
+- **CTRL + A**  - TOGGLE ALWAYS ON TOP
+- **CTRL + S**  - TOGGLE OPACITY
 - **TAB**       - TOGGLE SIDE PANEL
 - Double click the top or ALT + F4 to exit
 - Click and drag from anywhere to move the window around.
@@ -68,4 +68,4 @@ This project uses [Sharlayan](https://github.com/FFXIVAPP/sharlayan) to read the
 
 All other imagery used (mob icons, backgrounds images, some maps) are copyright of Square Enix.
 
-This is a personal project created to practice WPF and to create something useful to myself.
+This is a personal project created to practice WPF, personal learning, and to create something useful to myself.
