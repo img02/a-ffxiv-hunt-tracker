@@ -34,10 +34,14 @@ namespace ufht_UI
         private ObservableCollection<Mob> _nearbyMobs;
         internal Mob priorityMob;
 
+        private double _programOpacityToggleTo;
+
 
 
         public MainWindow()
         {
+            _programOpacityToggleTo = 0.8;
+
             Application.Current.Resources["_sidePanelStartingWidth"] = 0.0;
 
             Application.Current.Resources["PriorityMobTextVisibility"] = Visibility.Hidden;
@@ -285,7 +289,7 @@ namespace ufht_UI
                  {
                      if (MainWindow1.Opacity == 1.0)
                      {
-                         Application.Current.Resources["ProgramOpacity"] = 0.7;
+                         Application.Current.Resources["ProgramOpacity"] = _programOpacityToggleTo;
                      }
                      else
                      {
@@ -321,7 +325,7 @@ namespace ufht_UI
         {
             if (MainWindow1.Opacity == 1.0)
             {
-                Application.Current.Resources["ProgramOpacity"] = 0.7;
+                Application.Current.Resources["ProgramOpacity"] = _programOpacityToggleTo;
             }
             else
             {

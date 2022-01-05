@@ -24,11 +24,23 @@
 		"MapTerritory": "MareLamentorum"
 	},
   {
-    "Name": "Ker",
-    "ModelID": 8900,
-    "Rank": "SS",
-    "MapTerritory": "MareLamentorum"
+    "Name": "Sphatika",
+    "ModelID": 0,
+    "Rank": "S",
+    "MapTerritory": "Thavnair"
   },
+  {
+    "Name": "Burfurlur the Canny",
+    "ModelID": "000",
+    "Rank": "S",
+    "MapTerritory": "Labyrinthos"
+  },
+	{
+		"Name": "Ker",
+		"ModelID": 8900,
+		"Rank": "SS",
+		"MapTerritory": "MareLamentorum"
+	},
 	{
 		"Name": "Ker",
 		"ModelID": 8900,
@@ -59,4 +71,4 @@
 		"Rank": "SS",
 		"MapTerritory": "Labyrinthos"
 	}
-	]
+]
