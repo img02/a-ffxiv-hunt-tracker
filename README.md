@@ -37,8 +37,8 @@ You can also mouse over anywhere on the map to get the equivalent in-game **(XX.
 
 
 ### Current (hardcoded) shortcuts:
-- **CTRL + A**  - ALWAYS ON TOP
-- **CTRL + S**  - 70% OPACITY
+- **CTRL + A**  - TOGGLE ALWAYS ON TOP
+- **CTRL + S**  - TOGGLE OPACITY
 - **TAB**       - TOGGLE SIDE PANEL
 - Double click the top or ALT + F4 to exit
 - Click and drag from anywhere to move the window around.
