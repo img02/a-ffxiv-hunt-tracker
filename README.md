@@ -54,7 +54,7 @@ The current images and shortcuts are placeholders.
 - FATE detection, at least for Minho, Senmurv, Orghana, Special Fates.
 - Customisable shortcuts
 - Customisable text font / colours / weight / etc
-- Resize Window - maintaining aspect ration
+- Resize Window - maintaining aspect ratio
 - Customisable opacity 
 - Save and load settings
 - TTS (suggest using triggernometry tbh)
