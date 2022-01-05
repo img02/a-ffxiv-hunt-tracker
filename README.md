@@ -52,6 +52,7 @@ The current images and shortcuts are placeholders.
 ### TODO (no promises):
 - Replace Endwalker Map images, once Cable Monkey releases new maps.
 - FATE detection, at least for Minho, Senmurv, Orghana, Special Fates.
+- SS Maps showing location of minions - low prio
 - Customisable shortcuts
 - Customisable text font / colours / weight / etc
 - Resize Window - maintaining aspect ratio
