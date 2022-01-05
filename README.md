@@ -66,4 +66,4 @@ This project uses [Sharlayan](https://github.com/FFXIVAPP/sharlayan) to read the
 
 All other imagery used (mob icons, backgrounds images, some maps) are copyright of Square Enix.
 
-This is a personal project created to practice WPF and to create something useful to myself.
+This is a personal project created to practice WPF, personal learning, and to create something useful to myself.
