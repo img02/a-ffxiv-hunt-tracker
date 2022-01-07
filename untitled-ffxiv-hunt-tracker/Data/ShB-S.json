@@ -39,36 +39,72 @@
 		"Name": "Forgiven Rebellion",
 		"ModelID": 8915,
 		"Rank": "SS",
-		"MapTerritory":  "AmhAraeng" 
+		"MapTerritory": "AmhAraeng"
 	},
 	{
 		"Name": "Forgiven Rebellion",
 		"ModelID": 8915,
 		"Rank": "SS",
-		"MapTerritory":  "IlMheg" 
+		"MapTerritory": "IlMheg"
 	},
 	{
 		"Name": "Forgiven Rebellion",
 		"ModelID": 8915,
 		"Rank": "SS",
-		"MapTerritory":  "Kholusia" 
+		"MapTerritory": "Kholusia"
 	},
 	{
 		"Name": "Forgiven Rebellion",
 		"ModelID": 8915,
 		"Rank": "SS",
-		"MapTerritory":  "Lakeland" 
+		"MapTerritory": "Lakeland"
 	},
 	{
 		"Name": "Forgiven Rebellion",
 		"ModelID": 8915,
 		"Rank": "SS",
-		"MapTerritory":  "TheRaktikaGreatwood" 
+		"MapTerritory": "TheRaktikaGreatwood"
 	},
 	{
 		"Name": "Forgiven Rebellion",
 		"ModelID": 8915,
 		"Rank": "SS",
-		"MapTerritory":  "TheTempest" 
-	}
-	]
+		"MapTerritory": "TheTempest"
+	},
+	{
+		"Name": "Forgiven Gossip",
+    "ModelID": 8916,
+    "Rank": "SS",
+    "MapTerritory": "Lakeland"
+  },
+  {
+    "Name": "Forgiven Gossip",
+    "ModelID": 8916,
+    "Rank": "SS",
+    "MapTerritory": "AmhAraeng"
+  },
+  {
+    "Name": "Forgiven Gossip",
+    "ModelID": 8916,
+    "Rank": "SS",
+    "MapTerritory": "Kholusia"
+  },
+  {
+    "Name": "Forgiven Gossip",
+    "ModelID": 8916,
+    "Rank": "SS",
+    "MapTerritory": "TheTempest"
+  },
+  {
+    "Name": "Forgiven Gossip",
+    "ModelID": 8916,
+    "Rank": "SS",
+    "MapTerritory": "TheRaktikaGreatwood"
+  },
+  {
+    "Name": "Forgiven Gossip",
+    "ModelID": 8916,
+    "Rank": "SS",
+    "MapTerritory": "IlMheg"
+  }
+]

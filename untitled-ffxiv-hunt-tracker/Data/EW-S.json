@@ -23,18 +23,18 @@
 		"Rank": "S",
 		"MapTerritory": "MareLamentorum"
 	},
-  {
-    "Name": "Sphatika",
-    "ModelID": 0,
-    "Rank": "S",
-    "MapTerritory": "Thavnair"
-  },
-  {
-    "Name": "Burfurlur the Canny",
-    "ModelID": "000",
-    "Rank": "S",
-    "MapTerritory": "Labyrinthos"
-  },
+	{
+		"Name": "Sphatika",
+		"ModelID": 0,
+		"Rank": "S",
+		"MapTerritory": "Thavnair"
+	},
+	{
+		"Name": "Burfurlur the Canny",
+		"ModelID": "000",
+		"Rank": "S",
+		"MapTerritory": "Labyrinthos"
+	},
 	{
 		"Name": "Ker",
 		"ModelID": 8900,
@@ -70,5 +70,35 @@
 		"ModelID": 8900,
 		"Rank": "SS",
 		"MapTerritory": "Labyrinthos"
-	}
+	},
+  {
+    "Name": "Ker Shroud",
+    "ModelID": 10616,
+    "Rank": "SS",
+    "MapTerritory": "Thavnair"
+  },
+  {
+    "Name": "Ker Shroud",
+    "ModelID": 10616,
+    "Rank": "SS",
+    "MapTerritory": "Labyrinthos"
+  },
+  {
+    "Name": "Ker Shroud",
+    "ModelID": 10616,
+    "Rank": "SS",
+    "MapTerritory": "UltimaThule"
+  },
+  {
+    "Name": "Ker Shroud",
+    "ModelID": 10616,
+    "Rank": "SS",
+    "MapTerritory": "Elpis"
+  },
+  {
+    "Name": "Ker Shroud",
+    "ModelID": 10616,
+    "Rank": "SS",
+    "MapTerritory": "MareLamentorum"
+  }
 ]
