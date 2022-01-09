@@ -55,7 +55,7 @@ You can also mouse over anywhere on the map to get the equivalent in-game **(XX.
 |   |   ├── Mob Icons
 |   |   └── Player Icon
 │   └── Maps
-|   |   ├── *.jpg
+|       ├── *.jpg
 │       └── SS Maps  
 ```
 Mob data can be changed in the jsons files in the **Data** folder using the structure provided (Do not delete these files).
