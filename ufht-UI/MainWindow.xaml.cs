@@ -352,6 +352,16 @@ namespace ufht_UI
             }
         }
 
-        #endregion
-    }
+        private void  SSMapToggle_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void SSMapToggle_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            _session.ToggleSSMap();
+        }
+
+    #endregion
+}
 }

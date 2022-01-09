@@ -160,6 +160,24 @@
     </None>
     <None Update="Images\Maps\South_Shroud-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>    <None Update="Images\Maps\SS Maps\Amh_Araeng_SS-data.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Maps\SS Maps\Il_Mheg_SS-data.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Maps\SS Maps\Kholusia_SS-data.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Maps\SS Maps\Lakeland_SS-data.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Maps\SS Maps\The_Rak%27tika_Greatwood_SS-data.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+
+    <None Update="Images\Maps\SS Maps\The_Tempest_SS-data.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Images\Maps\Thavnair-data.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

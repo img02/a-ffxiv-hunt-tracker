@@ -31,13 +31,14 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
 
         private MemoryReader _memoryReader;
 
+        private bool _ssMap;
+
         public  List<Mob> CurrentTrain;
         private string CurrentTrainName { get; set; }
 
         public ObservableCollection<Mob> CurrentNearbyMobs { get; }
         public Player CurrentPlayer { get; set; }
 
-        
 
         public Session()
         {
@@ -48,6 +49,8 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             SBDict = SBMobFactory.GetSBDict();
             ShBDict = ShBMobFactory.GetShBDict();
             EWDict = EWMobFactory.GetEWDict();
+
+            _ssMap = false;
 
             Trains = new Dictionary<string, List<Mob>>();
 
@@ -255,10 +258,15 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         {
             var user = _memoryReader.GetUser();
 
+            if (user.MapTerritory < 813)
+            {
+                _ssMap = false;
+            }
+
             CurrentPlayer.Coordinates = new Coords(ConvertPos(user.X), ConvertPos(user.Y));
             CurrentPlayer.Name = user.Name;
             CurrentPlayer.MapTerritory = user.MapTerritory;
-            CurrentPlayer.SetMapImagePath();
+            CurrentPlayer.SetMapImagePath(_ssMap);
             CurrentPlayer.PlayerIconImagePath = Globals.PlayerIconImagePath;
             CurrentPlayer.Heading = user.Heading;
             // Console.WriteLine($"Heading: {CurrentPlayer.Heading}");
@@ -298,6 +306,11 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             //Trace.WriteLine(((Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100));
 
             return ( (Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100 ); 
+        }
+
+        public void ToggleSSMap()
+        {
+            _ssMap = !_ssMap;
         }
         #endregion
     }

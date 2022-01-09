@@ -55,13 +55,21 @@ namespace untitled_ffxiv_hunt_tracker.Entities
             Name = name;
             CurrentWorld = currentWorld;
             MapTerritory = mapTerritory;
-            SetMapImagePath();
+            SetMapImagePath(false);
         }
 
-        public void SetMapImagePath()
+        public void SetMapImagePath(bool SSMap)
         {
-            var mapName = Helpers.GetMapName((uint)MapTerritory).Replace(" ", "_");
-            CurrentMapImagePath = $"{Globals.ImageRootDir}/Maps/{mapName}-data.jpg";
+            if (!SSMap)
+            {
+                var mapName = Helpers.GetMapName((uint) MapTerritory).Replace(" ", "_");
+                CurrentMapImagePath = $"{Globals.ImageRootDir}/Maps/{mapName}-data.jpg";
+            }
+            else
+            {
+                var mapName = Helpers.GetMapName((uint)MapTerritory).Replace(" ", "_");
+                CurrentMapImagePath = $"{Globals.ImageRootDir}/Maps/SS Maps/{mapName}_SS-data.jpg";
+            }
         }
 
         public override string ToString()

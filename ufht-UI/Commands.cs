@@ -42,6 +42,17 @@ namespace ufht_UI
                 new KeyGesture(Key.Tab)
             }
         );
+         
+        public static readonly RoutedUICommand SSMapToggle = new RoutedUICommand
+        (
+            "SSMap Toggle",
+            "SSMap Toggle",
+            typeof(Commands),
+            new InputGestureCollection()
+            {
+                new KeyGesture(Key.F, ModifierKeys.Control)
+            }
+        );
 
         //Define more commands here, just like the one above
     }
