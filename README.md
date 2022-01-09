@@ -39,12 +39,37 @@ You can also mouse over anywhere on the map to get the equivalent in-game **(XX.
 ### Current (hardcoded) shortcuts:
 - **CTRL + A**  - TOGGLE ALWAYS ON TOP
 - **CTRL + S**  - TOGGLE OPACITY
+- **CTRL + F**  - TOGGLE SS MAP
 - **TAB**       - TOGGLE SIDE PANEL
 - Double click the top or ALT + F4 to exit
 - Click and drag from anywhere to move the window around.
 
 
-The default Images and Icons can be replaced in the Images folder, using the same naming scheme with the new image.
+# How do I change things?  
+```
+├── Data
+│   ├── ARR-A.json
+│   └── ...
+├── Images
+│   ├── Icons
+|   |   ├── Mob Icons
+|   |   └── Player Icon
+│   └── Maps
+|   |   ├── *.jpg
+│       └── SS Maps  
+```
+Mob data can be changed in the jsons files in the **Data** folder using the structure provided (Do not delete these files).
+
+Icons can be changed in the **Images/Icons** subfolders. Replace images using the same file name, **512x512  1:1** recommended.
+
+Map images can be changed in the **Images/Maps** folder, if you want to compress the images to reduce filesize. **1:1** ratio needed.    
+It is recommended that you do not change these. If you change the map images, positions might not be accurate.
+
+Must follow the format _"{MapName}-data.jpg"_ with _ replacing spaces.  
+These are the default file names from [Cable Monkey](http://cablemonkey.us/huntmap2/).  
+
+The **Images/SS Maps** names are changed from the default file names to follow the format _"{MapName}\_SS-data.jpg"_
+
 
 The current images and shortcuts are placeholders.
 
@@ -52,7 +77,7 @@ The current images and shortcuts are placeholders.
 ### TODO (no promises):
 - Replace Endwalker Map images, once Cable Monkey releases new maps.
 - FATE detection, at least for Minho, Senmurv, Orghana, Special Fates.
-- SS Maps showing location of minions - low prio
+- ~~SS Maps showing location of minions - low prio~~
 - Customisable shortcuts
 - Customisable text font / colours / weight / etc
 - Resize Window - maintaining aspect ratio
