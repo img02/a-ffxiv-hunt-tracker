@@ -31,6 +31,8 @@
 
             
             <Ellipse Name="PlayerRadius" 
+                     IsHitTestVisible="False"
+
                      Canvas.Left="{DynamicResource _playerRadiusX}"
                      Canvas.Top="{DynamicResource _playerRadiusY}"
 
