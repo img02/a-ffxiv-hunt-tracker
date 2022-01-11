@@ -187,7 +187,7 @@ namespace ufht_UI.UserControls
                                 
                                 if (m.Name != A1.Name)
                                 {
-                                    ARank2.Source = _mobIconSS;
+                                    ARank2.Source = _mobIconA;
                                     A2 = m;
                                 }
                             }
