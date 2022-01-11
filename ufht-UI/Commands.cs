@@ -10,6 +10,13 @@ namespace ufht_UI
 {
     public static class Commands
     {
+        public static readonly KeyGesture DefaultOnTopKeyGesture = new KeyGesture(Key.A, ModifierKeys.Control);
+        public static readonly KeyGesture DefaultOpacityKeyGesture = new KeyGesture(Key.S, ModifierKeys.Control);
+        public static readonly KeyGesture DefaultSidePanelKeyGesture = new KeyGesture(Key.Tab);
+        public static readonly KeyGesture DefaultSSMapKeyGesture = new KeyGesture(Key.F, ModifierKeys.Control);
+        public static readonly KeyGesture DefaultSettingsWindowKeyGesture = new KeyGesture(Key.Q, ModifierKeys.Control);
+
+
         public static readonly RoutedUICommand OnTop = new RoutedUICommand
         (
             "On Top",
@@ -17,7 +24,7 @@ namespace ufht_UI
             typeof(Commands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.A, ModifierKeys.Control)
+                DefaultOnTopKeyGesture
             }
         );
         
@@ -28,7 +35,7 @@ namespace ufht_UI
             typeof(Commands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.S, ModifierKeys.Control)
+                DefaultOpacityKeyGesture
             }
         );
         
@@ -39,7 +46,7 @@ namespace ufht_UI
             typeof(Commands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.Tab)
+                DefaultSidePanelKeyGesture
             }
         );
          
@@ -50,10 +57,30 @@ namespace ufht_UI
             typeof(Commands),
             new InputGestureCollection()
             {
-                new KeyGesture(Key.F, ModifierKeys.Control)
+                DefaultSSMapKeyGesture
+            }
+        );
+        
+        public static readonly RoutedUICommand SettingsWindowToggle = new RoutedUICommand
+        (
+            "SettingsWindow Toggle",
+            "SettingsWindow Toggle",
+            typeof(Commands),
+            new InputGestureCollection()
+            {
+                DefaultSettingsWindowKeyGesture
             }
         );
 
         //Define more commands here, just like the one above
+
+
+
+
+        public static void ChangeKeyGesture(RoutedUICommand command, KeyGesture keyCombo)
+        {
+            command.InputGestures.Clear();
+            command.InputGestures.Add(keyCombo);
+        }
     }
 }

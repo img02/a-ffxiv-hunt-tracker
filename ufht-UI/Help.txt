@@ -1,0 +1,9 @@
+﻿Setting Custom Hotkeys via config
+
+Open the config file,
+Set the KeyCode based on :
+https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.key?view=windowsdesktop-6.0
+Set the ModifierKeyCode (ALT, CTRL, SHIFT) based on :
+https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys?view=windowsdesktop-6.0
+
+Some combos may not work. Some characters require a modifier to work.

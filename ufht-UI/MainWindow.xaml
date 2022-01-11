@@ -11,8 +11,8 @@
 
         d:DesignHeight="1000" d:DesignWidth="1000"
 
-        Width="1024"
-        Height="1024"
+        Width="{DynamicResource ProgramWidth }"
+        Height="{DynamicResource ProgramHeight}"
 
         AllowsTransparency="True" WindowStyle="None"
         Background="Transparent"
@@ -43,6 +43,10 @@
         <CommandBinding Command="ufhtUi:Commands.SSMapToggle" 
                         CanExecute="SSMapToggle_CanExecute"
                         Executed="SSMapToggle_Executed" />
+
+        <CommandBinding Command="ufhtUi:Commands.SettingsWindowToggle" 
+                        CanExecute="SettingsWindowToggle_CanExecute"
+                        Executed="SettingsWindowToggle_Executed" />
     </Window.CommandBindings>
 
 
@@ -235,12 +239,14 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0" Command="ufhtUi:Commands.SSMapToggle" Content="Future" />
                 <Button Grid.Column="1"  Command="ufhtUi:Commands.OnTop" Content="Features" />
                 <Button Grid.Column="2" Command="ufhtUi:Commands.OpacityToggle" >But</Button>
                 <Button Grid.Column="3" Click="Exit_OnClick">Lazy</Button>
+                <Button Grid.Column="4" Command="ufhtUi:Commands.SettingsWindowToggle">Settings</Button>
             </Grid>
 
         </Grid>

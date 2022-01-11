@@ -1,0 +1,55 @@
+﻿<Window x:Class="ufht_UI.DialogWindow.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ufht_UI.DialogWindow"
+        xmlns:models="clr-namespace:ufht_UI.Models"
+        d:DataContext="{d:DesignInstance models:Settings}"
+        mc:Ignorable="d"
+        Title="Settings" Height="450" Width="800">
+
+    <Grid>
+        <Label Content="Opacity" FontSize="14" HorizontalAlignment="Left" Margin="50,25,0,0" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Height" FontSize="14" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Width" FontSize="14" HorizontalAlignment="Left" Margin="50,75,0,0" VerticalAlignment="Top" Height="30"/>
+
+        <TextBox x:Name="OpacityTextBox" HorizontalAlignment="Left" 
+                 Margin="139,31,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" 
+                 Width="120" 
+                 Text="{DynamicResource OpacityText}"
+                 MaxLength="2"
+                 TextChanged="OpacityTextBox_TextChanged"
+                 PreviewTextInput="OpacityTextBox_OnPreviewTextInput"
+        />
+
+        <TextBox x:Name="StartingHeightTextBox" HorizontalAlignment="Left" 
+                 Margin="139,56,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" 
+                 Width="120"
+                 Text="{DynamicResource StartingHeightText}"
+                 MaxLength="5"
+                 TextChanged="StartingHeightTextBox_OnTextChanged"
+                 PreviewTextInput="StartingHeightTextBox_OnPreviewTextInput"/>
+
+        <TextBox x:Name="StartingWidthTextBox" HorizontalAlignment="Left" 
+                 Margin="139,81,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" 
+                 Width="120"
+                 Text="{DynamicResource StartingWidthText}"
+                 MaxLength="5"
+                 TextChanged="StartingWidthTextBox_OnTextChanged"
+                 PreviewTextInput="StartingWidthTextBox_OnPreviewTextInput"
+                 />
+
+        <Label Content="Opacity % to change to (0-99) " FontSize="10" HorizontalAlignment="Left" Margin="271,30,0,0" VerticalAlignment="Top"/>
+        <Label Content="Starting Window Height 1:1 ratio - Requires Restart" FontSize="10" HorizontalAlignment="Left" Margin="271,55,0,0" VerticalAlignment="Top"/>
+        <Label Content="Starting Window Width 1:1 ratio - Requires Restart" FontSize="10" HorizontalAlignment="Left" Margin="271,80,0,0" VerticalAlignment="Top"/>
+
+        <Button Content="Save" HorizontalAlignment="Left" Margin="689,370,0,0" VerticalAlignment="Top"
+                Click="Save_OnClick"/>
+        
+
+    </Grid>
+</Window>

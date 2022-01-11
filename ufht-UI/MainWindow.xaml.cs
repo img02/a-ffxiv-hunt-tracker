@@ -10,6 +10,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using ufht_UI.DialogWindow;
+using ufht_UI.Models;
 using ufht_UI.UserControls;
 using ufht_UI.UserControls.InfoSection;
 using untitled_ffxiv_hunt_tracker;
@@ -34,15 +36,22 @@ namespace ufht_UI
         private ObservableCollection<Mob> _nearbyMobs;
         internal Mob priorityMob;
 
-        private double _programOpacityToggleTo;
 
-
+        private SettingsManager _settingsManager;
+        private Settings _userSettings;
 
         public MainWindow()
         {
-            _programOpacityToggleTo = 0.8;
+            _settingsManager = new SettingsManager();
+            _userSettings = _settingsManager.UserSettings;
+
+
+            Application.Current.Resources["ProgramWidth"] = _userSettings.DefaultSizeX;
+            Application.Current.Resources["ProgramHeight"] = _userSettings.DefaultSizeY;
+
 
             Application.Current.Resources["_sidePanelStartingWidth"] = 0.0;
+
 
             Application.Current.Resources["PriorityMobTextVisibility"] = Visibility.Hidden;
             Application.Current.Resources["PriorityMobGridInnerVisibility"] = Visibility.Hidden;
@@ -232,41 +241,41 @@ namespace ufht_UI
             {
                 InfoGrid.Width = 300;
                 MainWindow1.Width += 300;
-               
+
 
             }
             else
             {
                 InfoGrid.Width = 0;
                 MainWindow1.Width -= 300;
-                
+
             }
         }
 
-/*  -- no longer used, using commands instead
-        private void OnTop_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (!MainWindow1.Topmost)
-            {
-                Application.Current.Resources["ProgramTopMost"] = true;
-            }
-            else
-            {
-                Application.Current.Resources["ProgramTopMost"] = false;
-            }
-        }
+        /*  -- no longer used, using commands instead
+                private void OnTop_OnClick(object sender, RoutedEventArgs e)
+                {
+                    if (!MainWindow1.Topmost)
+                    {
+                        Application.Current.Resources["ProgramTopMost"] = true;
+                    }
+                    else
+                    {
+                        Application.Current.Resources["ProgramTopMost"] = false;
+                    }
+                }
 
-        private void Opacity_OnClick(object sender, RoutedEventArgs e)
-        {
-            if (MainWindow1.Opacity == 1.0)
-            {
-                Application.Current.Resources["ProgramOpacity"] = 0.7;
-            }
-            else
-            {
-                Application.Current.Resources["ProgramOpacity"] = 1.0;
-            }
-        }*/
+                private void Opacity_OnClick(object sender, RoutedEventArgs e)
+                {
+                    if (MainWindow1.Opacity == 1.0)
+                    {
+                        Application.Current.Resources["ProgramOpacity"] = 0.7;
+                    }
+                    else
+                    {
+                        Application.Current.Resources["ProgramOpacity"] = 1.0;
+                    }
+                }*/
 
         //exit button
         private void Exit_OnClick(object sender, RoutedEventArgs e)
@@ -281,23 +290,6 @@ namespace ufht_UI
 
 
         #region Commands
-
-        /*       KeyDown="UIElement_OnKeyDown" in xaml window
-             private void UIElement_OnKeyDown(object sender, KeyEventArgs e)
-             {
-                 if (e.Key == Key.A && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl)))
-                 {
-                     if (MainWindow1.Opacity == 1.0)
-                     {
-                         Application.Current.Resources["ProgramOpacity"] = _programOpacityToggleTo;
-                     }
-                     else
-                     {
-                         Application.Current.Resources["ProgramOpacity"] = 1.0;
-                     }
-                 }
-             }*/
-
 
         private void OnTop_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
@@ -325,7 +317,7 @@ namespace ufht_UI
         {
             if (MainWindow1.Opacity == 1.0)
             {
-                Application.Current.Resources["ProgramOpacity"] = _programOpacityToggleTo;
+                Application.Current.Resources["ProgramOpacity"] = _userSettings.Opacity;
             }
             else
             {
@@ -352,7 +344,7 @@ namespace ufht_UI
             }
         }
 
-        private void  SSMapToggle_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        private void SSMapToggle_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
         }
@@ -361,7 +353,17 @@ namespace ufht_UI
         {
             _session.ToggleSSMap();
         }
+        
+        private void SettingsWindowToggle_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
 
-    #endregion
-}
+        private void SettingsWindowToggle_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            new SettingsWindow(_settingsManager).ShowDialog();
+        }
+
+        #endregion
+    }
 }
