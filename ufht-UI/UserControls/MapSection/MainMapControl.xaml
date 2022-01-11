@@ -118,8 +118,8 @@
                    Canvas.Left="{DynamicResource _ARank2IconX}"
                    Canvas.Top="{DynamicResource _ARank2IconY}"
                    Canvas.ZIndex ="2"
-                   MouseMove="ARank_OnMouseMove"
-                   MouseLeave="ARank_OnMouseLeave"
+                   MouseMove="ARank2_OnMouseMove"
+                   MouseLeave="ARank2_OnMouseLeave"
 
                    Height="64" 
                    Width="64"

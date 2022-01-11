@@ -113,5 +113,12 @@ namespace ufht_UI.DialogWindow
             Close();
         }
 
+        private void SettingsWindow_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Save_OnClick(null, null); //dodgy?
+            }
+        }
     }
 }

@@ -232,7 +232,7 @@ namespace ufht_UI
                 this.DragMove();
         }
 
-        #region Button event handlers
+        #region BUTTON event handlers
 
         //side panel toggle -- not needed if using command
         private void SidePanelToggleButton_OnClick(object sender, RoutedEventArgs e)
@@ -362,6 +362,13 @@ namespace ufht_UI
         private void SettingsWindowToggle_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             new SettingsWindow(_settingsManager).ShowDialog();
+            if (InfoGrid.Width > 0)
+            {
+                SidePanelToggle_Executed(null, null); //prob bad and should separate into own method but.., turn off side panel
+            }
+
+            this.Width = _userSettings.DefaultSizeX;
+            this.Height = _userSettings.DefaultSizeY;
         }
 
         #endregion

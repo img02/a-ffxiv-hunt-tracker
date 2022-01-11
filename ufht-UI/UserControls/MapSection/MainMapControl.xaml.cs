@@ -46,6 +46,9 @@ namespace ufht_UI.UserControls
         private readonly BitmapImage _mobIconS;
         private readonly BitmapImage _mobIconSS;
 
+        private Mob A1;
+        private Mob A2;
+
 
         public MainMapControl(Session session)
         {
@@ -121,6 +124,7 @@ namespace ufht_UI.UserControls
             int SCount = 0;
             int SSCount = 0;
 
+
             #region idk could use something like this instead to dynamically add as many as needed, but need to workout how to remove/update em... list?
 
             /*
@@ -141,15 +145,38 @@ namespace ufht_UI.UserControls
 
             #endregion
 
-
-            //can prob simplify/refactor this...
-            foreach (var m in (ObservableCollection<Mob>)o)
+            foreach (var m in (ObservableCollection<Mob>) o)
             {
                 if (m.Rank == "A")
                 {
                     ACount++;
+                }
+            }
+
+            if (ACount <= 1)
+            {
+                A1 = null;
+                A2 = null;
+                this.Dispatcher.Invoke(() =>
+                    {
+                        ARank.Source = null;
+                        ARank2.Source = null;
+                    }
+                );
+            }
+
+            ACount = 0;
+
+            //can prob simplify/refactor this...
+                foreach (var m in (ObservableCollection<Mob>)o)
+            {
+                if (m.Rank == "A")
+                {
+                    ACount++;
+                    A1 ??= m;
                     var x = m.Coordinates.X;
                     var y = m.Coordinates.Y;
+
                     {
 
                         this.Dispatcher.Invoke(() =>
@@ -157,18 +184,32 @@ namespace ufht_UI.UserControls
                             if (ARank.Source == null || ARank2.Source == null)
                             {
                                 ARank.Source = _mobIconA;
+                                
+                                if (m.Name != A1.Name)
+                                {
+                                    ARank2.Source = _mobIconSS;
+                                    A2 = m;
+                                }
                             }
                         });
+                        //Gajasura
+                        /* _ = Task.Run(() =>
+                         {
+                             _ARankIconX = UpdatePositionOnMapImageForMobs(A1.Coordinates.X);
+                             _ARankIconY = UpdatePositionOnMapImageForMobs(A1.Coordinates.Y);
 
-                        _ = Task.Run(() =>
-                        {
-                            _ARankIconX = UpdatePositionOnMapImageForMobs(x);
-                            _ARankIconY = UpdatePositionOnMapImageForMobs(y);
 
-                            Application.Current.Resources["_ARankIconX"] = _ARankIconX;
-                            Application.Current.Resources["_ARankIconY"] = _ARankIconY;
 
-                        });
+                                 Application.Current.Resources["_ARankIconX"] = _ARankIconX;
+                                 Application.Current.Resources["_ARankIconY"] = _ARankIconY;
+
+                             if (A2 != null)
+                             {
+                                 Application.Current.Resources["_ARank2IconX"] = UpdatePositionOnMapImageForMobs(A2.Coordinates.Y);
+                                 Application.Current.Resources["_ARank2IconY"] = UpdatePositionOnMapImageForMobs(A2.Coordinates.X);
+                             }
+
+                         });*/
                         m.CoordsChanged += UpdateNearbyMobIcon;
                     }
                 }
@@ -181,11 +222,11 @@ namespace ufht_UI.UserControls
                         BRank.Source = _mobIconB;
                     });
 
-                    _BRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
+                 /*   _BRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
                     _BRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
 
                     Application.Current.Resources["_BRankIconX"] = _BRankIconX;
-                    Application.Current.Resources["_BRankIconY"] = _BRankIconY;
+                    Application.Current.Resources["_BRankIconY"] = _BRankIconY;*/
                     m.CoordsChanged += UpdateNearbyMobIcon;
 
                 }
@@ -197,11 +238,11 @@ namespace ufht_UI.UserControls
 
                     Trace.WriteLine("S added");
 
-                    _SRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
-                    _SRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
+                   /* _SRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
+                    _SRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
 
                     Application.Current.Resources["_SRankIconX"] = _SRankIconX;
-                    Application.Current.Resources["_SRankIconY"] = _SRankIconY;
+                    Application.Current.Resources["_SRankIconY"] = _SRankIconY;*/
                     m.CoordsChanged += UpdateNearbyMobIcon;
                 }
                 else if (m.Rank == "SS")
@@ -212,18 +253,23 @@ namespace ufht_UI.UserControls
 
                     Trace.WriteLine("SS added");
 
-                    _SSRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
+                  /*  _SSRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
                     _SSRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
 
                     Application.Current.Resources["_SSRankIconX"] = _SSRankIconX;
-                    Application.Current.Resources["_SSRankIconY"] = _SSRankIconY;
+                    Application.Current.Resources["_SSRankIconY"] = _SSRankIconY;*/
                     m.CoordsChanged += UpdateNearbyMobIcon;
                 }
             }
 
             if (ACount == 0)
             {
-                Dispatcher.Invoke(() => { ARank.Source = null; });
+                Dispatcher.Invoke(() => { 
+                    ARank.Source = null;
+                    ARank2.Source = null;
+                    A1 = null;
+                    A2 = null;
+                });
             }
             if (BCount == 0)
             {
@@ -252,15 +298,36 @@ namespace ufht_UI.UserControls
 
                 if (rank == "A")
                 {
-                    Application.Current.Resources["_ARankIconX"] = iconX;
-                    Application.Current.Resources["_ARankIconY"] = iconY;
-                    Application.Current.Resources["_nearbyA"] = toolTipInfo;
-
-
-                    if (mob.HPPercent == 0)
+                    if (mob.Name == A1.Name)
                     {
-                        Dispatcher.Invoke(() => ARank.Source = null);
+                        Application.Current.Resources["_ARankIconX"] = iconX;
+                        Application.Current.Resources["_ARankIconY"] = iconY;
+                        Application.Current.Resources["_nearbyA"] = toolTipInfo;
+
+
+                        if (mob.HPPercent == 0)
+                        {
+                            Dispatcher.Invoke(() => ARank.Source = null);
+                            A1 = null;
+                        }
                     }
+                    else
+                    {
+                        Application.Current.Resources["_ARank2IconX"] = iconX;
+                        Application.Current.Resources["_ARank2IconY"] = iconY;
+                        Application.Current.Resources["_nearbyA2"] = toolTipInfo;
+
+
+                        if (mob.HPPercent == 0)
+                        {
+                            Dispatcher.Invoke(() => ARank2.Source = null);
+                            A2 = null;
+                        }
+                    }
+
+                    Trace.WriteLine($"A1: {A1?.ToString()}");
+                    Trace.WriteLine($"A2: {A2?.ToString()}");
+                    Trace.WriteLine($"-----------------------");
                 }
                 else if (rank == "B")
                 {
