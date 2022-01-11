@@ -49,6 +49,7 @@ You can also mouse over anywhere on the map to get the equivalent in-game **(XX.
 ```
 ├── Data
 │   ├── ARR-A.json
+|   ├── config.json
 │   └── ...
 ├── Images
 │   ├── Icons
@@ -70,19 +71,28 @@ These are the default file names from [Cable Monkey](http://cablemonkey.us/huntm
 
 The **Images/SS Maps** names are changed from the default file names to follow the format _"{MapName}\_SS-data.jpg"_
 
-
 The current images and shortcuts are placeholders.
 
+## Config.json
 
-### TODO (no promises):
+Settings changed in the settings window are saved here.  
+You have edit the json file manually, but be careful.   
+If you break something you can delete this file and rerun the program. It will create a new default config on startup.  
+
+You can manually customise the hotkeys using the enums in the following links:  
+https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.key   
+https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys
+
+
+# TODO (no promises):
 - Replace Endwalker Map images, once Cable Monkey releases new maps.
 - FATE detection, at least for Minho, Senmurv, Orghana, Special Fates.
 - ~~SS Maps showing location of minions - low prio~~
 - Customisable shortcuts
 - Customisable text font / colours / weight / etc
 - Resize Window - maintaining aspect ratio
-- Customisable opacity 
-- Save and load settings
+- ~~Customisable opacity ~~
+- ~~Save and load settings~~
 - 'Record' and save a list of mob info for 'hunt trains'
 - TTS (suggest using triggernometry tbh)
 - ACT plugin version
