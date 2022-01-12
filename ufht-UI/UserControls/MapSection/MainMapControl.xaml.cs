@@ -135,7 +135,6 @@ namespace ufht_UI.UserControls
                     //if the mob icon already exists, update tooltip and skip
                     if (_mobIconList.FirstOrDefault(i => i.Name == cleanedName) != null)
                     {
-                        UpdateToolTip(m);
                         continue;
                     }
                     mobIcon = m.Rank switch
@@ -162,7 +161,10 @@ namespace ufht_UI.UserControls
                     PlayerIconCanvas.Children.Add(mobIcon);
                     PlayerIconCanvas.Children.Add(tt);
 
+                    Panel.SetZIndex(mobIcon, GetZIndex(m.Rank));
+
                     m.CoordsChanged += UpdateNearbyMobIcon;
+
                 }
 
                 var toRemove = new List<Image>();
@@ -217,6 +219,8 @@ namespace ufht_UI.UserControls
 
                     Canvas.SetLeft(mobIconToUpdate, iconX);
                     Canvas.SetTop(mobIconToUpdate, iconY);
+
+                    UpdateToolTip(mob);
                 });
             }
 
@@ -286,65 +290,6 @@ namespace ufht_UI.UserControls
         private void PlayerIcon_OnMouseLeave(object sender, MouseEventArgs e)
         {
             PlayerTT.IsOpen = false;
-        }
-
-        private void ARank_OnMouseMove(object sender, MouseEventArgs e)
-        {
-            ARankTT.IsOpen = true;
-            ARankTT.HorizontalOffset = e.GetPosition(MapImage).X + 80;
-            ARankTT.VerticalOffset = e.GetPosition(MapImage).Y - 40;
-        }
-
-        private void ARank_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            ARankTT.IsOpen = false;
-        }
-
-        private void ARank2_OnMouseMove(object sender, MouseEventArgs e)
-        {
-            ARank2TT.IsOpen = true;
-            ARank2TT.HorizontalOffset = e.GetPosition(MapImage).X + 80;
-            ARank2TT.VerticalOffset = e.GetPosition(MapImage).Y - 40;
-        }
-
-        private void ARank2_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            ARank2TT.IsOpen = false;
-        }
-
-        private void BRank_OnMouseMove(object sender, MouseEventArgs e)
-        {
-            BRankTT.IsOpen = true;
-            BRankTT.HorizontalOffset = e.GetPosition(MapImage).X + 80;
-            BRankTT.VerticalOffset = e.GetPosition(MapImage).Y - 40;
-        }
-
-        private void BRank_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            BRankTT.IsOpen = false;
-        }
-        private void SRank_OnMouseMove(object sender, MouseEventArgs e)
-        {
-            SRankTT.IsOpen = true;
-            SRankTT.HorizontalOffset = e.GetPosition(MapImage).X + 80;
-            SRankTT.VerticalOffset = e.GetPosition(MapImage).Y - 40;
-        }
-
-        private void SRank_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            SRankTT.IsOpen = false;
-        }
-
-        private void SSRank_OnMouseMove(object sender, MouseEventArgs e)
-        {
-            SSRankTT.IsOpen = true;
-            SSRankTT.HorizontalOffset = e.GetPosition(MapImage).X + 80;
-            SSRankTT.VerticalOffset = e.GetPosition(MapImage).Y - 40;
-        }
-
-        private void SSRank_OnMouseLeave(object sender, MouseEventArgs e)
-        {
-            SSRankTT.IsOpen = false;
         }
 
 
@@ -419,22 +364,26 @@ namespace ufht_UI.UserControls
 
         private void UpdateToolTip(Mob m)
         {
-            var tt = _toolTipList.FirstOrDefault(t => t.Name == $"{m.Name}TT");
+            var tt = _toolTipList.FirstOrDefault(t => t.Name == $"{RemoveSpecialCharacters(m.Name)}TT");
 
             if (tt == null)
             {
-                Trace.WriteLine("TOOLTIP NULL");
                 return;
-
             }
 
             var border = tt.Child as Border;
             var textBlock = border.Child as TextBlock;
             textBlock.Text = m.ToString();
-            Trace.WriteLine("UPDATED");
 
         }
 
-
+        private int GetZIndex(string rank)
+            => (rank) switch
+            {
+                "B" => 1,
+                "A" => 2,
+                "S" => 3,
+                "SS" => 4
+            };
     }
 }
