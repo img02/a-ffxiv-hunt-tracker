@@ -54,6 +54,12 @@
 		"MapTerritory": "NorthShroud"
 	},
 	{
+		"Name": "Slave",
+		"ModelID": 2928,
+		"Rank": "B",
+		"MapTerritory": "MiddleLaNoscea"
+	},
+	{
 		"Name": "Skogs Fru",
 		"ModelID": 2928,
 		"Rank": "B",

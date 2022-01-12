@@ -361,7 +361,7 @@ namespace ufht_UI
 
         private void SettingsWindowToggle_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            new SettingsWindow(_settingsManager).ShowDialog();
+            new SettingsWindow(_settingsManager){Owner = this}.ShowDialog();
             if (InfoGrid.Width > 0)
             {
                 SidePanelToggle_Executed(null, null); //prob bad and should separate into own method but.., turn off side panel

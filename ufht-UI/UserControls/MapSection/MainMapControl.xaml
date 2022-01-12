@@ -16,9 +16,9 @@
                         Converter={StaticResource FileToBitmapConverter}}"/>
 
         <!-- Map ToolTip Popup -->
-        <Popup Name="MapTT" Placement="Relative">
+        <Popup Name="MapTT" Placement="Relative" IsHitTestVisible="false">
             <Border CornerRadius="5" Padding="5, 2,5,2" 
-                    Background="Azure" IsHitTestVisible="False">
+                    Background="Azure">
                 <TextBlock Text="{DynamicResource _mapMouseOver}" />
 
             </Border>

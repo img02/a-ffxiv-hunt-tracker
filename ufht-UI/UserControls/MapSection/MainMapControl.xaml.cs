@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using untitled_ffxiv_hunt_tracker;
 using untitled_ffxiv_hunt_tracker.Entities;
@@ -29,22 +36,13 @@ namespace ufht_UI.UserControls
         private double _playerIconY;
         private double _playerIconRotation;
 
-        private double _ARankIconX;
-        private double _ARankIconY;
-
-        private double _BRankIconX;
-        private double _BRankIconY;
-
-        private double _SRankIconX;
-        private double _SRankIconY;
-
-        private double _SSRankIconX;
-        private double _SSRankIconY;
-
         private readonly BitmapImage _mobIconA;
         private readonly BitmapImage _mobIconB;
         private readonly BitmapImage _mobIconS;
         private readonly BitmapImage _mobIconSS;
+
+        private readonly List<Image> _mobIconList;
+        private readonly List<Popup> _toolTipList;
 
         private Mob A1;
         private Mob A2;
@@ -52,6 +50,9 @@ namespace ufht_UI.UserControls
 
         public MainMapControl(Session session)
         {
+            _mobIconList = new List<Image>();
+            _toolTipList = new List<Popup>();
+
             _session = session;
             InitializeComponent();
 
@@ -119,170 +120,79 @@ namespace ufht_UI.UserControls
 
         private void AddNearbyMobIcon(object o, NotifyCollectionChangedEventArgs e)
         {
-            int ACount = 0;
-            int BCount = 0;
-            int SCount = 0;
-            int SSCount = 0;
+            List<String> namesList = new List<string>();
 
-
-            #region idk could use something like this instead to dynamically add as many as needed, but need to workout how to remove/update em... list?
-
-            /*
-                        Dispatcher.Invoke(() =>
-                        {
-                            var image = new Image();
-                            image.Source = _mobIconA; //etc
-                            image.HorizontalAlignment = HorizontalAlignment.Center;
-                            image.VerticalAlignment = VerticalAlignment.Center;
-                            image.Height = 64;
-                            image.Width = 64;
-
-                            PlayerIconCanvas.Children.Add(image);
-                            Canvas.SetTop(image, UpdatePositionOnMapImage(m.Coordinates.X));
-                            Canvas.SetLeft(image, UpdatePositionOnMapImage(m.Coordinates.Y));
-                        });
-                    }*/
-
-            #endregion
-
-            foreach (var m in (ObservableCollection<Mob>) o)
+            Dispatcher.Invoke(() =>
             {
-                if (m.Rank == "A")
-                {
-                    ACount++;
-                }
-            }
-
-            if (ACount <= 1)
-            {
-                A1 = null;
-                A2 = null;
-                this.Dispatcher.Invoke(() =>
-                    {
-                        ARank.Source = null;
-                        ARank2.Source = null;
-                    }
-                );
-            }
-
-            ACount = 0;
-
-            //can prob simplify/refactor this...
+                //adding mobs
                 foreach (var m in (ObservableCollection<Mob>)o)
-            {
-                if (m.Rank == "A")
                 {
-                    ACount++;
-                    A1 ??= m;
-                    var x = m.Coordinates.X;
-                    var y = m.Coordinates.Y;
+                    var cleanedName = RemoveSpecialCharacters(m.Name);
 
+                    namesList.Add(cleanedName);
+                    Image mobIcon;
+
+                    //if the mob icon already exists, update tooltip and skip
+                    if (_mobIconList.FirstOrDefault(i => i.Name == cleanedName) != null)
                     {
+                        UpdateToolTip(m);
+                        continue;
+                    }
+                    mobIcon = m.Rank switch
+                    {
+                        "A" => new Image
+                        { Source = _mobIconA, Name = cleanedName, Height = 64, Width = 64, },
+                        "S" => new Image
+                        { Source = _mobIconS, Name = cleanedName, Height = 64, Width = 64 },
+                        "SS" => new Image
+                        { Source = _mobIconSS, Name = cleanedName, Height = 64, Width = 64 },
+                        "B" => new Image
+                        { Source = _mobIconB, Name = cleanedName, Height = 64, Width = 64 }
+                    };
 
-                        this.Dispatcher.Invoke(() =>
-                        {
-                            if (ARank.Source == null || ARank2.Source == null)
-                            {
-                                ARank.Source = _mobIconA;
-                                
-                                if (m.Name != A1.Name)
-                                {
-                                    ARank2.Source = _mobIconA;
-                                    A2 = m;
-                                }
-                            }
-                        });
-                        //Gajasura
-                        /* _ = Task.Run(() =>
-                         {
-                             _ARankIconX = UpdatePositionOnMapImageForMobs(A1.Coordinates.X);
-                             _ARankIconY = UpdatePositionOnMapImageForMobs(A1.Coordinates.Y);
+                    mobIcon.MouseMove += Mob_OnMouseMove;
+                    mobIcon.MouseLeave += Mob_OnMouseLeave;
+
+                    var tt = CreateToolTip(m);
+
+                    _mobIconList.Add(mobIcon);
+                    _toolTipList.Add(tt);
 
 
+                    PlayerIconCanvas.Children.Add(mobIcon);
+                    PlayerIconCanvas.Children.Add(tt);
 
-                                 Application.Current.Resources["_ARankIconX"] = _ARankIconX;
-                                 Application.Current.Resources["_ARankIconY"] = _ARankIconY;
+                    m.CoordsChanged += UpdateNearbyMobIcon;
+                }
 
-                             if (A2 != null)
-                             {
-                                 Application.Current.Resources["_ARank2IconX"] = UpdatePositionOnMapImageForMobs(A2.Coordinates.Y);
-                                 Application.Current.Resources["_ARank2IconY"] = UpdatePositionOnMapImageForMobs(A2.Coordinates.X);
-                             }
+                var toRemove = new List<Image>();
+                var toRemoveTT = new List<Popup>();
 
-                         });*/
-                        m.CoordsChanged += UpdateNearbyMobIcon;
+                //remove old mobs that aren't nearby anymore
+                foreach (var img in _mobIconList)
+                {
+
+                    if (!namesList.Contains(img.Name))
+                    {
+                        var tt = _toolTipList.FirstOrDefault(t => t.Name == $"{img.Name}TT");
+
+                        toRemove.Add(img);
+                        toRemoveTT.Add(tt);
                     }
                 }
-                else if (m.Rank == "B")
+
+                foreach (var imgToRemove in toRemove)
                 {
-                    BCount++;
-
-                    this.Dispatcher.Invoke(() =>
-                    {
-                        BRank.Source = _mobIconB;
-                    });
-
-                 /*   _BRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
-                    _BRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
-
-                    Application.Current.Resources["_BRankIconX"] = _BRankIconX;
-                    Application.Current.Resources["_BRankIconY"] = _BRankIconY;*/
-                    m.CoordsChanged += UpdateNearbyMobIcon;
-
+                    _mobIconList.Remove(imgToRemove);
+                    PlayerIconCanvas.Children.Remove(imgToRemove);
                 }
-                else if (m.Rank == "S")
+
+                foreach (var popup in toRemoveTT)
                 {
-                    SCount++;
-
-                    this.Dispatcher.Invoke(() => { SRank.Source = _mobIconS; });
-
-                    Trace.WriteLine("S added");
-
-                   /* _SRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
-                    _SRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
-
-                    Application.Current.Resources["_SRankIconX"] = _SRankIconX;
-                    Application.Current.Resources["_SRankIconY"] = _SRankIconY;*/
-                    m.CoordsChanged += UpdateNearbyMobIcon;
+                    _toolTipList.Remove(popup);
+                    PlayerIconCanvas.Children.Remove(popup);
                 }
-                else if (m.Rank == "SS")
-                {
-                    SSCount++;
-
-                    this.Dispatcher.Invoke(() => { SSRank.Source = _mobIconSS; });
-
-                    Trace.WriteLine("SS added");
-
-                  /*  _SSRankIconX = UpdatePositionOnMapImageForMobs(m.Coordinates.X);
-                    _SSRankIconY = UpdatePositionOnMapImageForMobs(m.Coordinates.Y);
-
-                    Application.Current.Resources["_SSRankIconX"] = _SSRankIconX;
-                    Application.Current.Resources["_SSRankIconY"] = _SSRankIconY;*/
-                    m.CoordsChanged += UpdateNearbyMobIcon;
-                }
-            }
-
-            if (ACount == 0)
-            {
-                Dispatcher.Invoke(() => { 
-                    ARank.Source = null;
-                    ARank2.Source = null;
-                    A1 = null;
-                    A2 = null;
-                });
-            }
-            if (BCount == 0)
-            {
-                Dispatcher.Invoke(() => { BRank.Source = null; });
-            }
-            if (SCount == 0)
-            {
-                Dispatcher.Invoke(() => { SRank.Source = null; });
-            }
-            if (SSCount == 0)
-            {
-                Dispatcher.Invoke(() => { SSRank.Source = null; });
-            }
+            });
         }
 
         private void UpdateNearbyMobIcon(object o, Coords coords)
@@ -296,71 +206,21 @@ namespace ufht_UI.UserControls
 
                 var toolTipInfo = mob.ToString();
 
-                if (rank == "A")
+                Dispatcher.Invoke(() =>
                 {
-                    if (mob.Name == A1.Name)
+                    var mobIconToUpdate = _mobIconList.FirstOrDefault(i => i.Name == RemoveSpecialCharacters(mob.Name));
+
+                    if (mobIconToUpdate == null)
                     {
-                        Application.Current.Resources["_ARankIconX"] = iconX;
-                        Application.Current.Resources["_ARankIconY"] = iconY;
-                        Application.Current.Resources["_nearbyA"] = toolTipInfo;
-
-
-                        if (mob.HPPercent == 0)
-                        {
-                            Dispatcher.Invoke(() => ARank.Source = null);
-                            A1 = null;
-                        }
-                    }
-                    else
-                    {
-                        Application.Current.Resources["_ARank2IconX"] = iconX;
-                        Application.Current.Resources["_ARank2IconY"] = iconY;
-                        Application.Current.Resources["_nearbyA2"] = toolTipInfo;
-
-
-                        if (mob.HPPercent == 0)
-                        {
-                            Dispatcher.Invoke(() => ARank2.Source = null);
-                            A2 = null;
-                        }
+                        return;
                     }
 
-                    Trace.WriteLine($"A1: {A1?.ToString()}");
-                    Trace.WriteLine($"A2: {A2?.ToString()}");
-                    Trace.WriteLine($"-----------------------");
-                }
-                else if (rank == "B")
-                {
-                    Application.Current.Resources["_BRankIconX"] = iconX;
-                    Application.Current.Resources["_BRankIconY"] = iconY;
-
-                    Application.Current.Resources["_nearbyB"] = toolTipInfo;
-                    if (mob.HPPercent == 0)
-                    {
-                        Dispatcher.Invoke(() => BRank.Source = null);
-                    }
-                }
-                if (rank == "S")
-                {
-                    Application.Current.Resources["_SRankIconX"] = iconX;
-                    Application.Current.Resources["_SRankIconY"] = iconY;
-                    Application.Current.Resources["_nearbyS"] = toolTipInfo;
-                    if (mob.HPPercent == 0)
-                    {
-                        Dispatcher.Invoke(() => SRank.Source = null);
-                    }
-                }
-                if (rank == "SS")
-                {
-                    Application.Current.Resources["_SSRankIconX"] = iconX;
-                    Application.Current.Resources["_SSRankIconY"] = iconY;
-                    Application.Current.Resources["_nearbySS"] = toolTipInfo;
-                    if (mob.HPPercent == 0)
-                    {
-                        Dispatcher.Invoke(() => SSRank.Source = null);
-                    }
-                }
+                    Canvas.SetLeft(mobIconToUpdate, iconX);
+                    Canvas.SetTop(mobIconToUpdate, iconY);
+                });
             }
+
+
         }
 
 
@@ -378,7 +238,7 @@ namespace ufht_UI.UserControls
         private double UpdatePositionOnMapImageForMobs(double coordinateValue)
         {
             var mobIconHeight = 64; //make this settable somewhere....? and ARank, BRank, etc, height and width equal this...
-            //image height and width should be the same
+                                    //image height and width should be the same
             return ((coordinateValue - 1) * (MapImage.ActualHeight / 41) - mobIconHeight / 2);
         }
 
@@ -487,6 +347,94 @@ namespace ufht_UI.UserControls
             SSRankTT.IsOpen = false;
         }
 
+
+        private void Mob_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            var img = sender as Image;
+
+            var tt = _toolTipList.FirstOrDefault(t => t.Name == $"{img.Name}TT");
+
+            tt.IsOpen = true;
+            tt.HorizontalOffset = e.GetPosition(MapImage).X + 80;
+            tt.VerticalOffset = e.GetPosition(MapImage).Y - 40;
+
+        }
+
+        private void Mob_OnMouseLeave(object sender, MouseEventArgs e)
+        {
+            var img = sender as Image;
+
+            var tt = _toolTipList.FirstOrDefault(t => t.Name == $"{img.Name}TT");
+            if (tt == null)
+            {
+                return;
+            }
+            tt.IsOpen = false;
+        }
         #endregion
+
+
+
+        //helpers
+        private string RemoveSpecialCharacters(string str)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (char c in str)
+            {
+                if (c is >= '0' and <= '9' or >= 'A' and <= 'Z' or >= 'a' and <= 'z')
+                {
+                    sb.Append(c);
+                }
+            }
+            return sb.ToString();
+        }
+
+        private Popup CreateToolTip(Mob m)
+        {
+            var pp = new Popup
+            {
+                Placement = PlacementMode.Relative,
+                Name = $"{RemoveSpecialCharacters(m.Name)}TT",
+                IsHitTestVisible = false
+
+            };
+
+            var border = new Border
+            {
+                CornerRadius = new CornerRadius(5),
+                Padding = new Thickness(5, 2, 5, 2),
+                Background = Brushes.Azure
+            };
+
+            border.Child = new TextBlock
+            {
+                Name = $"{RemoveSpecialCharacters(m.Name)}TTText",
+                Text = m.ToString()
+            };
+
+            pp.Child = border;
+
+            return pp;
+        }
+
+        private void UpdateToolTip(Mob m)
+        {
+            var tt = _toolTipList.FirstOrDefault(t => t.Name == $"{m.Name}TT");
+
+            if (tt == null)
+            {
+                Trace.WriteLine("TOOLTIP NULL");
+                return;
+
+            }
+
+            var border = tt.Child as Border;
+            var textBlock = border.Child as TextBlock;
+            textBlock.Text = m.ToString();
+            Trace.WriteLine("UPDATED");
+
+        }
+
+
     }
 }
