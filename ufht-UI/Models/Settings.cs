@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Newtonsoft.Json;
+using Sharlayan.Core.Enums;
 
 namespace ufht_UI.Models
 {
@@ -13,6 +15,15 @@ namespace ufht_UI.Models
         public double Opacity;
         public double DefaultSizeX;
         public double DefaultSizeY;
+
+        [DefaultValue(64)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public double MobIconSize;
+        [DefaultValue(32)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public double PlayerIconSize;
+
+
 
         public Hotkey OnTopHotkey;
         public Hotkey OpacityHotKey;
@@ -33,6 +44,8 @@ namespace ufht_UI.Models
             Opacity = 0.8;
             DefaultSizeX = 1024;
             DefaultSizeY = 1024;
+            MobIconSize = 64;
+            PlayerIconSize = 32;
 
             OnTopToggleGesture = new KeyGesture(Key.A, ModifierKeys.Control);
             OpacityToggleGesture = new KeyGesture(Key.S, ModifierKeys.Control);
@@ -41,12 +54,14 @@ namespace ufht_UI.Models
         }
 
         [JsonConstructor]
-        public Settings(double opacity, double defaultSizeX, double defaultSizeY, 
+        public Settings(double opacity, double defaultSizeX, double defaultSizeY, double mobIconSize, double playerIconSize,
             Hotkey onTopHotkey, Hotkey opacityHotKey, Hotkey sidePanelHotKey, Hotkey ssMapHotkey)
         {
             Opacity = opacity;
             DefaultSizeX = defaultSizeX;
             DefaultSizeY = defaultSizeY;
+            MobIconSize = mobIconSize;
+            PlayerIconSize = playerIconSize;
 
             OnTopHotkey = onTopHotkey ?? new Hotkey(Commands.DefaultOnTopKeyGesture);
             OpacityHotKey = opacityHotKey ?? new Hotkey(Commands.DefaultOpacityKeyGesture);

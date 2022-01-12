@@ -17,6 +17,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using ufht_UI.Models;
 using untitled_ffxiv_hunt_tracker;
 using untitled_ffxiv_hunt_tracker.Entities;
 using untitled_ffxiv_hunt_tracker.ViewModels;
@@ -47,13 +48,17 @@ namespace ufht_UI.UserControls
         private Mob A1;
         private Mob A2;
 
+        private SettingsManager _settingsManager;
 
-        public MainMapControl(Session session)
+        public MainMapControl(Session session, SettingsManager settingsManager)
         {
             _mobIconList = new List<Image>();
             _toolTipList = new List<Popup>();
 
             _session = session;
+            _settingsManager = settingsManager;
+            _settingsManager.PropertyChanged += SettingsManagerOnPropertyChanged;
+
             InitializeComponent();
 
             _nearbyMobs = _session.CurrentNearbyMobs;
@@ -78,13 +83,10 @@ namespace ufht_UI.UserControls
             _session.CurrentNearbyMobs.CollectionChanged += AddNearbyMobIcon;
         }
 
-
-
         private void PlayerIconMove(object o, Coords coords)
         {
             _ = Task.Run(() =>
             {
-
                 _playerIconX = UpdatePositionOnMapImage(coords.X);
                 _playerIconY = UpdatePositionOnMapImage(coords.Y);
                 //map (1,1) to (41.9,41.9), adjust for player coord,
@@ -94,6 +96,9 @@ namespace ufht_UI.UserControls
                 //Trace.WriteLine($"X = {coords.X}, y = {coords.Y}");
                 //Trace.WriteLine($"X = {_playerIconX}, y = {_playerIconY}");
 
+                Application.Current.Resources["PlayerIconHeight"] = _settingsManager.UserSettings.PlayerIconSize;
+                Application.Current.Resources["PlayerIconWidth"] = _settingsManager.UserSettings.PlayerIconSize;  
+                
                 Application.Current.Resources["_playerIconX"] = _playerIconX;
                 Application.Current.Resources["_playerIconY"] = _playerIconY;
 
@@ -137,16 +142,19 @@ namespace ufht_UI.UserControls
                     {
                         continue;
                     }
+
+                    var iconSize = _settingsManager.UserSettings.MobIconSize;
+                    
                     mobIcon = m.Rank switch
                     {
                         "A" => new Image
-                        { Source = _mobIconA, Name = cleanedName, Height = 64, Width = 64, },
+                        { Source = _mobIconA, Name = cleanedName, Height = iconSize, Width = iconSize, },
                         "S" => new Image
-                        { Source = _mobIconS, Name = cleanedName, Height = 64, Width = 64 },
+                        { Source = _mobIconS, Name = cleanedName, Height = iconSize, Width = iconSize },
                         "SS" => new Image
-                        { Source = _mobIconSS, Name = cleanedName, Height = 64, Width = 64 },
+                        { Source = _mobIconSS, Name = cleanedName, Height = iconSize, Width = iconSize },
                         "B" => new Image
-                        { Source = _mobIconB, Name = cleanedName, Height = 64, Width = 64 }
+                        { Source = _mobIconB, Name = cleanedName, Height = iconSize, Width = iconSize }
                     };
 
                     mobIcon.MouseMove += Mob_OnMouseMove;
@@ -241,9 +249,7 @@ namespace ufht_UI.UserControls
         //idk if i decide to make icons resizable...
         private double UpdatePositionOnMapImageForMobs(double coordinateValue)
         {
-            var mobIconHeight = 64; //make this settable somewhere....? and ARank, BRank, etc, height and width equal this...
-                                    //image height and width should be the same
-            return ((coordinateValue - 1) * (MapImage.ActualHeight / 41) - mobIconHeight / 2);
+            return ((coordinateValue - 1) * (MapImage.ActualHeight / 41) - _settingsManager.UserSettings.MobIconSize / 2);
         }
 
 
@@ -320,7 +326,7 @@ namespace ufht_UI.UserControls
 
 
 
-        //helpers
+        //helpers++
         private string RemoveSpecialCharacters(string str)
         {
             StringBuilder sb = new StringBuilder();
@@ -385,5 +391,19 @@ namespace ufht_UI.UserControls
                 "S" => 3,
                 "SS" => 4
             };
+
+
+        //Events
+        private void SettingsManagerOnPropertyChanged(object? sender, Settings e)
+        {
+            foreach (var image in _mobIconList)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    image.Width = _settingsManager.UserSettings.MobIconSize;
+                    image.Height = _settingsManager.UserSettings.MobIconSize;
+                });
+            }
+        }
     }
 }

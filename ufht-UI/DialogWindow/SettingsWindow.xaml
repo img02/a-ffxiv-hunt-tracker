@@ -16,6 +16,8 @@
         <Label Content="Opacity" FontSize="14" HorizontalAlignment="Left" Margin="50,25,0,0" VerticalAlignment="Top" Height="30"/>
         <Label Content="Height" FontSize="14" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Height="30"/>
         <Label Content="Width" FontSize="14" HorizontalAlignment="Left" Margin="50,75,0,0" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Mob Icon" FontSize="14" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Player Icon" FontSize="14" HorizontalAlignment="Left" Margin="50,125,0,0" VerticalAlignment="Top" Height="30"/>
 
         <TextBox x:Name="OpacityTextBox" HorizontalAlignment="Left" 
                  Margin="139,31,0,0" 
@@ -23,7 +25,6 @@
                  Width="120" 
                  Text="{DynamicResource OpacityText}"
                  MaxLength="2"
-                 TextChanged="OpacityTextBox_TextChanged"
                  PreviewTextInput="OpacityTextBox_OnPreviewTextInput"
         />
 
@@ -46,9 +47,29 @@
                  PreviewTextInput="StartingWidthTextBox_OnPreviewTextInput"
                  />
 
-        <Label Content="Opacity % to change to (0-99) " FontSize="12" HorizontalAlignment="Left" Margin="271,30,0,0" VerticalAlignment="Top"/>
-        <Label Content="Starting Window Height 1:1 ratio " FontSize="12" HorizontalAlignment="Left" Margin="271,55,0,0" VerticalAlignment="Top"/>
-        <Label Content="Starting Window Width 1:1 ratio" FontSize="12" HorizontalAlignment="Left" Margin="271,80,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="MobIconTextBox" HorizontalAlignment="Left" 
+                 Margin="139,106,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" 
+                 Width="120"
+                 Text="{DynamicResource MobIconText}"
+                 MaxLength="2"
+                 PreviewTextInput="MobIconTextBox_OnPreviewTextInput"
+                 />
+
+        <TextBox x:Name="PlayerIconTextBox" HorizontalAlignment="Left" 
+                 Margin="139,131,0,0" 
+                 TextWrapping="Wrap" VerticalAlignment="Top" 
+                 Width="120"
+                 Text="{DynamicResource PlayerIconText}"
+                 MaxLength="2"
+                 PreviewTextInput="PlayerIconTextBox_OnPreviewTextInput"
+                 />
+
+        <Label Content="Opacity % to change to (0-99)    Default: 80" FontSize="12" HorizontalAlignment="Left" Margin="271,30,0,0" VerticalAlignment="Top"/>
+        <Label Content="Starting Window Height 1:1 ratio    Default: 1024" FontSize="12" HorizontalAlignment="Left" Margin="271,55,0,0" VerticalAlignment="Top"/>
+        <Label Content="Starting Window Width 1:1 ratio    Default: 1024" FontSize="12" HorizontalAlignment="Left" Margin="271,80,0,0" VerticalAlignment="Top"/>
+        <Label Content="Default: 64" FontSize="12" HorizontalAlignment="Left" Margin="271,105,0,0" VerticalAlignment="Top"/>
+        <Label Content="Default: 32" FontSize="12" HorizontalAlignment="Left" Margin="271,130,0,0" VerticalAlignment="Top"/>
 
         <Button Content="Save" HorizontalAlignment="Left" FontSize="14" 
                 Margin="689,358,0,0"

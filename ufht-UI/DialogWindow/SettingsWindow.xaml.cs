@@ -34,15 +34,12 @@ namespace ufht_UI.DialogWindow
             Application.Current.Resources["OpacityText"] = ((int)(_settings.Opacity * 100)).ToString();
             Application.Current.Resources["StartingHeightText"] = ((int)_settings.DefaultSizeY).ToString();
             Application.Current.Resources["StartingWidthText"] = ((int)_settings.DefaultSizeX).ToString();
+            Application.Current.Resources["MobIconText"] = ((int)_settings.MobIconSize).ToString();
+            Application.Current.Resources["PlayerIconText"] = ((int)_settings.PlayerIconSize).ToString();
 
             InitializeComponent();
         }
-
-        private void OpacityTextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var text = (TextBox) sender;
-            Trace.WriteLine($"---------------------------------\n{text.Text}\n------------------------------------");
-        }
+        
         private void OpacityTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var textbox = (TextBox) sender;
@@ -86,10 +83,33 @@ namespace ufht_UI.DialogWindow
             Regex regex = new Regex(@"^(?:\d{1})$");
             e.Handled = !regex.IsMatch(e.Text);
         }
+        
+       
+        private void MobIconTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textbox = (TextBox)sender;
 
+            Regex regex = new Regex(@"^(?:\d{1})$");
+            e.Handled = !regex.IsMatch(e.Text);
+        }
+      
+        private void PlayerIconTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var textbox = (TextBox)sender;
+
+            Regex regex = new Regex(@"^(?:\d{1})$");
+            e.Handled = !regex.IsMatch(e.Text);
+        }
+
+
+
+
+
+
+        //Button
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
-            Double opacity, height, width;
+            Double opacity, height, width, mobIcon, playerIcon;
 
             if (Double.TryParse(OpacityTextBox.Text, out opacity) )
             {
@@ -106,6 +126,16 @@ namespace ufht_UI.DialogWindow
             {
                 _settings.DefaultSizeX = height;
                 _settings.DefaultSizeY = height;
+            }
+
+            if (Double.TryParse(MobIconTextBox.Text, out mobIcon))
+            {
+                _settings.MobIconSize = mobIcon;
+            }
+
+            if (Double.TryParse(PlayerIconTextBox.Text, out playerIcon))
+            {
+                _settings.PlayerIconSize = playerIcon;
             }
 
             _settingsManager.SaveSettings();

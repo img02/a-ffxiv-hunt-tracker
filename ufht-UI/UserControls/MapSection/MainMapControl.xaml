@@ -62,8 +62,8 @@
                    MouseMove="PlayerIcon_OnMouseMove"
                    MouseLeave="PlayerIcon_OnMouseLeave"
 
-                   Height="32" 
-                   Width="32"
+                   Height="{DynamicResource PlayerIconHeight}" 
+                   Width="{DynamicResource PlayerIconWidth}"
                    Source="{Binding CurrentPlayer.PlayerIconImagePath,
                         Converter={StaticResource FileToBitmapConverter}}"
                    RenderTransformOrigin="0.5, 0.5">

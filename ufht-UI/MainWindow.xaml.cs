@@ -44,6 +44,7 @@ namespace ufht_UI
         {
             _settingsManager = new SettingsManager();
             _userSettings = _settingsManager.UserSettings;
+            _settingsManager.PropertyChanged += SettingsManagerOnPropertyChanged;
 
 
             Application.Current.Resources["ProgramWidth"] = _userSettings.DefaultSizeX;
@@ -82,7 +83,7 @@ namespace ufht_UI
                     _listSectionMain = new InfoSectionControl(_session, _nearbyMobs);
                     _session.CurrentNearbyMobs.CollectionChanged += CurrentNearbyMobs_CollectionChanged;
 
-                    _mainMap = new MainMapControl(_session);
+                    _mainMap = new MainMapControl(_session, _settingsManager);
 
                     MainGrid2.Children.Add(_mainMap);
                     ListSection.Children.Add(_listSectionMain);
@@ -93,6 +94,7 @@ namespace ufht_UI
             });
 
         }
+
 
         //info side panel stuff
         private void CurrentNearbyMobs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -232,6 +234,20 @@ namespace ufht_UI
                 this.DragMove();
         }
 
+        //settings updated
+        private void SettingsManagerOnPropertyChanged(object? sender, Settings e)
+        {
+            //close the side panel first, otherwise it messes with the resize.
+            if (InfoGrid.Width > 0)
+            {
+                SidePanelToggle_Executed(null, null); //prob bad and should separate into own method but.., turn off side panel
+            }
+
+            this.Width = _userSettings.DefaultSizeX;
+            this.Height = _userSettings.DefaultSizeY;
+            //other stuff like updating fonts, etc, in the future
+        }
+
         #region BUTTON event handlers
 
         //side panel toggle -- not needed if using command
@@ -251,32 +267,7 @@ namespace ufht_UI
 
             }
         }
-
-        /*  -- no longer used, using commands instead
-                private void OnTop_OnClick(object sender, RoutedEventArgs e)
-                {
-                    if (!MainWindow1.Topmost)
-                    {
-                        Application.Current.Resources["ProgramTopMost"] = true;
-                    }
-                    else
-                    {
-                        Application.Current.Resources["ProgramTopMost"] = false;
-                    }
-                }
-
-                private void Opacity_OnClick(object sender, RoutedEventArgs e)
-                {
-                    if (MainWindow1.Opacity == 1.0)
-                    {
-                        Application.Current.Resources["ProgramOpacity"] = 0.7;
-                    }
-                    else
-                    {
-                        Application.Current.Resources["ProgramOpacity"] = 1.0;
-                    }
-                }*/
-
+        
         //exit button
         private void Exit_OnClick(object sender, RoutedEventArgs e)
         {
@@ -362,13 +353,6 @@ namespace ufht_UI
         private void SettingsWindowToggle_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             new SettingsWindow(_settingsManager){Owner = this}.ShowDialog();
-            if (InfoGrid.Width > 0)
-            {
-                SidePanelToggle_Executed(null, null); //prob bad and should separate into own method but.., turn off side panel
-            }
-
-            this.Width = _userSettings.DefaultSizeX;
-            this.Height = _userSettings.DefaultSizeY;
         }
 
         #endregion

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace ufht_UI.Models
 
         public Settings UserSettings;
 
+        public event EventHandler<Settings> PropertyChanged;
+
 
         public SettingsManager()
         {
@@ -28,6 +31,7 @@ namespace ufht_UI.Models
             if (File.Exists(ConfigFileLocation)){
                 var jsonSettings = new JsonSerializerSettings
                 {
+                    NullValueHandling = NullValueHandling.Ignore,
                     MissingMemberHandling = MissingMemberHandling.Ignore
                 };
 
@@ -45,6 +49,7 @@ namespace ufht_UI.Models
         public void SaveSettings()
         {
             File.WriteAllText(ConfigFileLocation, JsonConvert.SerializeObject(UserSettings, Formatting.Indented));
+            PropertyChanged?.Invoke(this, UserSettings);
         }
 
         private void CreateDefaultSettings()

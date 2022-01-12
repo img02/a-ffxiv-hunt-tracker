@@ -48,12 +48,6 @@
 		"MapTerritory": "TheRubySea"
 	},
 	{
-		"Name": "Slave",
-		"ModelID": 5998,
-		"Rank": "A",
-		"MapTerritory": "Yanxia"
-	},
-	{
 		"Name": "Angada",
 		"ModelID": 5999,
 		"Rank": "A",
