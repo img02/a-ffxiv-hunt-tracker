@@ -37,7 +37,7 @@ You can also mouse over anywhere on the map to get the equivalent in-game **(XX.
 
 
 ### Current (hardcoded) shortcuts:
-- **CTRL + Q(** - OPEN SETTINGS WINDOW
+- **CTRL + Q** - OPEN SETTINGS WINDOW
 - **CTRL + A**  - TOGGLE ALWAYS ON TOP
 - **CTRL + S**  - TOGGLE OPACITY
 - **CTRL + F**  - TOGGLE SS MAP
