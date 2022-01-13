@@ -5,12 +5,63 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ufht_UI.DialogWindow"
         xmlns:models="clr-namespace:ufht_UI.Models"
-        d:DataContext="{d:DesignInstance models:Settings}"
         mc:Ignorable="d"
         Title="Settings" Height="450" Width="800"
         Topmost="True"
         KeyDown="SettingsWindow_OnKeyDown"
         WindowStartupLocation="CenterOwner">
+
+    <Window.Resources>
+        <Style x:Key="chkBullet" TargetType="CheckBox">
+            <Setter Property="IsChecked" Value="False"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#999"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border Width="60" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" >
+                            <Grid>
+                                <Border x:Name="border" Width="18" Height="18" CornerRadius="9" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1 0" Background="White">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform  X="0"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Margin="9 0" VerticalAlignment="Center" Foreground="White" >
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform   X="18"></TranslateTransform>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Text" TargetName="txt" Value="{Binding Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="40" Duration="00:00:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="18" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Text" TargetName="txt" Value="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
 
     <Grid>
         <Label Content="Opacity" FontSize="14" HorizontalAlignment="Left" Margin="50,25,0,0" VerticalAlignment="Top" Height="30"/>
@@ -18,6 +69,7 @@
         <Label Content="Width" FontSize="14" HorizontalAlignment="Left" Margin="50,75,0,0" VerticalAlignment="Top" Height="30"/>
         <Label Content="Mob Icon" FontSize="14" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" Height="30"/>
         <Label Content="Player Icon" FontSize="14" HorizontalAlignment="Left" Margin="50,125,0,0" VerticalAlignment="Top" Height="30"/>
+        <Label Content="Log S Ranks" FontSize="14" HorizontalAlignment="Left" Margin="50,150,0,0" VerticalAlignment="Top" Height="30"/>
 
         <TextBox x:Name="OpacityTextBox" HorizontalAlignment="Left" 
                  Margin="139,31,0,0" 
@@ -65,11 +117,22 @@
                  PreviewTextInput="PlayerIconTextBox_OnPreviewTextInput"
                  />
 
+        <CheckBox x:Name="LogSRanks" HorizontalAlignment="Left" 
+                 Margin="139,156,0,0" VerticalAlignment="Top"
+                 Background="#424b7f "
+                 Content="Off" Tag="On"
+                 IsChecked="{DynamicResource LogS}"
+                 HorizontalContentAlignment="Center"
+                 Width="120"
+                 Style="{StaticResource chkBullet}"
+                 />
+
         <Label Content="Opacity % to change to (0-99)    Default: 80" FontSize="12" HorizontalAlignment="Left" Margin="271,30,0,0" VerticalAlignment="Top"/>
         <Label Content="Starting Window Height 1:1 ratio    Default: 1024" FontSize="12" HorizontalAlignment="Left" Margin="271,55,0,0" VerticalAlignment="Top"/>
         <Label Content="Starting Window Width 1:1 ratio    Default: 1024" FontSize="12" HorizontalAlignment="Left" Margin="271,80,0,0" VerticalAlignment="Top"/>
         <Label Content="Default: 64" FontSize="12" HorizontalAlignment="Left" Margin="271,105,0,0" VerticalAlignment="Top"/>
         <Label Content="Default: 32" FontSize="12" HorizontalAlignment="Left" Margin="271,130,0,0" VerticalAlignment="Top"/>
+        <Label Content="Saves to Desktop. [Name - Pos - Local Time - UTC]  Does not currently record World" FontSize="12" HorizontalAlignment="Left" Margin="271,155,0,0" VerticalAlignment="Top"/>
 
         <Button Content="Save" HorizontalAlignment="Left" FontSize="14" 
                 Margin="689,358,0,0"
@@ -78,4 +141,6 @@
                 Click="Save_OnClick"/>
 
     </Grid>
+
+   
 </Window>

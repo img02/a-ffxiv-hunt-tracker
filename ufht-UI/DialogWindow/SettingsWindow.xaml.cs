@@ -36,7 +36,8 @@ namespace ufht_UI.DialogWindow
             Application.Current.Resources["StartingWidthText"] = ((int)_settings.DefaultSizeX).ToString();
             Application.Current.Resources["MobIconText"] = ((int)_settings.MobIconSize).ToString();
             Application.Current.Resources["PlayerIconText"] = ((int)_settings.PlayerIconSize).ToString();
-
+            Application.Current.Resources["LogS"] = _settings.LogS;
+            
             InitializeComponent();
         }
         
@@ -101,11 +102,6 @@ namespace ufht_UI.DialogWindow
             e.Handled = !regex.IsMatch(e.Text);
         }
 
-
-
-
-
-
         //Button
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
@@ -137,6 +133,8 @@ namespace ufht_UI.DialogWindow
             {
                 _settings.PlayerIconSize = playerIcon;
             }
+
+            _settings.LogS = LogSRanks.IsChecked ?? false;
 
             _settingsManager.SaveSettings();
 

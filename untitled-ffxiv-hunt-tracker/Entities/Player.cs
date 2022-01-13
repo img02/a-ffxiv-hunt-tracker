@@ -31,9 +31,8 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         public event EventHandler<Coords> CoordsChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public string GetCoords() => Coordinates.ToString();
         public string CurrentWorld { get; set; }
-        public string PlayerIconImagePath { get; set; } //useless
+        public string PlayerIconImagePath { get; set; } 
 
         public string CurrentMapImagePath
         {

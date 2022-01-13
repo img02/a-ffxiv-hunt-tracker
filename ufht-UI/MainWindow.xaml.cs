@@ -91,6 +91,7 @@ namespace ufht_UI
                     DataContext = _session;
                 });
                 _session.Start();
+                _session.ToggleLogS(_userSettings.LogS);
             });
 
         }
@@ -198,7 +199,7 @@ namespace ufht_UI
             Application.Current.Resources["PriorityMobTextRank"] = priorityMob.Rank;
             Application.Current.Resources["PriorityMobTextName"] = priorityMob.Name;
             Application.Current.Resources["PriorityMobTTText"] = priorityMob.Name;
-            Application.Current.Resources["PriorityMobTextCoords"] = priorityMob.GetCoords();
+            Application.Current.Resources["PriorityMobTextCoords"] = priorityMob.Coordinates;
             Application.Current.Resources["PriorityMobTextHPP"] = $"{priorityMob.HPPercentAsPercentage,0:0}%";
 
             Application.Current.Resources["PriorityMobTextVisibility"] = Visibility.Visible;
@@ -245,6 +246,7 @@ namespace ufht_UI
 
             this.Width = _userSettings.DefaultSizeX;
             this.Height = _userSettings.DefaultSizeY;
+            _session.ToggleLogS(_userSettings.LogS);
             //other stuff like updating fonts, etc, in the future
         }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net.Mime;
 using System.Text;
@@ -32,8 +33,9 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         private MemoryReader _memoryReader;
 
         private bool _ssMap;
+        private bool _logS;
 
-        public  List<Mob> CurrentTrain;
+        public List<Mob> CurrentTrain;
         private string CurrentTrainName { get; set; }
 
         public ObservableCollection<Mob> CurrentNearbyMobs { get; }
@@ -51,12 +53,14 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             EWDict = EWMobFactory.GetEWDict();
 
             _ssMap = false;
+            _logS = false;
 
             Trains = new Dictionary<string, List<Mob>>();
 
             CurrentTrain = new List<Mob>();
             CurrentTrainName = null;
             CurrentNearbyMobs = new ObservableCollection<Mob>();
+            CurrentNearbyMobs.CollectionChanged += LogSRanks;
             CurrentPlayer = new Player();
             GetUser();
         }
@@ -90,7 +94,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                     Thread.Sleep(2000);
                     SetUpMemReader();
                 }
-                
+
                 GetUser();
                 SearchNearbyMobs();
 
@@ -126,7 +130,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 //END TEST PRINT
 
                 var tempList = expansionDict.Values.FirstOrDefault(l =>
-                    (l.FirstOrDefault(m => 
+                    (l.FirstOrDefault(m =>
                     m.Name.ToLower() == actor.Value.Name.ToLower()
                         && (uint)m.MapTerritory == actor.Value.MapTerritory) != null));
 
@@ -142,7 +146,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                     Console.WriteLine($"---------------------------------------------------------\n" +
                                       $"|{m.Name}| - ({ConvertPos(m.X)}, {ConvertPos(m.Y)}) - HP: {m.HPMax} , MAP TERRITORY = {m.MapTerritory}" +
                                       $"\n---------------------------------------------------------\n");
-                    
+
                     var mob = new Mob
                     {
                         Name = actor.Value.Name,
@@ -305,13 +309,41 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
 
             //Trace.WriteLine(((Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100));
 
-            return ( (Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100 ); 
+            return ((Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100);
         }
 
         public void ToggleSSMap()
         {
             _ssMap = !_ssMap;
         }
+
+#nullable enable
+        private void LogSRanks(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (_logS)
+            {
+                if (e.NewItems?.Count > 0)
+                {
+                    var text = "";
+                    
+                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "S" ||  m.Rank == "SS") )
+                    {
+                        text += ($"{mob.Name}\t {mob.Coordinates}\t Local: {DateTime.Now} | UTC: {DateTime.UtcNow}{Environment.NewLine}");
+                    }
+                    var path = $"{Environment.GetFolderPath(Environment.SpecialFolder.Desktop)}/UFHT S Log.txt";
+
+                    File.AppendAllText(path, text);
+                }
+            }
+        }
+#nullable disable
+
         #endregion
+        public void ToggleLogS(bool logS)
+        {
+            _logS = logS;
+        }
+
+
     }
 }

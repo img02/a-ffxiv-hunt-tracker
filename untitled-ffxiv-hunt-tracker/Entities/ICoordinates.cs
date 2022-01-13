@@ -6,8 +6,6 @@ namespace untitled_ffxiv_hunt_tracker.Entities
     public interface ICoordinates
     {
         Coords Coordinates { get; set; }
-        string GetCoords();
-
     }
 
     public struct Coords
