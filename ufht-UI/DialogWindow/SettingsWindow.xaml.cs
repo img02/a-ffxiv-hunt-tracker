@@ -37,6 +37,9 @@ namespace ufht_UI.DialogWindow
             Application.Current.Resources["MobIconText"] = ((int)_settings.MobIconSize).ToString();
             Application.Current.Resources["PlayerIconText"] = ((int)_settings.PlayerIconSize).ToString();
             Application.Current.Resources["LogS"] = _settings.LogS;
+            Application.Current.Resources["SRankTTS"] = _settings.SRankTTS;
+            Application.Current.Resources["ARankTTS"] = _settings.ARankTTS;
+            Application.Current.Resources["BRankTTS"] = _settings.BRankTTS;
             
             InitializeComponent();
         }
@@ -102,7 +105,9 @@ namespace ufht_UI.DialogWindow
             e.Handled = !regex.IsMatch(e.Text);
         }
 
-        //Button
+
+
+        //Save Button
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
             Double opacity, height, width, mobIcon, playerIcon;
@@ -135,6 +140,9 @@ namespace ufht_UI.DialogWindow
             }
 
             _settings.LogS = LogSRanks.IsChecked ?? false;
+            _settings.SRankTTS = SRankTTSCHK.IsChecked ?? false;
+            _settings.ARankTTS = ARankTTSCHK.IsChecked ?? false;
+            _settings.BRankTTS = BRankTTSCHK.IsChecked ?? false;
 
             _settingsManager.SaveSettings();
 

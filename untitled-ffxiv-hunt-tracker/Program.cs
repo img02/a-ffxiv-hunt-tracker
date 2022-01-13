@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Net.Mime;
 using System.Runtime.Intrinsics.Arm;
+using System.Speech.Synthesis;
 using System.Threading;
 using System.Threading.Tasks;
 using untitled_ffxiv_hunt_tracker.Factories;

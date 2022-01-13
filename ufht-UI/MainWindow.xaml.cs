@@ -77,6 +77,10 @@ namespace ufht_UI
             _ = Task.Run(() =>
             {
                 _session = new Session();
+                _session.ToggleLogS(_userSettings.LogS);
+                _session.ToggleSRankTTS(_userSettings.SRankTTS);
+                _session.ToggleARankTTS(_userSettings.ARankTTS);
+                _session.ToggleBRankTTS(_userSettings.BRankTTS);
 
                 Dispatcher.Invoke(() =>
                 {
@@ -91,7 +95,7 @@ namespace ufht_UI
                     DataContext = _session;
                 });
                 _session.Start();
-                _session.ToggleLogS(_userSettings.LogS);
+                
             });
 
         }
@@ -247,6 +251,10 @@ namespace ufht_UI
             this.Width = _userSettings.DefaultSizeX;
             this.Height = _userSettings.DefaultSizeY;
             _session.ToggleLogS(_userSettings.LogS);
+            _session.ToggleSRankTTS(_userSettings.SRankTTS);
+            _session.ToggleARankTTS(_userSettings.ARankTTS);
+            _session.ToggleBRankTTS(_userSettings.BRankTTS);
+
             //other stuff like updating fonts, etc, in the future
         }
 

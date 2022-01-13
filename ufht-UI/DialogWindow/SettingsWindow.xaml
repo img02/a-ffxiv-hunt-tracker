@@ -11,10 +11,11 @@
         KeyDown="SettingsWindow_OnKeyDown"
         WindowStartupLocation="CenterOwner">
 
+    <!-- Checkbox Style base from: https://www.programmerall.com/article/7783212284/, with some minor changes by me -->
     <Window.Resources>
         <Style x:Key="chkBullet" TargetType="CheckBox">
             <Setter Property="IsChecked" Value="False"/>
-            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Background" Value="#424b7f"/> <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
             <Setter Property="Foreground" Value="#999"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -35,7 +36,11 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
-                                <Setter Property="Text" TargetName="txt" Value="{Binding Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <!-- BACKGROUND COLOUR WHEN TOGGLED ON#18852f -->
+                                <Setter Property="Background" Value="#30af4b"/>
+                                <Setter Property="Text" TargetName="txt"  Value="{Binding Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <!-- Change this to change text colour when ON-->
+                                <Setter Property="Foreground" TargetName="txt"  Value="White"/>
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard>
@@ -60,87 +65,220 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style> 
+        
+        <Style x:Key="TTS" TargetType="CheckBox">
+            <Setter Property="IsChecked" Value="False"/>
+            <Setter Property="Background" Value="#424b7f"/> <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
+            <Setter Property="Foreground" Value="#999"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border Width="35" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left">
+                            <Grid>
+                                <Border x:Name="border" Width="18" Height="18" CornerRadius="9" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1 0" Background="White">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform  X="0"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Margin="2 0" VerticalAlignment="Center" Foreground="White" >
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform   X="18"></TranslateTransform>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <!-- BACKGROUND COLOUR WHEN TOGGLED ON#18852f -->
+                                <Setter Property="Background" Value="#30af4b"/>
+                                <Setter Property="Text" TargetName="txt"  Value="{Binding Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <!-- Change this to change text colour when ON-->
+                                <Setter Property="Foreground" TargetName="txt"  Value="White"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="15" Duration="00:00:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="4" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="20" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Text" TargetName="txt" Value="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
     </Window.Resources>
 
     <Grid>
-        <Label Content="Opacity" FontSize="14" HorizontalAlignment="Left" Margin="50,25,0,0" VerticalAlignment="Top" Height="30"/>
-        <Label Content="Height" FontSize="14" HorizontalAlignment="Left" Margin="50,50,0,0" VerticalAlignment="Top" Height="30"/>
-        <Label Content="Width" FontSize="14" HorizontalAlignment="Left" Margin="50,75,0,0" VerticalAlignment="Top" Height="30"/>
-        <Label Content="Mob Icon" FontSize="14" HorizontalAlignment="Left" Margin="50,100,0,0" VerticalAlignment="Top" Height="30"/>
-        <Label Content="Player Icon" FontSize="14" HorizontalAlignment="Left" Margin="50,125,0,0" VerticalAlignment="Top" Height="30"/>
-        <Label Content="Log S Ranks" FontSize="14" HorizontalAlignment="Left" Margin="50,150,0,0" VerticalAlignment="Top" Height="30"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBox x:Name="OpacityTextBox" HorizontalAlignment="Left" 
-                 Margin="139,31,0,0" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" 
+            <Label Grid.Row="0" Grid.Column="0" Content="Opacity" FontSize="14" />
+            <Label Grid.Row="1" Grid.Column="0" Content="Height" FontSize="14"/>
+            <Label Grid.Row="2" Grid.Column="0" Content="Width" FontSize="14" />
+            <Label Grid.Row="3" Grid.Column="0" Content="Mob Icon" FontSize="14"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Player Icon" FontSize="14" />
+            <Label Grid.Row="5" Grid.Column="0" Content="Log S Ranks" FontSize="14" />
+            <Label Grid.Row="6" Grid.Column="0" Content="TTS" FontSize="14" />
+
+            <TextBox Grid.Row="0" Grid.Column="1" 
+                 x:Name="OpacityTextBox" HorizontalAlignment="Left" 
                  Width="120" 
+                 Height="17.96"
                  Text="{DynamicResource OpacityText}"
                  MaxLength="2"
-                 PreviewTextInput="OpacityTextBox_OnPreviewTextInput"
-        />
+                 PreviewTextInput="OpacityTextBox_OnPreviewTextInput"/>
 
-        <TextBox x:Name="StartingHeightTextBox" HorizontalAlignment="Left" 
-                 Margin="139,56,0,0" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" 
+            <TextBox Grid.Row="1" Grid.Column="1" 
+                 x:Name="StartingHeightTextBox" HorizontalAlignment="Left" 
                  Width="120"
+                 Height="17.96"
                  Text="{DynamicResource StartingHeightText}"
                  MaxLength="5"
                  TextChanged="StartingHeightTextBox_OnTextChanged"
                  PreviewTextInput="StartingHeightTextBox_OnPreviewTextInput"/>
 
-        <TextBox x:Name="StartingWidthTextBox" HorizontalAlignment="Left" 
-                 Margin="139,81,0,0" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" 
+            <TextBox Grid.Row="2" Grid.Column="1" 
+                 x:Name="StartingWidthTextBox" HorizontalAlignment="Left" 
                  Width="120"
+                 Height="17.96"
                  Text="{DynamicResource StartingWidthText}"
                  MaxLength="5"
                  TextChanged="StartingWidthTextBox_OnTextChanged"
-                 PreviewTextInput="StartingWidthTextBox_OnPreviewTextInput"
-                 />
+                 PreviewTextInput="StartingWidthTextBox_OnPreviewTextInput"/>
 
-        <TextBox x:Name="MobIconTextBox" HorizontalAlignment="Left" 
-                 Margin="139,106,0,0" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" 
-                 Width="120"
-                 Text="{DynamicResource MobIconText}"
-                 MaxLength="2"
-                 PreviewTextInput="MobIconTextBox_OnPreviewTextInput"
-                 />
+            <TextBox Grid.Row="3" Grid.Column="1" 
+                x:Name="MobIconTextBox" HorizontalAlignment="Left" 
+                Width="120"
+                Height="17.96"
+                Text="{DynamicResource MobIconText}"
+                MaxLength="2"
+                PreviewTextInput="MobIconTextBox_OnPreviewTextInput"/>
 
-        <TextBox x:Name="PlayerIconTextBox" HorizontalAlignment="Left" 
-                 Margin="139,131,0,0" 
-                 TextWrapping="Wrap" VerticalAlignment="Top" 
+            <TextBox Grid.Row="4" Grid.Column="1" 
+                 x:Name="PlayerIconTextBox" HorizontalAlignment="Left" 
                  Width="120"
+                 Height="17.96"
                  Text="{DynamicResource PlayerIconText}"
                  MaxLength="2"
-                 PreviewTextInput="PlayerIconTextBox_OnPreviewTextInput"
-                 />
+                 PreviewTextInput="PlayerIconTextBox_OnPreviewTextInput"/>
 
-        <CheckBox x:Name="LogSRanks" HorizontalAlignment="Left" 
-                 Margin="139,156,0,0" VerticalAlignment="Top"
-                 Background="#424b7f "
-                 Content="Off" Tag="On"
-                 IsChecked="{DynamicResource LogS}"
-                 HorizontalContentAlignment="Center"
-                 Width="120"
-                 Style="{StaticResource chkBullet}"
-                 />
+            <CheckBox Grid.Row="5" Grid.Column="1" 
+                  x:Name="LogSRanks" 
+                  Content="Off" Tag="On"
+                  IsChecked="{DynamicResource LogS}"
+                  HorizontalContentAlignment="Center"
+                  Width="120"
+                  Height="20"
+                  Style="{StaticResource chkBullet}"/>
 
-        <Label Content="Opacity % to change to (0-99)    Default: 80" FontSize="12" HorizontalAlignment="Left" Margin="271,30,0,0" VerticalAlignment="Top"/>
-        <Label Content="Starting Window Height 1:1 ratio    Default: 1024" FontSize="12" HorizontalAlignment="Left" Margin="271,55,0,0" VerticalAlignment="Top"/>
-        <Label Content="Starting Window Width 1:1 ratio    Default: 1024" FontSize="12" HorizontalAlignment="Left" Margin="271,80,0,0" VerticalAlignment="Top"/>
-        <Label Content="Default: 64" FontSize="12" HorizontalAlignment="Left" Margin="271,105,0,0" VerticalAlignment="Top"/>
-        <Label Content="Default: 32" FontSize="12" HorizontalAlignment="Left" Margin="271,130,0,0" VerticalAlignment="Top"/>
-        <Label Content="Saves to Desktop. [Name - Pos - Local Time - UTC]  Does not currently record World" FontSize="12" HorizontalAlignment="Left" Margin="271,155,0,0" VerticalAlignment="Top"/>
+            <!-- TTS checkboxes -->
+            <Grid Grid.Row="6" Grid.Column="1">
 
-        <Button Content="Save" HorizontalAlignment="Left" FontSize="14" 
-                Margin="689,358,0,0"
-                Padding="16 4 "
-                VerticalAlignment="Top"
-                Click="Save_OnClick"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <CheckBox Grid.Column="0" Grid.Row="0"
+                      x:Name="SRankTTSCHK"
+                      Content="S" Tag="S"
+                      IsChecked="{DynamicResource SRankTTS}"
+                      Width="35"
+                      Height="20"
+                      Style="{StaticResource TTS}"/>
+
+                <CheckBox Grid.Column="1" Grid.Row="0"
+                      x:Name="ARankTTSCHK"
+                      Content="A" Tag="A"
+                      IsChecked="{DynamicResource ARankTTS}"
+                      Width="35"
+                      Height="20"
+                      Style="{StaticResource TTS}"/>
+
+                <CheckBox Grid.Column="2" Grid.Row="0"
+                      x:Name="BRankTTSCHK"
+                      Content="B" Tag="B"
+                      IsChecked="{DynamicResource BRankTTS}"
+                      Width="35"
+                      Height="20"
+                      Style="{StaticResource TTS}"/>
+
+            </Grid>
+            <!-- TTS checkboxes END -->
+
+            <Label Grid.Row="0" Grid.Column="2" 
+               Content="Opacity toggle % (0-99)     Default: 80" 
+               FontSize="12" />
+            <Label Grid.Row="1" Grid.Column="2" 
+               Content="Window Height 1:1 ratio    Default: 1024" 
+               FontSize="12" />
+            <Label Grid.Row="2" Grid.Column="2" 
+               Content="Window Width  1:1 ratio    Default: 1024"
+               FontSize="12"/>
+            <Label Grid.Row="3" Grid.Column="2" 
+               Content="Default: 64" 
+               FontSize="12" />
+            <Label Grid.Row="4" Grid.Column="2" 
+               Content="Default: 32" 
+               FontSize="12"/>
+            <Label Grid.Row="5" Grid.Column="2" 
+               Content="Saves to Desktop. [Name - Pos - Local Time - UTC]  Does not currently record World"
+               FontSize="12"/>
+            <Label Grid.Row="6" Grid.Column="2" 
+               Content="Text-to-Speech"
+               FontSize="12"/>
+        </Grid>
+
+        <Button Grid.Row="1" Grid.Column="1"
+            Content="Save" HorizontalAlignment="Left" FontSize="14" 
+            Margin="639,333,0,0"
+            Padding="16 4 "
+            VerticalAlignment="Top"
+            Click="Save_OnClick"/>
     </Grid>
 
-   
+
+
+
 </Window>

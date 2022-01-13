@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Mime;
+using System.Speech.Synthesis;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,9 +32,14 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         private readonly Dictionary<String, List<Mob>> Trains;
 
         private MemoryReader _memoryReader;
+        private SpeechSynthesizer _tts;
 
         private bool _ssMap;
         private bool _logS;
+        private bool _SRankTTS;
+        private bool _ARankTTS;
+        private bool _BRankTTS;
+
 
         public List<Mob> CurrentTrain;
         private string CurrentTrainName { get; set; }
@@ -44,6 +50,9 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
 
         public Session()
         {
+            _memoryReader = new MemoryReader();
+            _tts = new SpeechSynthesizer{Rate = 1, Volume = 100};
+
             SetUpMemReader();
 
             ARRDict = ARRMobFactory.GetARRDict();
@@ -54,20 +63,27 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
 
             _ssMap = false;
             _logS = false;
-
+            _SRankTTS = false;
+            _ARankTTS = false;
+            _BRankTTS = false;
+            
             Trains = new Dictionary<string, List<Mob>>();
 
             CurrentTrain = new List<Mob>();
             CurrentTrainName = null;
+
             CurrentNearbyMobs = new ObservableCollection<Mob>();
             CurrentNearbyMobs.CollectionChanged += LogSRanks;
+            CurrentNearbyMobs.CollectionChanged += SRankTTS;
+            CurrentNearbyMobs.CollectionChanged += ARankTTS;
+            CurrentNearbyMobs.CollectionChanged += BRankTTS;
+
             CurrentPlayer = new Player();
             GetUser();
         }
 
         private void SetUpMemReader()
         {
-            _memoryReader = new MemoryReader();
             var processExists = _memoryReader.Setup();
 
             while (!processExists)
@@ -299,7 +315,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
 
         #endregion
 
-        #region Helpers
+        #region Helpers / Event Handlers
         private double ConvertPos(double num) //works for ShB
         {
             //this converts into  x y pos on most (open world? combat-enabled?) maps, doesn't work for city states, residential areas, gold saucer etc
@@ -310,11 +326,6 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             //Trace.WriteLine(((Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100));
 
             return ((Math.Floor((21.48 + (Convert.ToDouble(num) / 50)) * 100)) / 100);
-        }
-
-        public void ToggleSSMap()
-        {
-            _ssMap = !_ssMap;
         }
 
 #nullable enable
@@ -336,14 +347,86 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 }
             }
         }
+
+        private void SRankTTS(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (_SRankTTS)
+            {
+                if (e.NewItems?.Count > 0)
+                {
+                    var text = "";
+                    
+                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "S" ||  m.Rank == "SS") )
+                    {
+                       _ = _tts.SpeakAsync($"{mob.Name} in zone.");
+                    }
+                }
+            }
+        }
+
+        private void ARankTTS(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (_ARankTTS)
+            {
+                if (e.NewItems?.Count > 0)
+                {
+                    var text = "";
+                    
+                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "A") )
+                    {
+                       _ = _tts.SpeakAsync($"{mob.Name} nearby.");
+                    }
+                }
+            }
+        }
+        private void BRankTTS(object? sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (_BRankTTS)
+            {
+                if (e.NewItems?.Count > 0)
+                {
+                    var text = "";
+                    
+                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "B") )
+                    {
+                       _ = _tts.SpeakAsync($"{mob.Name} nearby.");
+                    }
+                }
+            }
+        }
+
 #nullable disable
 
         #endregion
+
+        #region bool toggles
+
+        public void ToggleSSMap()
+        {
+            _ssMap = !_ssMap;
+        }
+
         public void ToggleLogS(bool logS)
         {
             _logS = logS;
         }
 
+        public void ToggleSRankTTS(bool sRankTTS)
+        {
+            _SRankTTS = sRankTTS;
+        }
+
+        public void ToggleARankTTS(bool aRankTTS)
+        {
+            _ARankTTS = aRankTTS;
+        }
+
+        public void ToggleBRankTTS(bool bRankTTS)
+        {
+            _BRankTTS = bRankTTS;
+        }
+
+        #endregion
 
     }
 }

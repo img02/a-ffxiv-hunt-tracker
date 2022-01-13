@@ -15,22 +15,39 @@ namespace ufht_UI.Models
         [DefaultValue(0.8)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public double Opacity;
+
         [DefaultValue(1024)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public double DefaultSizeX;
+
         [DefaultValue(1024)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public double DefaultSizeY;
 
+
         [DefaultValue(64)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public double MobIconSize;
+
         [DefaultValue(32)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public double PlayerIconSize;
+
         [DefaultValue(false)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool LogS;
+
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool SRankTTS;
+
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool ARankTTS;
+        
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool BRankTTS;
 
 
 
@@ -55,7 +72,11 @@ namespace ufht_UI.Models
             DefaultSizeY = 1024;
             MobIconSize = 64;
             PlayerIconSize = 32;
+
             LogS = false;
+            SRankTTS = false;
+            ARankTTS = false;
+            BRankTTS = false;
 
             OnTopToggleGesture = new KeyGesture(Key.A, ModifierKeys.Control);
             OpacityToggleGesture = new KeyGesture(Key.S, ModifierKeys.Control);
@@ -65,7 +86,8 @@ namespace ufht_UI.Models
 
         [JsonConstructor]
         public Settings(double opacity, double defaultSizeX, double defaultSizeY,
-            double mobIconSize, double playerIconSize, bool logS,
+            double mobIconSize, double playerIconSize, 
+            bool logS, bool sRankTts, bool aRanktts, bool bRanktts,
             Hotkey onTopHotkey, Hotkey opacityHotKey, Hotkey sidePanelHotKey, Hotkey ssMapHotkey)
         {
             Opacity = opacity;
@@ -73,8 +95,12 @@ namespace ufht_UI.Models
             DefaultSizeY = defaultSizeY;
             MobIconSize = mobIconSize;
             PlayerIconSize = playerIconSize;
+            
             LogS = logS;
-
+            SRankTTS = sRankTts;
+            ARankTTS = aRanktts;
+            BRankTTS = bRanktts;
+            
             OnTopHotkey = onTopHotkey ?? new Hotkey(Commands.DefaultOnTopKeyGesture);
             OpacityHotKey = opacityHotKey ?? new Hotkey(Commands.DefaultOpacityKeyGesture);
             SidePanelHotKey = sidePanelHotKey ?? new Hotkey(Commands.DefaultSidePanelKeyGesture);

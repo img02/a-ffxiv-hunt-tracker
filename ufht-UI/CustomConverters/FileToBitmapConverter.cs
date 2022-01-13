@@ -15,7 +15,6 @@ namespace ufht_UI.CustomConverters
         private double _playerIconOpacity;
         private double _playerRadiusOpacity;
         private double _playerRadiusStrokeOpacity;
-        private bool OnHuntMapLocation;
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
