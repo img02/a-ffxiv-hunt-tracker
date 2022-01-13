@@ -76,7 +76,7 @@ The current images and shortcuts are placeholders.
 
 --
 ## Settings Window
-![Settings Window Image](https://i.imgur.com/Rg38pbv.png)  
+![Settings Window Image](https://i.imgur.com/Er2FUvi.png)  
 
 You can open the settings window with CTRL+Q,  
 
@@ -85,8 +85,9 @@ In this window you can set various values as described. Image / Windows sizes ar
 Logging S Ranks saves to a text file on your desktop called "UFHT S Log.txt" in the format shown below,  
 >Sphatika	 (18.3, 23.3)	 Local: 13/01/22 2:25:04 PM | UTC: 13/01/22 3:25:04 AM
 
-
-
+You can toggle Text-to-Speech for individual callouts for separate Rank tiers. This uses your Windows default voice.
+>S Ranks: {Name} in zone.  
+>A and B: {Name} nearby.
 
 ## Config.json
 
@@ -111,7 +112,7 @@ https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys
   - ~~Customisable opacity~~
   - ~~Save and load settings~~
 - 'Record' and save a list of mob info for 'hunt trains'
-- TTS (suggest using triggernometry tbh)
+- ~~TTS (suggest using triggernometry tbh)~~
 - ACT plugin version
 - ..tbd
 
