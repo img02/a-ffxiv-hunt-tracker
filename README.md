@@ -103,12 +103,12 @@ https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys
 - Replace Endwalker Map images, once Cable Monkey releases new maps.
 - FATE detection, at least for Minho, Senmurv, Orghana, Special Fates.
 - ~~SS Maps showing location of minions - low prio~~
-- ~~Settings Page ~~
+- ~~Settings Page~~
   - Customisable shortcuts
   - Customisable text font / colours / weight / etc
   - ~~Resize Window - maintaining aspect ratio~~
   - ~~Resizable Icons~~
-  - ~~Customisable opacity ~~
+  - ~~Customisable opacity~~
   - ~~Save and load settings~~
 - 'Record' and save a list of mob info for 'hunt trains'
 - TTS (suggest using triggernometry tbh)
