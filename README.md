@@ -37,6 +37,7 @@ You can also mouse over anywhere on the map to get the equivalent in-game **(XX.
 
 
 ### Current (hardcoded) shortcuts:
+- **CTRL + Q(** - OPEN SETTINGS WINDOW
 - **CTRL + A**  - TOGGLE ALWAYS ON TOP
 - **CTRL + S**  - TOGGLE OPACITY
 - **CTRL + F**  - TOGGLE SS MAP
@@ -73,6 +74,20 @@ The **Images/SS Maps** names are changed from the default file names to follow t
 
 The current images and shortcuts are placeholders.
 
+--
+## Settings Window
+![Settings Window Image](https://i.imgur.com/Rg38pbv.png)  
+
+You can open the settings window with CTRL+Q,  
+
+In this window you can set various values as described. Image / Windows sizes are pixels.  
+
+Logging S Ranks saves to a text file on your desktop called "UFHT S Log.txt" in the format shown below,  
+>Sphatika	 (18.3, 23.3)	 Local: 13/01/22 2:25:04 PM | UTC: 13/01/22 3:25:04 AM
+
+
+
+
 ## Config.json
 
 Settings changed in the settings window are saved here.  
@@ -88,11 +103,13 @@ https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys
 - Replace Endwalker Map images, once Cable Monkey releases new maps.
 - FATE detection, at least for Minho, Senmurv, Orghana, Special Fates.
 - ~~SS Maps showing location of minions - low prio~~
-- Customisable shortcuts
-- Customisable text font / colours / weight / etc
-- Resize Window - maintaining aspect ratio
-- ~~Customisable opacity ~~
-- ~~Save and load settings~~
+- ~~Settings Page ~~
+  - Customisable shortcuts
+  - Customisable text font / colours / weight / etc
+  - ~~Resize Window - maintaining aspect ratio~~
+  - ~~Resizable Icons~~
+  - ~~Customisable opacity ~~
+  - ~~Save and load settings~~
 - 'Record' and save a list of mob info for 'hunt trains'
 - TTS (suggest using triggernometry tbh)
 - ACT plugin version
