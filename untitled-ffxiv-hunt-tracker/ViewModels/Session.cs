@@ -48,10 +48,10 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         public Player CurrentPlayer { get; set; }
 
 
-        public Session()
+        public Session(MemoryReader memoryReader, SpeechSynthesizer tts)
         {
-            _memoryReader = new MemoryReader();
-            _tts = new SpeechSynthesizer{Rate = 1, Volume = 100};
+            _memoryReader = memoryReader;
+            _tts = tts;
 
             SetUpMemReader();
 

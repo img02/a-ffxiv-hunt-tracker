@@ -37,33 +37,26 @@ namespace ufht_UI.Models
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool LogS;
 
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool SRankTTS;
 
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool ARankTTS;
         
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool BRankTTS;
-
-
+        
 
         public Hotkey OnTopHotkey;
         public Hotkey OpacityHotKey;
         public Hotkey SidePanelHotKey;
         public Hotkey SSMapHotkey;
+        public Hotkey SettingsHotkey;
 
-        [JsonIgnore]
-        public KeyGesture OnTopToggleGesture;
-        [JsonIgnore]
-        public KeyGesture OpacityToggleGesture;
-        [JsonIgnore]
-        public KeyGesture SidePaneLToggleGesture;
-        [JsonIgnore]
-        public KeyGesture SSMapToggleGesture;
+
 
         public Settings()
         {
@@ -73,22 +66,24 @@ namespace ufht_UI.Models
             MobIconSize = 64;
             PlayerIconSize = 32;
 
-            LogS = false;
-            SRankTTS = false;
-            ARankTTS = false;
-            BRankTTS = false;
+            LogS = true;
+            SRankTTS = true;
+            ARankTTS = true;
+            BRankTTS = true;
 
-            OnTopToggleGesture = new KeyGesture(Key.A, ModifierKeys.Control);
-            OpacityToggleGesture = new KeyGesture(Key.S, ModifierKeys.Control);
-            SidePaneLToggleGesture = new KeyGesture(Key.Tab);
-            SSMapToggleGesture = new KeyGesture(Key.F, ModifierKeys.Control);
+            OnTopHotkey = new Hotkey(Commands.DefaultOnTopKeyGesture);
+            OpacityHotKey = new Hotkey(Commands.DefaultOpacityKeyGesture);
+            SidePanelHotKey = new Hotkey(Commands.DefaultSidePanelKeyGesture);
+            SSMapHotkey = new Hotkey(Commands.DefaultSSMapKeyGesture);
+            SettingsHotkey = new Hotkey(Commands.DefaultSettingsWindowKeyGesture);
         }
 
         [JsonConstructor]
         public Settings(double opacity, double defaultSizeX, double defaultSizeY,
             double mobIconSize, double playerIconSize, 
             bool logS, bool sRankTts, bool aRanktts, bool bRanktts,
-            Hotkey onTopHotkey, Hotkey opacityHotKey, Hotkey sidePanelHotKey, Hotkey ssMapHotkey)
+            Hotkey onTopHotkey, Hotkey opacityHotKey, Hotkey sidePanelHotKey,
+            Hotkey ssMapHotkey, Hotkey settingsHotkey)
         {
             Opacity = opacity;
             DefaultSizeX = defaultSizeX;
@@ -105,19 +100,16 @@ namespace ufht_UI.Models
             OpacityHotKey = opacityHotKey ?? new Hotkey(Commands.DefaultOpacityKeyGesture);
             SidePanelHotKey = sidePanelHotKey ?? new Hotkey(Commands.DefaultSidePanelKeyGesture);
             SSMapHotkey = ssMapHotkey ?? new Hotkey(Commands.DefaultSSMapKeyGesture);
-
-            OnTopToggleGesture = OnTopHotkey.HotkeyCombo;
-            OpacityToggleGesture = OpacityHotKey.HotkeyCombo;
-            SidePaneLToggleGesture = SidePanelHotKey.HotkeyCombo;
-            SSMapToggleGesture = SSMapHotkey.HotkeyCombo;
+            SettingsHotkey = settingsHotkey ?? new Hotkey(Commands.DefaultSettingsWindowKeyGesture);
         }
 
         public void LoadKeyGestures()
         {
-            Commands.ChangeKeyGesture(Commands.OnTop, OnTopToggleGesture);
-            Commands.ChangeKeyGesture(Commands.OpacityToggle, OpacityToggleGesture);
-            Commands.ChangeKeyGesture(Commands.SidePanelToggle, SidePaneLToggleGesture);
-            Commands.ChangeKeyGesture(Commands.SSMapToggle, SSMapToggleGesture);
+            Commands.ChangeKeyGesture(Commands.OnTop, OnTopHotkey.HotkeyCombo);
+            Commands.ChangeKeyGesture(Commands.OpacityToggle, OpacityHotKey.HotkeyCombo);
+            Commands.ChangeKeyGesture(Commands.SidePanelToggle, SidePanelHotKey.HotkeyCombo);
+            Commands.ChangeKeyGesture(Commands.SSMapToggle, SSMapHotkey.HotkeyCombo);
+            Commands.ChangeKeyGesture(Commands.SettingsWindowToggle, SettingsHotkey.HotkeyCombo);
         }
     }
 }

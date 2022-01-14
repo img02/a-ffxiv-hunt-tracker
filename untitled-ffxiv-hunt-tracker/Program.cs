@@ -11,12 +11,12 @@ using untitled_ffxiv_hunt_tracker.ViewModels;
 
 namespace untitled_ffxiv_hunt_tracker
 {
-    class Program
+    public class Program
     {
-        static async Task Main(string[] args)
+        public static async Task Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            var session = new Session();
+            var session = CreateSession();
 
             while (true)
             {
@@ -24,6 +24,14 @@ namespace untitled_ffxiv_hunt_tracker
                 session.SearchNearbyMobs();
                 Thread.Sleep(1000);
             }
+        }
+
+        public static Session CreateSession()
+        {
+            var memoryReader = new MemoryReader();
+            var tts = new SpeechSynthesizer { Rate = 1, Volume = 100 };
+
+            return new Session(memoryReader, tts);
         }
     }
 }

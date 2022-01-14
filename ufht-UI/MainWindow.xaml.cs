@@ -76,7 +76,7 @@ namespace ufht_UI
             _nearbyMobs = new ObservableCollection<Mob>();
             _ = Task.Run(() =>
             {
-                _session = new Session();
+                _session = Program.CreateSession();
                 _session.ToggleLogS(_userSettings.LogS);
                 _session.ToggleSRankTTS(_userSettings.SRankTTS);
                 _session.ToggleARankTTS(_userSettings.ARankTTS);
@@ -362,7 +362,7 @@ namespace ufht_UI
 
         private void SettingsWindowToggle_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            new SettingsWindow(_settingsManager){Owner = this}.ShowDialog();
+            new DialogWindow.SettingsWindow(_settingsManager){Owner = this}.ShowDialog();
         }
 
         #endregion

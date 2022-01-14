@@ -46,10 +46,5 @@ namespace ufht_UI.Models
                 HotkeyCombo = null;
             }
         }
-
-        public void CreateGestureOnLoad()
-        {
-            HotkeyCombo = new KeyGesture((Key)KeyCode, (ModifierKeys)ModifierKeyCode);
-        }
     }
 }

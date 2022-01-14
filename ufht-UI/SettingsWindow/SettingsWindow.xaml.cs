@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -15,6 +16,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ufht_UI.Models;
+using ufht_UI.SettingsWindow;
 
 namespace ufht_UI.DialogWindow
 {
@@ -43,13 +45,12 @@ namespace ufht_UI.DialogWindow
             
             InitializeComponent();
         }
-        
-        private void OpacityTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            var textbox = (TextBox) sender;
 
-            Regex regex = new Regex(@"^(?:\d{1}){1,3}$");
-            Trace.WriteLine("LENGTH " + textbox.Text.Length);
+        private void TextBox_OnPreviewTextInput_NumberOnly(object sender, TextCompositionEventArgs e)
+        {
+            var textbox = (TextBox)sender;
+
+            Regex regex = new Regex(@"^(?:\d{1})$");
             e.Handled = !regex.IsMatch(e.Text);
         }
 
@@ -62,15 +63,6 @@ namespace ufht_UI.DialogWindow
             }
         }
 
-        private void StartingHeightTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            var textbox = (TextBox)sender;
-
-            Regex regex = new Regex(@"^(?:\d{1})$");
-            e.Handled = !regex.IsMatch(e.Text);
-            
-        }
-
         private void StartingWidthTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             var textbox = (TextBox)sender;
@@ -78,31 +70,6 @@ namespace ufht_UI.DialogWindow
             {
                 StartingHeightTextBox.Text = textbox.Text;
             }
-        }
-
-        private void StartingWidthTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            var textbox = (TextBox)sender;
-
-            Regex regex = new Regex(@"^(?:\d{1})$");
-            e.Handled = !regex.IsMatch(e.Text);
-        }
-        
-       
-        private void MobIconTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            var textbox = (TextBox)sender;
-
-            Regex regex = new Regex(@"^(?:\d{1})$");
-            e.Handled = !regex.IsMatch(e.Text);
-        }
-      
-        private void PlayerIconTextBox_OnPreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            var textbox = (TextBox)sender;
-
-            Regex regex = new Regex(@"^(?:\d{1})$");
-            e.Handled = !regex.IsMatch(e.Text);
         }
 
 
@@ -151,10 +118,15 @@ namespace ufht_UI.DialogWindow
 
         private void SettingsWindow_OnKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter || e.Key == Key.Escape)
             {
                 Save_OnClick(null, null); //dodgy?
             }
+        }
+
+        private void HotkeyEdit_OnClick(object sender, RoutedEventArgs e)
+        {
+            new HotkeyWindow(_settingsManager){Owner = this}.ShowDialog();
         }
     }
 }

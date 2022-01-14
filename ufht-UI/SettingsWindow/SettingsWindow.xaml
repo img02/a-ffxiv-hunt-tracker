@@ -120,6 +120,32 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Button -->
+        <Style x:Key="BlueButton" TargetType="Button">
+            <Setter Property="Background" Value="#424b7f"/>
+            <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
+            <Setter Property="Foreground" Value="#999"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="60" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" >
+                            <Grid>
+                                <TextBlock x:Name="txt" 
+                                           Text="{TemplateBinding Content}" 
+                                           
+                                           VerticalAlignment="Center"
+                                           Foreground="White" >
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform   X="18"></TranslateTransform>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Grid>
@@ -133,6 +159,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
@@ -155,6 +182,9 @@
             <Label Grid.Row="4" Grid.Column="0" Content="Player Icon" FontSize="14" />
             <Label Grid.Row="5" Grid.Column="0" Content="Log S Ranks" FontSize="14" />
             <Label Grid.Row="6" Grid.Column="0" Content="TTS" FontSize="14" />
+            <Label Grid.Row="7" Grid.Column="0" Content="Hotkeys" FontSize="14" />
+
+            <!-- Mid Column -->
 
             <TextBox Grid.Row="0" Grid.Column="1" 
                  x:Name="OpacityTextBox" HorizontalAlignment="Left" 
@@ -162,7 +192,7 @@
                  Height="17.96"
                  Text="{DynamicResource OpacityText}"
                  MaxLength="2"
-                 PreviewTextInput="OpacityTextBox_OnPreviewTextInput"/>
+                 PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
             <TextBox Grid.Row="1" Grid.Column="1" 
                  x:Name="StartingHeightTextBox" HorizontalAlignment="Left" 
@@ -171,7 +201,7 @@
                  Text="{DynamicResource StartingHeightText}"
                  MaxLength="5"
                  TextChanged="StartingHeightTextBox_OnTextChanged"
-                 PreviewTextInput="StartingHeightTextBox_OnPreviewTextInput"/>
+                 PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
             <TextBox Grid.Row="2" Grid.Column="1" 
                  x:Name="StartingWidthTextBox" HorizontalAlignment="Left" 
@@ -180,7 +210,7 @@
                  Text="{DynamicResource StartingWidthText}"
                  MaxLength="5"
                  TextChanged="StartingWidthTextBox_OnTextChanged"
-                 PreviewTextInput="StartingWidthTextBox_OnPreviewTextInput"/>
+                 PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
             <TextBox Grid.Row="3" Grid.Column="1" 
                 x:Name="MobIconTextBox" HorizontalAlignment="Left" 
@@ -188,7 +218,7 @@
                 Height="17.96"
                 Text="{DynamicResource MobIconText}"
                 MaxLength="2"
-                PreviewTextInput="MobIconTextBox_OnPreviewTextInput"/>
+                PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
             <TextBox Grid.Row="4" Grid.Column="1" 
                  x:Name="PlayerIconTextBox" HorizontalAlignment="Left" 
@@ -196,7 +226,7 @@
                  Height="17.96"
                  Text="{DynamicResource PlayerIconText}"
                  MaxLength="2"
-                 PreviewTextInput="PlayerIconTextBox_OnPreviewTextInput"/>
+                 PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
             <CheckBox Grid.Row="5" Grid.Column="1" 
                   x:Name="LogSRanks" 
@@ -247,6 +277,14 @@
             </Grid>
             <!-- TTS checkboxes END -->
 
+            <Button Grid.Row="7" Grid.Column="1"
+                    x:Name="HotkeyEdit"
+                    Style="{StaticResource BlueButton}"
+                    Content="Edit"
+                    Click="HotkeyEdit_OnClick"/>
+
+            <!-- Mid Column -->
+
             <Label Grid.Row="0" Grid.Column="2" 
                Content="Opacity toggle % (0-99)     Default: 80" 
                FontSize="12" />
@@ -267,6 +305,9 @@
                FontSize="12"/>
             <Label Grid.Row="6" Grid.Column="2" 
                Content="Text-to-Speech"
+               FontSize="12"/>
+            <Label Grid.Row="7" Grid.Column="2" 
+               Content="Modifier + Key. Modifiers: CTRL, SHIFT. Not all combos are available"
                FontSize="12"/>
         </Grid>
 
