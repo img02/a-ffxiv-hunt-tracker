@@ -36,14 +36,16 @@ Alternatively, you can mouse over a player or mob icon to show a tooltip providi
 You can also mouse over anywhere on the map to get the equivalent in-game **(XX.X, YY.Y)** coordinates.
 
 
-### Current (hardcoded) shortcuts:
+### Default shortcuts:
 - **CTRL + Q** - OPEN SETTINGS WINDOW
 - **CTRL + A**  - TOGGLE ALWAYS ON TOP
 - **CTRL + S**  - TOGGLE OPACITY
 - **CTRL + F**  - TOGGLE SS MAP
 - **TAB**       - TOGGLE SIDE PANEL
 - Double click the top or ALT + F4 to exit
-- Click and drag from anywhere to move the window around.
+- Click and drag from anywhere to move the window around. 
+
+These can be changed from the settings window.
 
 
 # How do I change things?  
@@ -76,7 +78,7 @@ The current images and shortcuts are placeholders.
 
 --
 ## Settings Window
-![Settings Window Image](https://i.imgur.com/Er2FUvi.png)  
+![Settings Window Image](https://i.imgur.com/ZS7zjGI.png)  
 
 You can open the settings window with CTRL+Q,  
 
@@ -89,10 +91,14 @@ You can toggle Text-to-Speech for individual callouts for separate Rank tiers. T
 >S Ranks: {Name} in zone.  
 >A and B: {Name} nearby.
 
+Hotkeys can be changed in the hotkeys window, hotkeys require a modifier + key.  
+Currently only CTRL and SHIFT are usuable, and not all key combos can be set, as some are default System / Global hotkeys.
+
+
 ## Config.json
 
 Settings changed in the settings window are saved here.  
-You have edit the json file manually, but be careful.   
+You can edit the json file manually, but be careful.   
 If you break something you can delete this file and rerun the program. It will create a new default config on startup.  
 
 You can manually customise the hotkeys using the enums in the following links:  
@@ -105,8 +111,8 @@ https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys
 - FATE detection, at least for Minho, Senmurv, Orghana, Special Fates.
 - ~~SS Maps showing location of minions - low prio~~
 - ~~Settings Page~~
-  - Customisable shortcuts
-  - Customisable text font / colours / weight / etc
+  - ~~Customisable shortcuts~~
+  - Customisable text font / colours / weight / etc - LOW PRIO
   - ~~Resize Window - maintaining aspect ratio~~
   - ~~Resizable Icons~~
   - ~~Customisable opacity~~
