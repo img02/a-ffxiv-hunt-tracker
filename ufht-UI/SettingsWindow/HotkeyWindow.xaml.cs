@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ufht_UI.Models;
 
 namespace ufht_UI.SettingsWindow
@@ -52,7 +44,7 @@ namespace ufht_UI.SettingsWindow
 
             InitializeComponent();
         }
-        
+
         private void Hotkey_OnGotFocus(object sender, RoutedEventArgs e)
         {
             var t = sender as Label;
@@ -77,7 +69,7 @@ namespace ufht_UI.SettingsWindow
         {
             ((Label)sender).Focus();
         }
-        
+
         //Exit
 
         private void Save_OnClick(object sender, RoutedEventArgs e)
@@ -87,7 +79,7 @@ namespace ufht_UI.SettingsWindow
             {
                 _settings.SettingsHotkey = new Hotkey((int)_settingsKey, (int)_settingsModifier);
             }
-            
+
             if (ValidateKeyCombo(_onTopKey, _onTopModifier))
             {
                 _settings.OnTopHotkey = new Hotkey((int)_onTopKey, (int)_onTopModifier);
@@ -97,7 +89,7 @@ namespace ufht_UI.SettingsWindow
             {
                 _settings.OpacityHotKey = new Hotkey((int)_opacityKey, (int)_opacityModifier);
             }
-            
+
             if (ValidateKeyCombo(_ssMapKey, _ssMapModifier))
             {
                 _settings.SSMapHotkey = new Hotkey((int)_ssMapKey, (int)_ssMapModifier);
@@ -156,10 +148,10 @@ namespace ufht_UI.SettingsWindow
             {
                 SetRelevantModifierKey(lbl.Name, modifier);
 
-                if ((int) key is > 34 and < 69 || (int) key is > 74 and < 113)
+                if ((int)key is > 34 and < 69 || (int)key is > 74 and < 113)
                 {
                     SetRelevantKey(lbl.Name, key);
-                    
+
                     lbl.Content =
                         $"{Enum.GetName(typeof(ModifierKeys), modifier)}+{Enum.GetName(typeof(Key), key)}";
                 }
@@ -188,7 +180,7 @@ namespace ufht_UI.SettingsWindow
                     break;
             }
         }
-         
+
         private void SetRelevantModifierKey(string name, ModifierKeys modifier)
         {
             switch (name)

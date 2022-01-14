@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Newtonsoft.Json;
-using Sharlayan.Core.Enums;
 
 namespace ufht_UI.Models
 {
@@ -44,11 +37,11 @@ namespace ufht_UI.Models
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool ARankTTS;
-        
+
         [DefaultValue(true)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool BRankTTS;
-        
+
 
         public Hotkey OnTopHotkey;
         public Hotkey OpacityHotKey;
@@ -80,7 +73,7 @@ namespace ufht_UI.Models
 
         [JsonConstructor]
         public Settings(double opacity, double defaultSizeX, double defaultSizeY,
-            double mobIconSize, double playerIconSize, 
+            double mobIconSize, double playerIconSize,
             bool logS, bool sRankTts, bool aRanktts, bool bRanktts,
             Hotkey onTopHotkey, Hotkey opacityHotKey, Hotkey sidePanelHotKey,
             Hotkey ssMapHotkey, Hotkey settingsHotkey)
@@ -90,12 +83,12 @@ namespace ufht_UI.Models
             DefaultSizeY = defaultSizeY;
             MobIconSize = mobIconSize;
             PlayerIconSize = playerIconSize;
-            
+
             LogS = logS;
             SRankTTS = sRankTts;
             ARankTTS = aRanktts;
             BRankTTS = bRanktts;
-            
+
             OnTopHotkey = onTopHotkey ?? new Hotkey(Commands.DefaultOnTopKeyGesture);
             OpacityHotKey = opacityHotKey ?? new Hotkey(Commands.DefaultOpacityKeyGesture);
             SidePanelHotKey = sidePanelHotKey ?? new Hotkey(Commands.DefaultSidePanelKeyGesture);

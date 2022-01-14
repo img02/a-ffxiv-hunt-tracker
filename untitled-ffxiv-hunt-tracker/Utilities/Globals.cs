@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Sharlayan.Enums;
+﻿using Sharlayan.Enums;
 
 namespace untitled_ffxiv_hunt_tracker.Utilities
 {

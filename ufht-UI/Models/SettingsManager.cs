@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using untitled_ffxiv_hunt_tracker.Entities;
 
 namespace ufht_UI.Models
 {
@@ -24,11 +18,12 @@ namespace ufht_UI.Models
             LoadSettings();
         }
 
-        
+
 
         public void LoadSettings()
         {
-            if (File.Exists(ConfigFileLocation)){
+            if (File.Exists(ConfigFileLocation))
+            {
                 var jsonSettings = new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,

@@ -1,12 +1,7 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Sharlayan.Core;
+using System;
+using System.ComponentModel;
 
 namespace untitled_ffxiv_hunt_tracker.Entities
 {
@@ -44,7 +39,8 @@ namespace untitled_ffxiv_hunt_tracker.Entities
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HPPercent)));
 
                 HPPercentAsPercentage = Math.Round(_hPPercent * 100, 2);
-            } }
+            }
+        }
 
         public double HPPercentAsPercentage
         {
@@ -58,7 +54,7 @@ namespace untitled_ffxiv_hunt_tracker.Entities
 
         public Mob()
         {
-            
+
         }
 
         public Mob(string name, int modelId, string rank)
@@ -67,15 +63,15 @@ namespace untitled_ffxiv_hunt_tracker.Entities
             ModelID = modelId;
             Rank = rank;
         }
-        
+
         [JsonConstructor]
-        public Mob(string name, string rank, MapID mapTerritory )
+        public Mob(string name, string rank, MapID mapTerritory)
         {
             Name = name;
             Rank = rank;
             MapTerritory = mapTerritory;
         }
-        
+
         public Mob(Coords coordinates, string name, int modelId, string rank, double hp, MapID mapTerritory)
         {
             Coordinates = coordinates;
@@ -94,7 +90,7 @@ namespace untitled_ffxiv_hunt_tracker.Entities
 
         public override string ToString()
         {
-            return $"{Name} {Coordinates.ToString()} {HPPercent*100, 0:0.00}%";
+            return $"{Name} {Coordinates.ToString()} {HPPercent * 100,0:0.00}%";
         }
     }
 }

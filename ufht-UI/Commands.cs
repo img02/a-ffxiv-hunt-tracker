@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace ufht_UI
 {
@@ -27,7 +21,7 @@ namespace ufht_UI
                 DefaultOnTopKeyGesture
             }
         );
-        
+
         public static readonly RoutedUICommand OpacityToggle = new RoutedUICommand
         (
             "Opacity Toggle",
@@ -38,7 +32,7 @@ namespace ufht_UI
                 DefaultOpacityKeyGesture
             }
         );
-        
+
         public static readonly RoutedUICommand SidePanelToggle = new RoutedUICommand
         (
             "SidePanel Toggle",
@@ -49,7 +43,7 @@ namespace ufht_UI
                 DefaultSidePanelKeyGesture
             }
         );
-         
+
         public static readonly RoutedUICommand SSMapToggle = new RoutedUICommand
         (
             "SSMap Toggle",
@@ -60,7 +54,7 @@ namespace ufht_UI
                 DefaultSSMapKeyGesture
             }
         );
-        
+
         public static readonly RoutedUICommand SettingsWindowToggle = new RoutedUICommand
         (
             "SettingsWindow Toggle",

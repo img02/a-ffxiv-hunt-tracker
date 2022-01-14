@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace untitled_ffxiv_hunt_tracker
+﻿namespace untitled_ffxiv_hunt_tracker
 {
     //I don't need these enums anymore. sharlayan.utilities.getzoneinfo
 

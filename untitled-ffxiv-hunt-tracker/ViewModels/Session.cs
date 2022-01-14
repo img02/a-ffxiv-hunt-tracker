@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sharlayan.Core;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,15 +7,8 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
 using System.Speech.Synthesis;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using NLog.LayoutRenderers;
-using Sharlayan;
-using Sharlayan.Core;
-using Sharlayan.Core.Interfaces;
 using untitled_ffxiv_hunt_tracker.Entities;
 using untitled_ffxiv_hunt_tracker.Factories;
 using untitled_ffxiv_hunt_tracker.Memory;
@@ -66,7 +60,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             _SRankTTS = false;
             _ARankTTS = false;
             _BRankTTS = false;
-            
+
             Trains = new Dictionary<string, List<Mob>>();
 
             CurrentTrain = new List<Mob>();
@@ -336,8 +330,8 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 if (e.NewItems?.Count > 0)
                 {
                     var text = "";
-                    
-                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "S" ||  m.Rank == "SS") )
+
+                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "S" || m.Rank == "SS"))
                     {
                         text += ($"{mob.Name}\t {mob.Coordinates}\t Local: {DateTime.Now} | UTC: {DateTime.UtcNow}{Environment.NewLine}");
                     }
@@ -355,10 +349,10 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 if (e.NewItems?.Count > 0)
                 {
                     var text = "";
-                    
-                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "S" ||  m.Rank == "SS") )
+
+                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "S" || m.Rank == "SS"))
                     {
-                       _ = _tts.SpeakAsync($"{mob.Name} in zone.");
+                        _ = _tts.SpeakAsync($"{mob.Name} in zone.");
                     }
                 }
             }
@@ -371,10 +365,10 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 if (e.NewItems?.Count > 0)
                 {
                     var text = "";
-                    
-                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "A") )
+
+                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "A"))
                     {
-                       _ = _tts.SpeakAsync($"{mob.Name} nearby.");
+                        _ = _tts.SpeakAsync($"{mob.Name} nearby.");
                     }
                 }
             }
@@ -386,10 +380,10 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 if (e.NewItems?.Count > 0)
                 {
                     var text = "";
-                    
-                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "B") )
+
+                    foreach (Mob mob in e.NewItems.Cast<Mob>().Where(m => m.Rank == "B"))
                     {
-                       _ = _tts.SpeakAsync($"{mob.Name} nearby.");
+                        _ = _tts.SpeakAsync($"{mob.Name} nearby.");
                     }
                 }
             }

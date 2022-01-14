@@ -2,23 +2,16 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using ufht_UI.Models;
-using untitled_ffxiv_hunt_tracker;
 using untitled_ffxiv_hunt_tracker.Entities;
 using untitled_ffxiv_hunt_tracker.ViewModels;
 
@@ -97,8 +90,8 @@ namespace ufht_UI.UserControls
                 //Trace.WriteLine($"X = {_playerIconX}, y = {_playerIconY}");
 
                 Application.Current.Resources["PlayerIconHeight"] = _settingsManager.UserSettings.PlayerIconSize;
-                Application.Current.Resources["PlayerIconWidth"] = _settingsManager.UserSettings.PlayerIconSize;  
-                
+                Application.Current.Resources["PlayerIconWidth"] = _settingsManager.UserSettings.PlayerIconSize;
+
                 Application.Current.Resources["_playerIconX"] = _playerIconX;
                 Application.Current.Resources["_playerIconY"] = _playerIconY;
 
@@ -144,7 +137,7 @@ namespace ufht_UI.UserControls
                     }
 
                     var iconSize = _settingsManager.UserSettings.MobIconSize;
-                    
+
                     mobIcon = m.Rank switch
                     {
                         "A" => new Image

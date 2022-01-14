@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Dynamic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using ufht_UI.Models;
 using ufht_UI.SettingsWindow;
 
@@ -42,7 +30,7 @@ namespace ufht_UI.DialogWindow
             Application.Current.Resources["SRankTTS"] = _settings.SRankTTS;
             Application.Current.Resources["ARankTTS"] = _settings.ARankTTS;
             Application.Current.Resources["BRankTTS"] = _settings.BRankTTS;
-            
+
             InitializeComponent();
         }
 
@@ -79,9 +67,9 @@ namespace ufht_UI.DialogWindow
         {
             Double opacity, height, width, mobIcon, playerIcon;
 
-            if (Double.TryParse(OpacityTextBox.Text, out opacity) )
+            if (Double.TryParse(OpacityTextBox.Text, out opacity))
             {
-                _settings.Opacity = opacity/100.0;
+                _settings.Opacity = opacity / 100.0;
             }
 
             if (Double.TryParse(StartingHeightTextBox.Text, out height))
@@ -126,7 +114,7 @@ namespace ufht_UI.DialogWindow
 
         private void HotkeyEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            new HotkeyWindow(_settingsManager){Owner = this}.ShowDialog();
+            new HotkeyWindow(_settingsManager) { Owner = this }.ShowDialog();
         }
     }
 }

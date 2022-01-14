@@ -1,10 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using untitled_ffxiv_hunt_tracker.Entities;
 using untitled_ffxiv_hunt_tracker.Utilities;
 
@@ -35,7 +31,7 @@ namespace untitled_ffxiv_hunt_tracker.Factories
                 {
                     if (m.Name != "Forgiven Rebellion")
                     {
-                        var mapName = Helpers.GetMapName((uint) m.MapTerritory).Replace(" ", "_");
+                        var mapName = Helpers.GetMapName((uint)m.MapTerritory).Replace(" ", "_");
                         var imagePath = $"{Globals.ImageRootDir}{mapName}-data.jpg";
 
 #if FACTORYTESTIMAGE
@@ -46,7 +42,7 @@ namespace untitled_ffxiv_hunt_tracker.Factories
                     }
                     else
                     {
-                        var mapName = Helpers.GetMapName((uint) m.MapTerritory).Replace(" ", "_");
+                        var mapName = Helpers.GetMapName((uint)m.MapTerritory).Replace(" ", "_");
                         var imagePath = $"{Globals.ImageRootDirForgivenRebellion}{mapName}_-_Forgiven_Rebellion.jpg";
 
 #if FACTORYTESTIMAGE

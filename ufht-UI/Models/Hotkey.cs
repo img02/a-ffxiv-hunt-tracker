@@ -1,13 +1,7 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Newtonsoft.Json;
 
 namespace ufht_UI.Models
 {

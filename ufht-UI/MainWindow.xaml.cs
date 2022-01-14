@@ -2,15 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using ufht_UI.DialogWindow;
 using ufht_UI.Models;
 using ufht_UI.UserControls;
 using ufht_UI.UserControls.InfoSection;
@@ -95,7 +91,7 @@ namespace ufht_UI
                     DataContext = _session;
                 });
                 _session.Start();
-                
+
             });
 
         }
@@ -277,7 +273,7 @@ namespace ufht_UI
 
             }
         }
-        
+
         //exit button
         private void Exit_OnClick(object sender, RoutedEventArgs e)
         {
@@ -354,7 +350,7 @@ namespace ufht_UI
         {
             _session.ToggleSSMap();
         }
-        
+
         private void SettingsWindowToggle_CanExecute(object sender, CanExecuteRoutedEventArgs e)
         {
             e.CanExecute = true;
@@ -362,7 +358,7 @@ namespace ufht_UI
 
         private void SettingsWindowToggle_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            new DialogWindow.SettingsWindow(_settingsManager){Owner = this}.ShowDialog();
+            new DialogWindow.SettingsWindow(_settingsManager) { Owner = this }.ShowDialog();
         }
 
         #endregion

@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Sharlayan.Core;
+using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Sharlayan.Core;
 using untitled_ffxiv_hunt_tracker.Utilities;
 
 namespace untitled_ffxiv_hunt_tracker.Entities
@@ -27,12 +21,12 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         }
 
         public new double HPPercent { get; set; }
-        
+
         public event EventHandler<Coords> CoordsChanged;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public string CurrentWorld { get; set; }
-        public string PlayerIconImagePath { get; set; } 
+        public string PlayerIconImagePath { get; set; }
 
         public string CurrentMapImagePath
         {
@@ -61,7 +55,7 @@ namespace untitled_ffxiv_hunt_tracker.Entities
         {
             if (!SSMap)
             {
-                var mapName = Helpers.GetMapName((uint) MapTerritory).Replace(" ", "_");
+                var mapName = Helpers.GetMapName((uint)MapTerritory).Replace(" ", "_");
                 CurrentMapImagePath = $"{Globals.ImageRootDir}/Maps/{mapName}-data.jpg";
             }
             else

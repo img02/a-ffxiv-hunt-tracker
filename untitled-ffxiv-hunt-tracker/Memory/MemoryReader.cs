@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using Sharlayan;
+﻿using Sharlayan;
 using Sharlayan.Core;
 using Sharlayan.Enums;
 using Sharlayan.Models;
+using System;
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Threading;
 using untitled_ffxiv_hunt_tracker.Utilities;
 
 namespace untitled_ffxiv_hunt_tracker.Memory
@@ -71,7 +66,7 @@ namespace untitled_ffxiv_hunt_tracker.Memory
         }
 
         public ActorItem GetUser()
-        { 
+        {
             if (MemoryHandler.Reader.CanGetActors())
             {
                 var actors = _reader.GetActors();
