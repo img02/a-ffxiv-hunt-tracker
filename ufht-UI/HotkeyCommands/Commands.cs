@@ -1,6 +1,6 @@
 ﻿using System.Windows.Input;
 
-namespace ufht_UI
+namespace ufht_UI.HotkeyCommands
 {
     public static class Commands
     {
@@ -9,6 +9,7 @@ namespace ufht_UI
         public static readonly KeyGesture DefaultSidePanelKeyGesture = new KeyGesture(Key.Tab);
         public static readonly KeyGesture DefaultSSMapKeyGesture = new KeyGesture(Key.F, ModifierKeys.Control);
         public static readonly KeyGesture DefaultSettingsWindowKeyGesture = new KeyGesture(Key.Q, ModifierKeys.Control);
+        public static readonly KeyGesture DefaultClickThruKeyGesture = new KeyGesture(Key.W, ModifierKeys.Control);
 
 
         public static readonly RoutedUICommand OnTop = new RoutedUICommand
@@ -63,6 +64,17 @@ namespace ufht_UI
             new InputGestureCollection()
             {
                 DefaultSettingsWindowKeyGesture
+            }
+        );
+        
+        public static readonly RoutedUICommand ClickThruToggle = new RoutedUICommand
+        (
+            "ClickThru Toggle",
+            "ClickThru Toggle",
+            typeof(Commands),
+            new InputGestureCollection()
+            {
+                DefaultClickThruKeyGesture
             }
         );
 

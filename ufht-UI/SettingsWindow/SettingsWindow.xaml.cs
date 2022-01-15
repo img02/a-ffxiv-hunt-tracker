@@ -3,10 +3,9 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ufht_UI.Models;
-using ufht_UI.SettingsWindow;
+using ufht_UI.UserSettings;
 
-namespace ufht_UI.DialogWindow
+namespace ufht_UI.SettingsWindow
 {
     /// <summary>
     /// Interaction logic for Settings.xaml
@@ -30,6 +29,7 @@ namespace ufht_UI.DialogWindow
             Application.Current.Resources["SRankTTS"] = _settings.SRankTTS;
             Application.Current.Resources["ARankTTS"] = _settings.ARankTTS;
             Application.Current.Resources["BRankTTS"] = _settings.BRankTTS;
+            Application.Current.Resources["ClickThruWhenOnTop"] = _settings.ClickThruWhenOnTop;
 
             InitializeComponent();
         }
@@ -98,6 +98,7 @@ namespace ufht_UI.DialogWindow
             _settings.SRankTTS = SRankTTSCHK.IsChecked ?? false;
             _settings.ARankTTS = ARankTTSCHK.IsChecked ?? false;
             _settings.BRankTTS = BRankTTSCHK.IsChecked ?? false;
+            _settings.ClickThruWhenOnTop = ClickThruWhenOnTopCHK.IsChecked ?? false;
 
             _settingsManager.SaveSettings();
 

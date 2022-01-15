@@ -3,13 +3,17 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
-using ufht_UI.Models;
+using System.Windows.Media.Animation;
+using ufht_UI.HotkeyCommands;
 using ufht_UI.UserControls;
 using ufht_UI.UserControls.InfoSection;
+using ufht_UI.UserSettings;
 using untitled_ffxiv_hunt_tracker;
 using untitled_ffxiv_hunt_tracker.Entities;
 using untitled_ffxiv_hunt_tracker.ViewModels;
@@ -29,6 +33,9 @@ namespace ufht_UI
         //main map section
         private MainMapControl _mainMap;
 
+        //Settings window
+        private SettingsWindow.SettingsWindow _settingsWindow;
+
         private ObservableCollection<Mob> _nearbyMobs;
         internal Mob priorityMob;
 
@@ -36,12 +43,13 @@ namespace ufht_UI
         private SettingsManager _settingsManager;
         private Settings _userSettings;
 
+        private bool _isClickThru = false;
+
         public MainWindow()
         {
             _settingsManager = new SettingsManager();
             _userSettings = _settingsManager.UserSettings;
             _settingsManager.PropertyChanged += SettingsManagerOnPropertyChanged;
-
 
             Application.Current.Resources["ProgramWidth"] = _userSettings.DefaultSizeX;
             Application.Current.Resources["ProgramHeight"] = _userSettings.DefaultSizeY;
@@ -93,7 +101,6 @@ namespace ufht_UI
                 _session.Start();
 
             });
-
         }
 
 
@@ -188,8 +195,9 @@ namespace ufht_UI
 
                 });
             }
-
         }
+
+
 
         #region Event Handlers
 
@@ -250,6 +258,7 @@ namespace ufht_UI
             _session.ToggleSRankTTS(_userSettings.SRankTTS);
             _session.ToggleARankTTS(_userSettings.ARankTTS);
             _session.ToggleBRankTTS(_userSettings.BRankTTS);
+            GlobalHotkey.VerifyHotKeys(this);
 
             //other stuff like updating fonts, etc, in the future
         }
@@ -277,7 +286,7 @@ namespace ufht_UI
         //exit button
         private void Exit_OnClick(object sender, RoutedEventArgs e)
         {
-            SystemCommands.CloseWindow(this);
+            this.Close();
         }
 
         #endregion
@@ -312,7 +321,7 @@ namespace ufht_UI
 
         private void OpacityToggle_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            if (MainWindow1.Opacity == 1.0)
+            if (this.Opacity > 0.99)
             {
                 Application.Current.Resources["ProgramOpacity"] = _userSettings.Opacity;
             }
@@ -358,9 +367,104 @@ namespace ufht_UI
 
         private void SettingsWindowToggle_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            new DialogWindow.SettingsWindow(_settingsManager) { Owner = this }.ShowDialog();
+            new SettingsWindow.SettingsWindow(_settingsManager) { Owner = this }.ShowDialog();
+        }
+
+        private void ClickThruToggle_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void ClickThruToggle_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            ClickThruToggle();
         }
 
         #endregion
+
+
+
+
+        //////////// Global hotkey  - base code from https://stackoverflow.com/questions/11377977/global-hotkeys-in-wpf-working-from-every-window
+
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            GlobalHotkey.OnSourceInitialized(this, _userSettings);
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            GlobalHotkey.OnClosed(this);
+            base.OnClosed(e);
+        }
+
+
+        //for global hotkeys
+        public void OpacityToggle()
+        {
+            OpacityToggle_Executed(null, null);
+        }
+        public void OnTopToggle()
+        {
+            OnTop_Executed(null, null);
+            //minimize if toggling OFF ontop, otherwise it can get stuck until user clicks on and off.
+            if (!Topmost)
+            {
+                this.WindowState = WindowState.Minimized;
+                if (_userSettings.ClickThruWhenOnTop)
+                {
+                    ClickThru.DisableMouseClickThru(this);
+                    _isClickThru = false;
+                }
+            }
+            else
+            {
+                this.WindowState = WindowState.Normal; //alternatively, could just toggle opacity to 0?
+                if (_userSettings.ClickThruWhenOnTop)
+                {
+                    ClickThru.EnableMouseClickThru(this);
+                    _isClickThru = true;
+                }
+            }
+        }
+        public void SSMapToggle()
+        {
+            SSMapToggle_Executed(null, null);
+        }
+
+
+        //click thru helper
+        public void ClickThruToggle()
+        {
+            if (!_isClickThru)
+            {
+                ClickThru.EnableMouseClickThru(this);
+                _isClickThru = !_isClickThru;
+            }
+            else
+            {
+                ClickThru.DisableMouseClickThru(this);
+                _isClickThru = !_isClickThru;
+            }
+        }
+
+
+        //override alt key menu press
+        private void MainWindow_OnKeyDown(object sender, KeyEventArgs e)
+        {
+
+            if ((e.Key == Key.System) || (e.Key is Key.LeftShift or Key.RightShift))
+            {
+                if (e.SystemKey == Key.F4)
+                {
+                    this.Close();
+                }
+                e.Handled = true;
+            }
+        }
+
+
     }
 }

@@ -11,7 +11,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using ufht_UI.Models;
+using ufht_UI.UserSettings;
 using untitled_ffxiv_hunt_tracker.Entities;
 using untitled_ffxiv_hunt_tracker.ViewModels;
 

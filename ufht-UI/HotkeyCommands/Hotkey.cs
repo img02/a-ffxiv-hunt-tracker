@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace ufht_UI.Models
+namespace ufht_UI.HotkeyCommands
 {
     public class Hotkey
     {

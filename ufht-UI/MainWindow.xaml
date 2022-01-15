@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:untitled_ffxiv_hunt_tracker.ViewModels;assembly=untitled_ffxiv_hunt_tracker"
         xmlns:ufhtUi="clr-namespace:ufht_UI"
+        xmlns:hotkeyCommands="clr-namespace:ufht_UI.HotkeyCommands"
         d:DataContext="{d:DesignInstance viewModels:Session}"
         mc:Ignorable="d"
         Title="UFHT" 
@@ -25,28 +26,33 @@
         SnapsToDevicePixels="True"
         Topmost="{DynamicResource ProgramTopMost}"
 
+        KeyDown="MainWindow_OnKeyDown"
         MouseDown="Window_MouseDown">
 
     <Window.CommandBindings>
-        <CommandBinding Command="ufhtUi:Commands.OnTop"
+        <CommandBinding Command="hotkeyCommands:Commands.OnTop"
                         CanExecute="OnTop_CanExecute"
                         Executed="OnTop_Executed" />
 
-        <CommandBinding Command="ufhtUi:Commands.OpacityToggle" 
+        <CommandBinding Command="hotkeyCommands:Commands.OpacityToggle" 
                         CanExecute="OpacityToggle_CanExecute"
                         Executed="OpacityToggle_Executed" />
 
-        <CommandBinding Command="ufhtUi:Commands.SidePanelToggle" 
+        <CommandBinding Command="hotkeyCommands:Commands.SidePanelToggle" 
                         CanExecute="SidePanelToggle_CanExecute"
                         Executed="SidePanelToggle_Executed" />
 
-        <CommandBinding Command="ufhtUi:Commands.SSMapToggle" 
+        <CommandBinding Command="hotkeyCommands:Commands.SSMapToggle" 
                         CanExecute="SSMapToggle_CanExecute"
                         Executed="SSMapToggle_Executed" />
 
-        <CommandBinding Command="ufhtUi:Commands.SettingsWindowToggle" 
+        <CommandBinding Command="hotkeyCommands:Commands.SettingsWindowToggle" 
                         CanExecute="SettingsWindowToggle_CanExecute"
                         Executed="SettingsWindowToggle_Executed" />
+
+        <CommandBinding Command="hotkeyCommands:Commands.ClickThruToggle" 
+                        CanExecute="ClickThruToggle_CanExecute"
+                        Executed="ClickThruToggle_Executed" />
     </Window.CommandBindings>
 
 
@@ -242,11 +248,11 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Command="ufhtUi:Commands.SSMapToggle" Content="SS Map" />
-                <Button Grid.Column="1"  Command="ufhtUi:Commands.OnTop" Content="On Top" />
-                <Button Grid.Column="2" Command="ufhtUi:Commands.OpacityToggle" >Opacity</Button>
+                <Button Grid.Column="0" Command="hotkeyCommands:Commands.SSMapToggle" Content="SS Map" />
+                <Button Grid.Column="1"  Command="hotkeyCommands:Commands.OnTop" Content="On Top" />
+                <Button Grid.Column="2" Command="hotkeyCommands:Commands.OpacityToggle" >Opacity</Button>
                 <Button Grid.Column="3" Click="Exit_OnClick">Exit</Button>
-                <Button Grid.Column="4" Command="ufhtUi:Commands.SettingsWindowToggle">Settings</Button>
+                <Button Grid.Column="4" Command="hotkeyCommands:Commands.SettingsWindowToggle">Settings</Button>
             </Grid>
 
         </Grid>

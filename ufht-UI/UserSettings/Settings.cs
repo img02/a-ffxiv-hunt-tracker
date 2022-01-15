@@ -1,7 +1,8 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel;
+using ufht_UI.HotkeyCommands;
 
-namespace ufht_UI.Models
+namespace ufht_UI.UserSettings
 {
     public class Settings
     {
@@ -42,12 +43,33 @@ namespace ufht_UI.Models
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool BRankTTS;
 
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool OpacityGlobal;
+
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool OnTopGlobal;
+
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool SSMapGlobal;
+
+        [DefaultValue(false)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool ClickThruGlobal;
+
+        [DefaultValue(true)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool ClickThruWhenOnTop;
+
 
         public Hotkey OnTopHotkey;
         public Hotkey OpacityHotKey;
         public Hotkey SidePanelHotKey;
         public Hotkey SSMapHotkey;
         public Hotkey SettingsHotkey;
+        public Hotkey ClickThruHotkey;
 
 
 
@@ -64,19 +86,28 @@ namespace ufht_UI.Models
             ARankTTS = true;
             BRankTTS = true;
 
+            OpacityGlobal = false;
+            OnTopGlobal = false;
+            SSMapGlobal = false;
+            ClickThruGlobal = false;
+            ClickThruWhenOnTop = true;
+
             OnTopHotkey = new Hotkey(Commands.DefaultOnTopKeyGesture);
             OpacityHotKey = new Hotkey(Commands.DefaultOpacityKeyGesture);
             SidePanelHotKey = new Hotkey(Commands.DefaultSidePanelKeyGesture);
             SSMapHotkey = new Hotkey(Commands.DefaultSSMapKeyGesture);
             SettingsHotkey = new Hotkey(Commands.DefaultSettingsWindowKeyGesture);
+            ClickThruHotkey = new Hotkey(Commands.DefaultClickThruKeyGesture);
         }
 
         [JsonConstructor]
         public Settings(double opacity, double defaultSizeX, double defaultSizeY,
             double mobIconSize, double playerIconSize,
             bool logS, bool sRankTts, bool aRanktts, bool bRanktts,
+            bool opacityGlobal, bool onTopGlobal, bool ssMapGlobal,
+            bool clickThruGlobal, bool clickThruWhenOnTop,
             Hotkey onTopHotkey, Hotkey opacityHotKey, Hotkey sidePanelHotKey,
-            Hotkey ssMapHotkey, Hotkey settingsHotkey)
+            Hotkey ssMapHotkey, Hotkey settingsHotkey, Hotkey clickThruHotkey)
         {
             Opacity = opacity;
             DefaultSizeX = defaultSizeX;
@@ -89,11 +120,18 @@ namespace ufht_UI.Models
             ARankTTS = aRanktts;
             BRankTTS = bRanktts;
 
+            OpacityGlobal = opacityGlobal;
+            OnTopGlobal = onTopGlobal;
+            SSMapGlobal = ssMapGlobal;
+            ClickThruGlobal = clickThruGlobal;
+            ClickThruWhenOnTop = clickThruWhenOnTop;
+
             OnTopHotkey = onTopHotkey ?? new Hotkey(Commands.DefaultOnTopKeyGesture);
             OpacityHotKey = opacityHotKey ?? new Hotkey(Commands.DefaultOpacityKeyGesture);
             SidePanelHotKey = sidePanelHotKey ?? new Hotkey(Commands.DefaultSidePanelKeyGesture);
             SSMapHotkey = ssMapHotkey ?? new Hotkey(Commands.DefaultSSMapKeyGesture);
             SettingsHotkey = settingsHotkey ?? new Hotkey(Commands.DefaultSettingsWindowKeyGesture);
+            ClickThruHotkey = clickThruHotkey ?? new Hotkey(Commands.DefaultClickThruKeyGesture);
         }
 
         public void LoadKeyGestures()
@@ -103,6 +141,7 @@ namespace ufht_UI.Models
             Commands.ChangeKeyGesture(Commands.SidePanelToggle, SidePanelHotKey.HotkeyCombo);
             Commands.ChangeKeyGesture(Commands.SSMapToggle, SSMapHotkey.HotkeyCombo);
             Commands.ChangeKeyGesture(Commands.SettingsWindowToggle, SettingsHotkey.HotkeyCombo);
+            Commands.ChangeKeyGesture(Commands.ClickThruToggle, ClickThruHotkey.HotkeyCombo);
         }
     }
 }

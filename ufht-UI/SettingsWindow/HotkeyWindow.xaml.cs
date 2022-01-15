@@ -4,7 +4,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using ufht_UI.Models;
+using ufht_UI.HotkeyCommands;
+using ufht_UI.UserSettings;
 
 namespace ufht_UI.SettingsWindow
 {
@@ -41,6 +42,12 @@ namespace ufht_UI.SettingsWindow
             Application.Current.Resources["OpacityContent"] = HotkeyToString(_settings.OpacityHotKey.HotkeyCombo);
             Application.Current.Resources["OnTopContent"] = HotkeyToString(_settings.OnTopHotkey.HotkeyCombo);
             Application.Current.Resources["SSMapContent"] = HotkeyToString(_settings.SSMapHotkey.HotkeyCombo);
+            Application.Current.Resources["ClickThruContent"] = HotkeyToString(_settings.ClickThruHotkey.HotkeyCombo);
+
+            Application.Current.Resources["OpacityGlobal"] = _settings.OpacityGlobal;
+            Application.Current.Resources["OnTopGlobal"] = _settings.OnTopGlobal;
+            Application.Current.Resources["SSMapGlobal"] = _settings.SSMapGlobal;
+            Application.Current.Resources["ClickThruGlobal"] = _settings.ClickThruGlobal;
 
             InitializeComponent();
         }
@@ -95,6 +102,11 @@ namespace ufht_UI.SettingsWindow
                 _settings.SSMapHotkey = new Hotkey((int)_ssMapKey, (int)_ssMapModifier);
             }
 
+            _settings.OpacityGlobal = OpacityGlobalToggle.IsChecked ?? false;
+            _settings.OnTopGlobal = OnTopGlobalToggle.IsChecked ?? false;
+            _settings.SSMapGlobal = SSMapGlobalToggle.IsChecked ?? false;
+            _settings.ClickThruGlobal = ClickThruGlobalToggle.IsChecked ?? false;
+
             //save hotkeys
             _settingsManager.SaveSettings();
             _settings.LoadKeyGestures();
@@ -114,6 +126,11 @@ namespace ufht_UI.SettingsWindow
             {
                 Save_OnClick(null, null);
             }
+            
+            if ( (e.Key == Key.System && e.OriginalSource is Label) || (e.Key is Key.LeftShift or Key.RightShift))
+            {
+                e.Handled = true;
+            }
         }
 
         //helpers
@@ -130,6 +147,18 @@ namespace ufht_UI.SettingsWindow
             var key = e.Key;
             var modifier = ModifierKeys.None;
 
+            if (Keyboard.IsKeyDown(Key.LeftAlt))
+            {
+                modifier = ModifierKeys.Alt;
+                if (Keyboard.IsKeyDown(Key.NumPad2))
+                {
+                    Trace.WriteLine("num2");
+                    Trace.WriteLine(e.SystemKey);
+                    Trace.WriteLine(e.Key);
+                }
+
+            }
+
             if (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))
             {
                 modifier = ModifierKeys.Control;
@@ -137,10 +166,18 @@ namespace ufht_UI.SettingsWindow
             else if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
             {
                 modifier = ModifierKeys.Shift;
+                Trace.WriteLine(key);
             }
             else if (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt))
             {
                 modifier = ModifierKeys.Alt;
+               // Trace.WriteLine(key);
+                key = e.SystemKey;
+                if (Keyboard.IsKeyDown(Key.NumPad2))
+                {
+                    key = Key.NumPad2;
+                }
+                //Trace.WriteLine(key);
             }
 
 
@@ -148,15 +185,16 @@ namespace ufht_UI.SettingsWindow
             {
                 SetRelevantModifierKey(lbl.Name, modifier);
 
-                if ((int)key is > 34 and < 69 || (int)key is > 74 and < 113)
+                if ((int)key is >= 34 and <= 69 or >= 74 and <= 113)
                 {
                     SetRelevantKey(lbl.Name, key);
-
+                    //Trace.WriteLine($"{modifier} + {key}");
                     lbl.Content =
                         $"{Enum.GetName(typeof(ModifierKeys), modifier)}+{Enum.GetName(typeof(Key), key)}";
                 }
                 else
                 {
+                    //Trace.WriteLine($"{modifier} + {key}");
                     lbl.Content = $"{Enum.GetName(typeof(ModifierKeys), modifier)}+???";
                 }
             }
@@ -214,5 +252,11 @@ namespace ufht_UI.SettingsWindow
             }
         }
         #endregion
+
+        private void Label_OnKeyUp(object sender, KeyEventArgs e)
+        {
+            var lbl = sender as Label;
+            LabelToHotkey(lbl, e);
+        }
     }
 }

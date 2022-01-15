@@ -6,6 +6,144 @@
 
     <Application.Resources>
         <converters:FileToBitmapConverter x:Key="FileToBitmapConverter"/>
+   
+
+    <!-- Checkbox Style base from: https://www.programmerall.com/article/7783212284/, with some minor changes by me -->
+        <Style x:Key="chkBullet" TargetType="CheckBox">
+            <Setter Property="IsChecked" Value="False"/>
+            <Setter Property="Background" Value="#424b7f"/>
+            <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
+            <Setter Property="Foreground" Value="#999"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border Width="60" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" >
+                            <Grid>
+                                <Border x:Name="border" Width="18" Height="18" CornerRadius="9" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1 0" Background="White">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform  X="0"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Margin="9 0" VerticalAlignment="Center" Foreground="White" >
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform   X="18"></TranslateTransform>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <!-- BACKGROUND COLOUR WHEN TOGGLED ON#18852f -->
+                                <Setter Property="Background" Value="#30af4b"/>
+                                <Setter Property="Text" TargetName="txt"  Value="{Binding Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <!-- Change this to change text colour when ON-->
+                                <Setter Property="Foreground" TargetName="txt"  Value="White"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="40" Duration="00:00:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="18" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Text" TargetName="txt" Value="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="TTS" TargetType="CheckBox">
+            <Setter Property="IsChecked" Value="False"/>
+            <Setter Property="Background" Value="#424b7f"/>
+            <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
+            <Setter Property="Foreground" Value="#999"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Border Width="35" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left">
+                            <Grid>
+                                <Border x:Name="border" Width="18" Height="18" CornerRadius="9" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1 0" Background="White">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform  X="0"/>
+                                    </Border.RenderTransform>
+                                </Border>
+                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Margin="2 0" VerticalAlignment="Center" Foreground="White" >
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform   X="18"></TranslateTransform>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="true">
+                                <!-- BACKGROUND COLOUR WHEN TOGGLED ON#18852f -->
+                                <Setter Property="Background" Value="#30af4b"/>
+                                <Setter Property="Text" TargetName="txt"  Value="{Binding Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <!-- Change this to change text colour when ON-->
+                                <Setter Property="Foreground" TargetName="txt"  Value="White"/>
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="15" Duration="00:00:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="4" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
+                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="20" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="False">
+                                <Setter Property="Text" TargetName="txt" Value="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Button -->
+        <Style x:Key="BlueButton" TargetType="Button">
+            <Setter Property="Background" Value="#424b7f"/>
+            <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
+            <Setter Property="Foreground" Value="#999"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="60" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" >
+                            <Grid>
+                                <TextBlock x:Name="txt" 
+                                           Text="{TemplateBinding Content}" 
+                                           
+                                           VerticalAlignment="Center"
+                                           Foreground="White" >
+                                    <TextBlock.RenderTransform>
+                                        <TranslateTransform   X="18"></TranslateTransform>
+                                    </TextBlock.RenderTransform>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Application.Resources>
 
 </Application>

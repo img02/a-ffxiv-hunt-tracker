@@ -1,152 +1,15 @@
-﻿<Window x:Class="ufht_UI.DialogWindow.SettingsWindow"
+﻿<Window x:Class="ufht_UI.SettingsWindow.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ufht_UI.DialogWindow"
-        xmlns:models="clr-namespace:ufht_UI.Models"
+        xmlns:local="clr-namespace:ufht_UI.SettingsWindow"
+        xmlns:models="clr-namespace:ufht_UI.UserSettings"
         mc:Ignorable="d"
         Title="Settings" Height="450" Width="800"
         Topmost="True"
         KeyDown="SettingsWindow_OnKeyDown"
         WindowStartupLocation="CenterOwner">
-
-    <!-- Checkbox Style base from: https://www.programmerall.com/article/7783212284/, with some minor changes by me -->
-    <Window.Resources>
-        <Style x:Key="chkBullet" TargetType="CheckBox">
-            <Setter Property="IsChecked" Value="False"/>
-            <Setter Property="Background" Value="#424b7f"/> <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
-            <Setter Property="Foreground" Value="#999"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="CheckBox">
-                        <Border Width="60" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" >
-                            <Grid>
-                                <Border x:Name="border" Width="18" Height="18" CornerRadius="9" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1 0" Background="White">
-                                    <Border.RenderTransform>
-                                        <TranslateTransform  X="0"/>
-                                    </Border.RenderTransform>
-                                </Border>
-                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Margin="9 0" VerticalAlignment="Center" Foreground="White" >
-                                    <TextBlock.RenderTransform>
-                                        <TranslateTransform   X="18"></TranslateTransform>
-                                    </TextBlock.RenderTransform>
-                                </TextBlock>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <!-- BACKGROUND COLOUR WHEN TOGGLED ON#18852f -->
-                                <Setter Property="Background" Value="#30af4b"/>
-                                <Setter Property="Text" TargetName="txt"  Value="{Binding Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
-                                <!-- Change this to change text colour when ON-->
-                                <Setter Property="Foreground" TargetName="txt"  Value="White"/>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="40" Duration="00:00:0.2"/>
-                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
-                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="18" Duration="00:00:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Text" TargetName="txt" Value="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style> 
-        
-        <Style x:Key="TTS" TargetType="CheckBox">
-            <Setter Property="IsChecked" Value="False"/>
-            <Setter Property="Background" Value="#424b7f"/> <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
-            <Setter Property="Foreground" Value="#999"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="CheckBox">
-                        <Border Width="35" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" HorizontalAlignment="Left">
-                            <Grid>
-                                <Border x:Name="border" Width="18" Height="18" CornerRadius="9" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="1 0" Background="White">
-                                    <Border.RenderTransform>
-                                        <TranslateTransform  X="0"/>
-                                    </Border.RenderTransform>
-                                </Border>
-                                <TextBlock x:Name="txt" Text="{TemplateBinding Content}" Margin="2 0" VerticalAlignment="Center" Foreground="White" >
-                                    <TextBlock.RenderTransform>
-                                        <TranslateTransform   X="18"></TranslateTransform>
-                                    </TextBlock.RenderTransform>
-                                </TextBlock>
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="true">
-                                <!-- BACKGROUND COLOUR WHEN TOGGLED ON#18852f -->
-                                <Setter Property="Background" Value="#30af4b"/>
-                                <Setter Property="Text" TargetName="txt"  Value="{Binding Tag,RelativeSource={RelativeSource TemplatedParent}}"/>
-                                <!-- Change this to change text colour when ON-->
-                                <Setter Property="Foreground" TargetName="txt"  Value="White"/>
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="15" Duration="00:00:0.2"/>
-                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="4" Duration="00:00:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="border" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="0" Duration="00:00:0.2"/>
-                                            <DoubleAnimation Storyboard.TargetName="txt" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" To="20" Duration="00:00:0.2"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                            <Trigger Property="IsChecked" Value="False">
-                                <Setter Property="Text" TargetName="txt" Value="{Binding Content,RelativeSource={RelativeSource TemplatedParent}}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!-- Button -->
-        <Style x:Key="BlueButton" TargetType="Button">
-            <Setter Property="Background" Value="#424b7f"/>
-            <!-- BACKGROUND COLOUR WHEN TOGGLED OFF -->
-            <Setter Property="Foreground" Value="#999"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border Width="60" Height="20" CornerRadius="10" Background="{TemplateBinding Background}" >
-                            <Grid>
-                                <TextBlock x:Name="txt" 
-                                           Text="{TemplateBinding Content}" 
-                                           
-                                           VerticalAlignment="Center"
-                                           Foreground="White" >
-                                    <TextBlock.RenderTransform>
-                                        <TranslateTransform   X="18"></TranslateTransform>
-                                    </TextBlock.RenderTransform>
-                                </TextBlock>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -159,6 +22,9 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
@@ -183,6 +49,7 @@
             <Label Grid.Row="5" Grid.Column="0" Content="Log S Ranks" FontSize="14" />
             <Label Grid.Row="6" Grid.Column="0" Content="TTS" FontSize="14" />
             <Label Grid.Row="7" Grid.Column="0" Content="Hotkeys" FontSize="14" />
+            <Label Grid.Row="8" Grid.Column="0" Content="Click Thru" FontSize="14" />
 
             <!-- Mid Column -->
 
@@ -283,6 +150,16 @@
                     Content="Edit"
                     Click="HotkeyEdit_OnClick"/>
 
+
+            <CheckBox Grid.Row="8" Grid.Column="1" 
+                      x:Name="ClickThruWhenOnTopCHK" 
+                      Content="Off" Tag="On"
+                      IsChecked="{DynamicResource ClickThruWhenOnTop}"
+                      HorizontalContentAlignment="Center"
+                      Width="120"
+                      Height="20"
+                      Style="{StaticResource chkBullet}"/>
+
             <!-- Mid Column -->
 
             <Label Grid.Row="0" Grid.Column="2" 
@@ -308,6 +185,9 @@
                FontSize="12"/>
             <Label Grid.Row="7" Grid.Column="2" 
                Content="Modifier + Key. Modifiers: CTRL, SHIFT. Not all combos are available"
+               FontSize="12"/>
+            <Label Grid.Row="8" Grid.Column="2" 
+               Content="Auto-toggle click thru when On Top is toggled"
                FontSize="12"/>
         </Grid>
 

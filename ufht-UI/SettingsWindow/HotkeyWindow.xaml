@@ -57,53 +57,59 @@
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" Content="Settings" FontSize="14" />
             <Label Grid.Row="1" Grid.Column="0" Content="Opacity" FontSize="14"/>
             <Label Grid.Row="2" Grid.Column="0" Content="On Top" FontSize="14" />
             <Label Grid.Row="3" Grid.Column="0" Content="SS Map" FontSize="14"/>
+            <Label Grid.Row="4" Grid.Column="0" Content="Click Thru" FontSize="14"/>
 
-            <Label Grid.Row="0" Grid.Column="2" Style="{DynamicResource hotkey}"
+            <!-- Second Column -->
+            <Label Grid.Row="0" Grid.Column="1" Style="{DynamicResource hotkey}"
                 Name ="SettingsLabel" 
                 BorderBrush="Black" BorderThickness="1"
-                   Width="120"
-                   Height="20"
-                   Focusable="True"
-                   GotFocus="Hotkey_OnGotFocus"
-                    LostFocus="SettingsHotkeyLabel_OnLostFocus"
-                   KeyDown="Hotkey_OnKeyDown"
-                   MouseDown="Hotkey_OnMouseDown"
-                   Content="{DynamicResource SettingsContent}"/>
+                Width="120"
+                Height="20"
+                Focusable="True"
+                GotFocus="Hotkey_OnGotFocus"
+                LostFocus="SettingsHotkeyLabel_OnLostFocus"
+                KeyDown="Hotkey_OnKeyDown"
+                KeyUp="Label_OnKeyUp"
+                MouseDown="Hotkey_OnMouseDown"
+                Content="{DynamicResource SettingsContent}"/>
 
 
-            <Label Grid.Row="1" Grid.Column="2" Style="{DynamicResource hotkey}"
+            <Label Grid.Row="1" Grid.Column="1" Style="{DynamicResource hotkey}"
                 Name ="OpacityLabel" 
                 BorderBrush="Black" BorderThickness="1"
-                   Width="120"
-                   Height="20"
-                   Focusable="True"
-                   GotFocus="Hotkey_OnGotFocus"
-                    LostFocus="SettingsHotkeyLabel_OnLostFocus"
-                   KeyDown="Hotkey_OnKeyDown"
-                   MouseDown="Hotkey_OnMouseDown"
-                   Content="{DynamicResource OpacityContent}"/>
+                Width="120"
+                Height="20"
+                Focusable="True"
+                GotFocus="Hotkey_OnGotFocus"
+                LostFocus="SettingsHotkeyLabel_OnLostFocus"
+                KeyDown="Hotkey_OnKeyDown"
+                KeyUp="Label_OnKeyUp"
+                MouseDown="Hotkey_OnMouseDown"
+                Content="{DynamicResource OpacityContent}"/>
 
 
-            <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource hotkey}"
+            <Label Grid.Row="2" Grid.Column="1" Style="{DynamicResource hotkey}"
                 Name ="OnTopLabel" 
                 BorderBrush="Black" BorderThickness="1"
-                   Width="120"
-                   Height="20"
-                   Focusable="True"
-                   GotFocus="Hotkey_OnGotFocus"
-                    LostFocus="SettingsHotkeyLabel_OnLostFocus"
-                   KeyDown="Hotkey_OnKeyDown"
-                   MouseDown="Hotkey_OnMouseDown"
-                   Content="{DynamicResource OnTopContent}"/>
+                Width="120"
+                Height="20"
+                Focusable="True"
+                GotFocus="Hotkey_OnGotFocus"
+                LostFocus="SettingsHotkeyLabel_OnLostFocus"
+                KeyDown="Hotkey_OnKeyDown"
+                KeyUp="Label_OnKeyUp"
+                MouseDown="Hotkey_OnMouseDown"
+                Content="{DynamicResource OnTopContent}"/>
 
 
-            <Label Grid.Row="3" Grid.Column="2" Style="{DynamicResource hotkey}"
+            <Label Grid.Row="3" Grid.Column="1" Style="{DynamicResource hotkey}"
                 Name ="SSMapLabel" 
                 BorderBrush="Black" BorderThickness="1"
                 Width="120"
@@ -112,14 +118,80 @@
                 GotFocus="Hotkey_OnGotFocus"
                 LostFocus="SettingsHotkeyLabel_OnLostFocus"
                 KeyDown="Hotkey_OnKeyDown"
+                KeyUp="Label_OnKeyUp"
                 MouseDown="Hotkey_OnMouseDown"
                 Content="{DynamicResource SSMapContent}"/>
 
+            <Label Grid.Row="4" Grid.Column="1" Style="{DynamicResource hotkey}"
+                Name ="ClickThruLabel" 
+                BorderBrush="Black" BorderThickness="1"
+                Width="120"
+                Height="20"
+                Focusable="True"
+                GotFocus="Hotkey_OnGotFocus"
+                LostFocus="SettingsHotkeyLabel_OnLostFocus"
+                KeyDown="Hotkey_OnKeyDown"
+                KeyUp="Label_OnKeyUp"
+                MouseDown="Hotkey_OnMouseDown"
+                Content="{DynamicResource ClickThruContent}"/>
 
 
+            <!-- Third Column -->
+            <CheckBox Grid.Row="1" Grid.Column="2" 
+                      x:Name="OpacityGlobalToggle" 
+                      Content="Off" Tag="On"
+                      IsChecked="{DynamicResource OpacityGlobal}"
+                      HorizontalContentAlignment="Center"
+                      Width="80"
+                      Height="20"
+                      Style="{StaticResource chkBullet}"/>
+
+            <CheckBox Grid.Row="2" Grid.Column="2" 
+                      x:Name="OnTopGlobalToggle" 
+                      Content="Off" Tag="On"
+                      IsChecked="{DynamicResource OnTopGlobal}"
+                      HorizontalContentAlignment="Center"
+                      Width="80"
+                      Height="20"
+                      Style="{StaticResource chkBullet}"/>
+
+            <CheckBox Grid.Row="3" Grid.Column="2" 
+                      x:Name="SSMapGlobalToggle" 
+                      Content="Off" Tag="On"
+                      IsChecked="{DynamicResource SSMapGlobal}"
+                      HorizontalContentAlignment="Center"
+                      Width="80"
+                      Height="20"
+                      Style="{StaticResource chkBullet}"/>
+
+            <CheckBox Grid.Row="4" Grid.Column="2" 
+                      x:Name="ClickThruGlobalToggle" 
+                      Content="Off" Tag="On"
+                      IsChecked="{DynamicResource ClickThruGlobal}"
+                      HorizontalContentAlignment="Center"
+                      Width="80"
+                      Height="20"
+                      Style="{StaticResource chkBullet}"/>
+
+            <!--Fourth Column -->
+            <Label Grid.Row="0" Grid.Column="3" Content="" FontSize="12"/>
+            <Label Grid.Row="1" Grid.Column="3" Content="" FontSize="12"/>
+            <Label Grid.Row="2" Grid.Column="3" Content="Minimizes program when toggled off" FontSize="12"/>
+            <Label Grid.Row="3" Grid.Column="3" Content="" FontSize="12"/>
+            <Label Grid.Row="4" Grid.Column="3" Content="" FontSize="12"/>
 
 
         </Grid>
+
+
+        <Label Content="Global" FontSize="12" Grid.Column="1" Margin="218,0,435,0"/>
+
+        <!--Why can't you break down strings in xaml... it's so long -->
+        <Label Grid.Row="1" Grid.Column="1" 
+               Content="Global hotkeys activate even when the window is not in focus&#xD;&#xA;Some combos only work as Globals&#xD;&#xA;May not work if currently used as a Global hotkey by another program&#xD;&#xA;If using as Globals, change from the default hotkeys, as it wjill overwrite&#xD;&#xA;local hotkeys in other programs such as CTRL+S to save while UFHT is open"
+               Width="450"
+               Height="100"
+               FontSize="12" Margin="0,262,252,0"/>
 
         <Button Grid.Row="1" Grid.Column="1"
                 Content="Save" HorizontalAlignment="Left" FontSize="14" 

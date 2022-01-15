@@ -2,7 +2,7 @@
 using System;
 using System.IO;
 
-namespace ufht_UI.Models
+namespace ufht_UI.UserSettings
 {
     public class SettingsManager
     {
