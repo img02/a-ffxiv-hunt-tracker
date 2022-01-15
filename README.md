@@ -118,14 +118,14 @@ https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys
 - FATE detection, at least for Minho, Senmurv, Orghana, Special Fates. - Low Prio
 - ~~SS Maps showing location of minions - low prio~~
 - ~~Settings Page~~
-- ~~Customisable Hotkeys~~
-- Customisable text font / colours / weight / etc - LOW PRIO
-- ~~Resize Window - maintaining aspect ratio~~
-- ~~Resizable Icons~~
-- ~~Customisable opacity~~
-- ~~Save and load settings~~
-- ~~Click Through~~
-- ~~Global Hotkeys~~
+  - ~~Customisable Hotkeys~~
+  - Customisable text font / colours / weight / etc - REALLY LOW PRIO
+  - ~~Resize Window - maintaining aspect ratio~~
+  - ~~Resizable Icons~~
+  - ~~Customisable opacity~~
+  - ~~Save and load settings~~
+  - ~~Click Through~~
+  - ~~Global Hotkeys~~
 - 'Record' and save a list of mob info for 'hunt trains' - Low Prio
 - ~~TTS (suggest using triggernometry tbh)~~
 - ACT plugin version
