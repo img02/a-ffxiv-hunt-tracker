@@ -49,7 +49,7 @@
             <Label Grid.Row="5" Grid.Column="0" Content="Log S Ranks" FontSize="14" />
             <Label Grid.Row="6" Grid.Column="0" Content="TTS" FontSize="14" />
             <Label Grid.Row="7" Grid.Column="0" Content="Hotkeys" FontSize="14" />
-            <Label Grid.Row="8" Grid.Column="0" Content="Click Thru" FontSize="14" />
+            <Label Grid.Row="8" Grid.Column="0" Content="Auto-Thru" FontSize="14" />
 
             <!-- Mid Column -->
 
