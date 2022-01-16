@@ -38,7 +38,8 @@ You can also mouse over anywhere on the map to get the equivalent in-game **(XX.
 
 ### Default shortcuts:
 - **CTRL + Q** - OPEN SETTINGS WINDOW
-- **CTRL + A**  - TOGGLE ALWAYS ON TOP
+- **CTRL + W** - TOGGLE CLICK-THROUGH
+- **CTRL + A**  - TOGGLE ALWAYS ON TOP (By default, clickthru is enabled when On Top is)
 - **CTRL + S**  - TOGGLE OPACITY
 - **CTRL + F**  - TOGGLE SS MAP
 - **TAB**       - TOGGLE SIDE PANEL
@@ -78,7 +79,7 @@ The current images and shortcuts are placeholders.
 
 --
 ## Settings Window
-![Settings Window Image](https://i.imgur.com/ZS7zjGI.png)  
+![Settings Window Image](https://i.imgur.com/Ry7ahXk.png)  
 
 You can open the settings window with CTRL+Q,  
 
@@ -91,8 +92,14 @@ You can toggle Text-to-Speech for individual callouts for separate Rank tiers. T
 >S Ranks: {Name} in zone.  
 >A and B: {Name} nearby.
 
-Hotkeys can be changed in the hotkeys window, hotkeys require a modifier + key.  
-Currently only CTRL and SHIFT are usuable, and not all key combos can be set, as some are default System / Global hotkeys.
+![Hotkey Window](https://i.imgur.com/fKs6O1v.png)  
+
+Hotkeys can be changed in the Hotkeys Window, a modifier + key is required.  
+Hotkeys can be made Global hotkeys. This means that they will activate even when another program is in focus.  
+
+Be careful, Global hotkeys will overwrite local hotkeys - such as CTRL+S to save in most programs, will not activate while UFHT is open if you use it as a Global.  
+
+Some hotkeys can only be used as Global hotkeys, as they would otherwise be reserved elsewhere, such as ALT+Numpad used for unicode characters: ™♣☺ê©
 
 
 ## Config.json
@@ -108,16 +115,18 @@ https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys
 
 # TODO (no promises):
 - Replace Endwalker Map images, once Cable Monkey releases new maps.
-- FATE detection, at least for Minho, Senmurv, Orghana, Special Fates.
+- FATE detection, at least for Minho, Senmurv, Orghana, Special Fates. - Low Prio
 - ~~SS Maps showing location of minions - low prio~~
 - ~~Settings Page~~
-  - ~~Customisable shortcuts~~
-  - Customisable text font / colours / weight / etc - LOW PRIO
+  - ~~Customisable Hotkeys~~
+  - Customisable text font / colours / weight / etc - REALLY LOW PRIO
   - ~~Resize Window - maintaining aspect ratio~~
   - ~~Resizable Icons~~
   - ~~Customisable opacity~~
   - ~~Save and load settings~~
-- 'Record' and save a list of mob info for 'hunt trains'
+  - ~~Click Through~~
+  - ~~Global Hotkeys~~
+- 'Record' and save a list of mob info for 'hunt trains' - Low Prio
 - ~~TTS (suggest using triggernometry tbh)~~
 - ACT plugin version
 - ..tbd
