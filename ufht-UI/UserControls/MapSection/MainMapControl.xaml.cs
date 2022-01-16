@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,66 +79,67 @@ namespace ufht_UI.UserControls
 
         private void PlayerIconMove(object o, Coords coords)
         {
-            _ = Task.Run(() =>
-            {
-                _playerIconX = UpdatePositionOnMapImage(coords.X);
-                _playerIconY = UpdatePositionOnMapImage(coords.Y);
-                //map (1,1) to (41.9,41.9), adjust for player coord,
-                //separate map image size into 41 chunks,
-                //each in-game whole coordinate = map image pixel / 41
 
-                //Trace.WriteLine($"X = {coords.X}, y = {coords.Y}");
-                //Trace.WriteLine($"X = {_playerIconX}, y = {_playerIconY}");
+            _playerIconX = UpdatePositionOnMapImage(coords.X);
+            _playerIconY = UpdatePositionOnMapImage(coords.Y);
+            //map (1,1) to (41.9,41.9), adjust for player coord,
+            //separate map image size into 41 chunks,
+            //each in-game whole coordinate = map image pixel / 41
 
-                Application.Current.Resources["PlayerIconHeight"] = _settingsManager.UserSettings.PlayerIconSize;
-                Application.Current.Resources["PlayerIconWidth"] = _settingsManager.UserSettings.PlayerIconSize;
-
-                Application.Current.Resources["_playerIconX"] = _playerIconX;
-                Application.Current.Resources["_playerIconY"] = _playerIconY;
-
-                //Radius detection circle stuff
-                Application.Current.Resources["_playerRadiusX"] = _playerIconX - (PlayerRadius.ActualWidth / 2) + (PlayerIcon.ActualWidth / 2);
-                Application.Current.Resources["_playerRadiusY"] = _playerIconY - (PlayerRadius.ActualHeight / 2) + (PlayerIcon.ActualHeight / 2);
-
-                Application.Current.Resources["_playerRadiusWidth"] = (MapImage.ActualHeight / 41) * 4; //roughly 2 squares --actual detection seems a little larger.
-                Application.Current.Resources["_playerRadiusHeight"] = (MapImage.ActualHeight / 41) * 4;
-                //End Radius Circle stuff
+            //Trace.WriteLine($"X = {coords.X}, y = {coords.Y}");
+            //Trace.WriteLine($"X = {_playerIconX}, y = {_playerIconY}");
 
 
-                //put this into own method, add event for player.heading? or good enough.
-                _playerIconRotation = _session.CurrentPlayer.Heading * (180 / Math.PI);
-                _playerIconRotation = Math.Abs(_playerIconRotation - 180);
+            Application.Current.Resources["PlayerIconHeight"] = _settingsManager.UserSettings.PlayerIconSize;
+            Application.Current.Resources["PlayerIconWidth"] = _settingsManager.UserSettings.PlayerIconSize;
 
-                Application.Current.Resources["_playerIconRotation"] = _playerIconRotation;
+            Application.Current.Resources["_playerIconX"] = _playerIconX;
+            Application.Current.Resources["_playerIconY"] = _playerIconY;
 
-                //update tooltip info
-                var _playerToolTipInfo = ((Player)o).ToString();
-                Application.Current.Resources["_playerToolTipInfo"] = _playerToolTipInfo;
-            });
+            //Radius detection circle stuff
+            Application.Current.Resources["_playerRadiusX"] = _playerIconX - (PlayerRadius.ActualWidth / 2) + (PlayerIcon.ActualWidth / 2);
+            Application.Current.Resources["_playerRadiusY"] = _playerIconY - (PlayerRadius.ActualHeight / 2) + (PlayerIcon.ActualHeight / 2);
+
+            Application.Current.Resources["_playerRadiusWidth"] = (MapImage.ActualHeight / 41) * 4; //roughly 2 squares --actual detection seems a little larger.
+            Application.Current.Resources["_playerRadiusHeight"] = (MapImage.ActualHeight / 41) * 4;
+            //End Radius Circle stuff
+
+
+            //put this into own method, add event for player.heading? or good enough.
+            _playerIconRotation = _session.CurrentPlayer.Heading * (180 / Math.PI);
+            _playerIconRotation = Math.Abs(_playerIconRotation - 180);
+
+            Application.Current.Resources["_playerIconRotation"] = _playerIconRotation;
+
+            //update tooltip info
+            var _playerToolTipInfo = ((Player)o).ToString();
+            Application.Current.Resources["_playerToolTipInfo"] = _playerToolTipInfo;
+
         }
 
-        private void AddNearbyMobIcon(object o, NotifyCollectionChangedEventArgs e)
+        private async void AddNearbyMobIcon(object o, NotifyCollectionChangedEventArgs e)
         {
             List<String> namesList = new List<string>();
 
-            Dispatcher.Invoke(() =>
+            var moblist = o as ObservableCollection<Mob>;
+
+            //adding mobs
+            foreach (var m in moblist)
             {
-                //adding mobs
-                foreach (var m in (ObservableCollection<Mob>)o)
+                var cleanedName = RemoveSpecialCharacters(m.Name);
+
+                namesList.Add(cleanedName);
+                Image mobIcon;
+
+                //if the mob icon already exists, update tooltip and skip
+                if (_mobIconList.FirstOrDefault(i => i.Name == cleanedName) != null)
                 {
-                    var cleanedName = RemoveSpecialCharacters(m.Name);
+                    continue;
+                }
+                var iconSize = _settingsManager.UserSettings.MobIconSize;
 
-                    namesList.Add(cleanedName);
-                    Image mobIcon;
-
-                    //if the mob icon already exists, update tooltip and skip
-                    if (_mobIconList.FirstOrDefault(i => i.Name == cleanedName) != null)
-                    {
-                        continue;
-                    }
-
-                    var iconSize = _settingsManager.UserSettings.MobIconSize;
-
+                await Dispatcher.InvokeAsync(() =>
+                {
                     mobIcon = m.Rank switch
                     {
                         "A" => new Image
@@ -149,6 +151,7 @@ namespace ufht_UI.UserControls
                         "B" => new Image
                         { Source = _mobIconB, Name = cleanedName, Height = iconSize, Width = iconSize }
                     };
+
 
                     mobIcon.MouseMove += Mob_OnMouseMove;
                     mobIcon.MouseLeave += Mob_OnMouseLeave;
@@ -164,17 +167,22 @@ namespace ufht_UI.UserControls
 
                     Panel.SetZIndex(mobIcon, GetZIndex(m.Rank));
 
-                    m.CoordsChanged += UpdateNearbyMobIcon;
 
-                }
+                });
 
-                var toRemove = new List<Image>();
-                var toRemoveTT = new List<Popup>();
+                m.CoordsChanged += UpdateNearbyMobIcon;
 
-                //remove old mobs that aren't nearby anymore
-                foreach (var img in _mobIconList)
+
+            }
+
+            var toRemove = new List<Image>();
+            var toRemoveTT = new List<Popup>();
+
+            //remove old mobs that aren't nearby anymore
+            foreach (var img in _mobIconList)
+            {
+                await Dispatcher.InvokeAsync(() =>
                 {
-
                     if (!namesList.Contains(img.Name))
                     {
                         var tt = _toolTipList.FirstOrDefault(t => t.Name == $"{img.Name}TT");
@@ -182,20 +190,26 @@ namespace ufht_UI.UserControls
                         toRemove.Add(img);
                         toRemoveTT.Add(tt);
                     }
-                }
+                });
+            }
 
-                foreach (var imgToRemove in toRemove)
+            foreach (var imgToRemove in toRemove)
+            {
+                await Dispatcher.InvokeAsync(() =>
                 {
                     _mobIconList.Remove(imgToRemove);
                     PlayerIconCanvas.Children.Remove(imgToRemove);
-                }
+                });
+            }
 
-                foreach (var popup in toRemoveTT)
+            foreach (var popup in toRemoveTT)
+            {
+                await Dispatcher.InvokeAsync(() =>
                 {
                     _toolTipList.Remove(popup);
                     PlayerIconCanvas.Children.Remove(popup);
-                }
-            });
+                });
+            }
         }
 
         private void UpdateNearbyMobIcon(object o, Coords coords)
@@ -210,22 +224,31 @@ namespace ufht_UI.UserControls
                 var toolTipInfo = mob.ToString();
 
                 Dispatcher.Invoke(() =>
-                {
-                    var mobIconToUpdate = _mobIconList.FirstOrDefault(i => i.Name == RemoveSpecialCharacters(mob.Name));
+               {
+                   var mobIconToUpdate = _mobIconList.FirstOrDefault(i => i.Name == RemoveSpecialCharacters(mob.Name));
 
-                    if (mobIconToUpdate == null)
-                    {
-                        return;
-                    }
+                   if (mobIconToUpdate == null)
+                   {
+                       return;
+                   }
 
-                    Canvas.SetLeft(mobIconToUpdate, iconX);
-                    Canvas.SetTop(mobIconToUpdate, iconY);
+                    //only update if moved
+                    if (Canvas.GetLeft(mobIconToUpdate) != iconX || Canvas.GetTop(mobIconToUpdate) != iconY)
+                   {
+                       //Trace.WriteLine("update mob");
+                       Canvas.SetLeft(mobIconToUpdate, iconX);
+                       Canvas.SetTop(mobIconToUpdate, iconY);
+                   }
+                   else
+                   {
+                       //Trace.WriteLine("don't update mob");
+                   }
 
-                    UpdateToolTip(mob);
-                });
+
+
+                   UpdateToolTip(mob);
+               });
             }
-
-
         }
 
 

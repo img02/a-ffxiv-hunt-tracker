@@ -20,6 +20,7 @@ namespace ufht_UI.SettingsWindow
             _settingsManager = settingsManager;
             _settings = _settingsManager.UserSettings;
 
+            Application.Current.Resources["RefreshRateText"] = ((int)(_settings.RefreshRate)).ToString();
             Application.Current.Resources["OpacityText"] = ((int)(_settings.Opacity * 100)).ToString();
             Application.Current.Resources["StartingHeightText"] = ((int)_settings.DefaultSizeY).ToString();
             Application.Current.Resources["StartingWidthText"] = ((int)_settings.DefaultSizeX).ToString();
@@ -65,8 +66,14 @@ namespace ufht_UI.SettingsWindow
         //Save Button
         private void Save_OnClick(object sender, RoutedEventArgs e)
         {
+            int refresh;
             Double opacity, height, width, mobIcon, playerIcon;
 
+            if (Int32.TryParse(RefreshRateTextBox.Text, out refresh))
+            {
+                _settings.RefreshRate = refresh;
+            }
+            
             if (Double.TryParse(OpacityTextBox.Text, out opacity))
             {
                 _settings.Opacity = opacity / 100.0;

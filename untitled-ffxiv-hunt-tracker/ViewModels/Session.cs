@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -34,6 +35,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         private bool _ARankTTS;
         private bool _BRankTTS;
 
+        private int _refreshRate;
 
         public List<Mob> CurrentTrain;
         private string CurrentTrainName { get; set; }
@@ -42,10 +44,11 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         public Player CurrentPlayer { get; set; }
 
 
-        public Session(MemoryReader memoryReader, SpeechSynthesizer tts)
+        public Session(MemoryReader memoryReader, SpeechSynthesizer tts, int refreshRate)
         {
             _memoryReader = memoryReader;
             _tts = tts;
+            _refreshRate = refreshRate;
 
             SetUpMemReader();
 
@@ -91,11 +94,15 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             Trace.WriteLine("Process found!");
         }
 
-        public void Start()
+        public void Start(CancellationTokenSource ct)
         {
             Trace.WriteLine($"can get process? {_memoryReader.CanGetProcess} has exited? {_memoryReader.ProcessHasExited}");
             while (true)
             {
+                if (ct.IsCancellationRequested)
+                {
+                    break;
+                }
                 //Trace.WriteLine($"1inside loop can get process? {_memoryReader.CanGetProcess} has exited? {_memoryReader.ProcessHasExited}");
                 //this is really messy but it works. so...
                 if (!_memoryReader.CanGetProcess || _memoryReader.ProcessHasExited)
@@ -109,7 +116,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 SearchNearbyMobs();
 
                 //1000/144 = 6.94 - so this should refresh a bit more than 144 times per sec, so animation should be 144+fps, right? seems legit. def smoother. cpu usage low.
-                Thread.Sleep(6);
+                Thread.Sleep(_refreshRate);
             }
         }
 
@@ -248,13 +255,20 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 if (CurrentNearbyMobs.FirstOrDefault(m => m.Name.ToLower() == tMob.Name.ToLower()) == null)
                 {
                     CurrentNearbyMobs.Add(tMob);
-                    //tts here?
                 }
                 else
                 {
                     var mob = CurrentNearbyMobs.FirstOrDefault(m => m.Name.ToLower() == tMob.Name.ToLower());
-                    mob.Coordinates = tMob.Coordinates;
-                    mob.HPPercent = tMob.HPPercent;
+
+                    //if (mob.Coordinates.X != tMob.Coordinates.X || mob.Coordinates.Y != tMob.Coordinates.Y)
+                    
+                        mob.Coordinates = tMob.Coordinates;
+                    
+
+                    //if (mob.HPPercent != tMob.HPPercent)
+                    
+                        mob.HPPercent = tMob.HPPercent;
+                    
                 }
             }
 
@@ -389,6 +403,17 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
             }
         }
 
+        public void SetRefreshRate(int rate)
+        {
+            //1000 divided by refresh rate, since it's milliseconds per refresh
+            if (rate is < 10 or > 300)
+            {
+                _refreshRate = 1000 / 60;
+            }
+            else _refreshRate = 1000 / rate;
+
+
+        }
 #nullable disable
 
         #endregion

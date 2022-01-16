@@ -75,6 +75,12 @@
     "Name": "Ker Shroud",
     "ModelID": 10616,
     "Rank": "SS",
+    "MapTerritory": "Garlemald"
+  },
+  {
+    "Name": "Ker Shroud",
+    "ModelID": 10616,
+    "Rank": "SS",
     "MapTerritory": "Thavnair"
   },
   {

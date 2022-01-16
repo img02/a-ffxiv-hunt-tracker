@@ -41,19 +41,28 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" Content="Opacity" FontSize="14" />
-            <Label Grid.Row="1" Grid.Column="0" Content="Height" FontSize="14"/>
-            <Label Grid.Row="2" Grid.Column="0" Content="Width" FontSize="14" />
-            <Label Grid.Row="3" Grid.Column="0" Content="Mob Icon" FontSize="14"/>
-            <Label Grid.Row="4" Grid.Column="0" Content="Player Icon" FontSize="14" />
-            <Label Grid.Row="5" Grid.Column="0" Content="Log S Ranks" FontSize="14" />
-            <Label Grid.Row="6" Grid.Column="0" Content="TTS" FontSize="14" />
-            <Label Grid.Row="7" Grid.Column="0" Content="Hotkeys" FontSize="14" />
-            <Label Grid.Row="8" Grid.Column="0" Content="Auto-Thru" FontSize="14" />
+            <Label Grid.Row="0" Grid.Column="0" Content="Refresh Rate" FontSize="14" />
+            <Label Grid.Row="1" Grid.Column="0" Content="Opacity" FontSize="14" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Height" FontSize="14"/>
+            <Label Grid.Row="3" Grid.Column="0" Content="Width" FontSize="14" />
+            <Label Grid.Row="4" Grid.Column="0" Content="Mob Icon" FontSize="14"/>
+            <Label Grid.Row="5" Grid.Column="0" Content="Player Icon" FontSize="14" />
+            <Label Grid.Row="6" Grid.Column="0" Content="Log S Ranks" FontSize="14" />
+            <Label Grid.Row="7" Grid.Column="0" Content="TTS" FontSize="14" />
+            <Label Grid.Row="8" Grid.Column="0" Content="Hotkeys" FontSize="14" />
+            <Label Grid.Row="9" Grid.Column="0" Content="Auto-Thru" FontSize="14" />
 
             <!-- Mid Column -->
 
             <TextBox Grid.Row="0" Grid.Column="1" 
+                 x:Name="RefreshRateTextBox" HorizontalAlignment="Left" 
+                 Width="120" 
+                 Height="17.96"
+                 Text="{DynamicResource RefreshRateText}"
+                 MaxLength="3"
+                 PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
+
+            <TextBox Grid.Row="1" Grid.Column="1" 
                  x:Name="OpacityTextBox" HorizontalAlignment="Left" 
                  Width="120" 
                  Height="17.96"
@@ -61,7 +70,7 @@
                  MaxLength="2"
                  PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
-            <TextBox Grid.Row="1" Grid.Column="1" 
+            <TextBox Grid.Row="2" Grid.Column="1" 
                  x:Name="StartingHeightTextBox" HorizontalAlignment="Left" 
                  Width="120"
                  Height="17.96"
@@ -70,7 +79,7 @@
                  TextChanged="StartingHeightTextBox_OnTextChanged"
                  PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
-            <TextBox Grid.Row="2" Grid.Column="1" 
+            <TextBox Grid.Row="3" Grid.Column="1" 
                  x:Name="StartingWidthTextBox" HorizontalAlignment="Left" 
                  Width="120"
                  Height="17.96"
@@ -79,7 +88,7 @@
                  TextChanged="StartingWidthTextBox_OnTextChanged"
                  PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
-            <TextBox Grid.Row="3" Grid.Column="1" 
+            <TextBox Grid.Row="4" Grid.Column="1" 
                 x:Name="MobIconTextBox" HorizontalAlignment="Left" 
                 Width="120"
                 Height="17.96"
@@ -87,7 +96,7 @@
                 MaxLength="2"
                 PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
-            <TextBox Grid.Row="4" Grid.Column="1" 
+            <TextBox Grid.Row="5" Grid.Column="1" 
                  x:Name="PlayerIconTextBox" HorizontalAlignment="Left" 
                  Width="120"
                  Height="17.96"
@@ -95,7 +104,7 @@
                  MaxLength="2"
                  PreviewTextInput="TextBox_OnPreviewTextInput_NumberOnly"/>
 
-            <CheckBox Grid.Row="5" Grid.Column="1" 
+            <CheckBox Grid.Row="6" Grid.Column="1" 
                   x:Name="LogSRanks" 
                   Content="Off" Tag="On"
                   IsChecked="{DynamicResource LogS}"
@@ -105,7 +114,7 @@
                   Style="{StaticResource chkBullet}"/>
 
             <!-- TTS checkboxes -->
-            <Grid Grid.Row="6" Grid.Column="1">
+            <Grid Grid.Row="7" Grid.Column="1">
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -144,14 +153,14 @@
             </Grid>
             <!-- TTS checkboxes END -->
 
-            <Button Grid.Row="7" Grid.Column="1"
+            <Button Grid.Row="8" Grid.Column="1"
                     x:Name="HotkeyEdit"
                     Style="{StaticResource BlueButton}"
                     Content="Edit"
                     Click="HotkeyEdit_OnClick"/>
 
 
-            <CheckBox Grid.Row="8" Grid.Column="1" 
+            <CheckBox Grid.Row="9" Grid.Column="1" 
                       x:Name="ClickThruWhenOnTopCHK" 
                       Content="Off" Tag="On"
                       IsChecked="{DynamicResource ClickThruWhenOnTop}"
@@ -163,30 +172,33 @@
             <!-- Mid Column -->
 
             <Label Grid.Row="0" Grid.Column="2" 
-               Content="Opacity toggle % (0-99)     Default: 80" 
+               Content="Lower if the program is choppy (10-300)  Default: 60" 
                FontSize="12" />
             <Label Grid.Row="1" Grid.Column="2" 
-               Content="Window Height 1:1 ratio    Default: 1024" 
+               Content="Opacity toggle % (0-99)     Default: 80" 
                FontSize="12" />
             <Label Grid.Row="2" Grid.Column="2" 
+               Content="Window Height 1:1 ratio    Default: 1024" 
+               FontSize="12" />
+            <Label Grid.Row="3" Grid.Column="2" 
                Content="Window Width  1:1 ratio    Default: 1024"
                FontSize="12"/>
-            <Label Grid.Row="3" Grid.Column="2" 
+            <Label Grid.Row="4" Grid.Column="2" 
                Content="Default: 64" 
                FontSize="12" />
-            <Label Grid.Row="4" Grid.Column="2" 
+            <Label Grid.Row="5" Grid.Column="2" 
                Content="Default: 32" 
                FontSize="12"/>
-            <Label Grid.Row="5" Grid.Column="2" 
+            <Label Grid.Row="6" Grid.Column="2" 
                Content="Saves to Desktop. [Name - Pos - Local Time - UTC]  Does not currently record World"
                FontSize="12"/>
-            <Label Grid.Row="6" Grid.Column="2" 
+            <Label Grid.Row="7" Grid.Column="2" 
                Content="Text-to-Speech"
                FontSize="12"/>
-            <Label Grid.Row="7" Grid.Column="2" 
+            <Label Grid.Row="8" Grid.Column="2" 
                Content="Modifier + Key. Modifiers: CTRL, SHIFT. Not all combos are available"
                FontSize="12"/>
-            <Label Grid.Row="8" Grid.Column="2" 
+            <Label Grid.Row="9" Grid.Column="2" 
                Content="Auto-toggle click thru when On Top is toggled"
                FontSize="12"/>
         </Grid>

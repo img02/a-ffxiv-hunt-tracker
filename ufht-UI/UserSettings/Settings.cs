@@ -6,6 +6,10 @@ namespace ufht_UI.UserSettings
 {
     public class Settings
     {
+        [DefaultValue(60)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public int RefreshRate;
+        
         [DefaultValue(0.8)]
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public double Opacity;
@@ -75,6 +79,7 @@ namespace ufht_UI.UserSettings
 
         public Settings()
         {
+            RefreshRate = 60;
             Opacity = 0.8;
             DefaultSizeX = 1024;
             DefaultSizeY = 1024;
@@ -101,14 +106,16 @@ namespace ufht_UI.UserSettings
         }
 
         [JsonConstructor]
-        public Settings(double opacity, double defaultSizeX, double defaultSizeY,
-            double mobIconSize, double playerIconSize,
+        public Settings(int refreshRate, double opacity, double defaultSizeX,
+            double defaultSizeY, double mobIconSize, double playerIconSize,
             bool logS, bool sRankTts, bool aRanktts, bool bRanktts,
             bool opacityGlobal, bool onTopGlobal, bool ssMapGlobal,
             bool clickThruGlobal, bool clickThruWhenOnTop,
             Hotkey onTopHotkey, Hotkey opacityHotKey, Hotkey sidePanelHotKey,
             Hotkey ssMapHotkey, Hotkey settingsHotkey, Hotkey clickThruHotkey)
         {
+            RefreshRate = refreshRate;
+
             Opacity = opacity;
             DefaultSizeX = defaultSizeX;
             DefaultSizeY = defaultSizeY;

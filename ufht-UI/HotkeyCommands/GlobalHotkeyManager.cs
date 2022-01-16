@@ -14,7 +14,7 @@ namespace ufht_UI.HotkeyCommands
     public static class GlobalHotkey
     {
 
-        //////////// Global hotkey  - base code from https://stackoverflow.com/questions/11377977/global-hotkeys-in-wpf-working-from-every-window
+        //////////// Global hotkey  - base code from https://stackoverflow.com/questions/11377977/global-hotkeys-in-wpf-working-from-every-window - https://stackoverflow.com/a/11378213
 
 
         [DllImport("User32.dll")]

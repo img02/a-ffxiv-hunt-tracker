@@ -2,8 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -38,12 +40,16 @@ namespace ufht_UI
 
         private ObservableCollection<Mob> _nearbyMobs;
         internal Mob priorityMob;
+        private DateTime priorityMobLabelLastUpdate;
 
 
         private SettingsManager _settingsManager;
         private Settings _userSettings;
 
         private bool _isClickThru = false;
+
+        private Task task;
+        private CancellationTokenSource ct;
 
         public MainWindow()
         {
@@ -78,34 +84,37 @@ namespace ufht_UI
 
             InitializeComponent();
             _nearbyMobs = new ObservableCollection<Mob>();
-            _ = Task.Run(() =>
+
+            task = Task.Run(() =>
             {
-                _session = Program.CreateSession();
+                ct = new CancellationTokenSource();
+
+                _session = Program.CreateSession(_userSettings.RefreshRate);
                 _session.ToggleLogS(_userSettings.LogS);
                 _session.ToggleSRankTTS(_userSettings.SRankTTS);
                 _session.ToggleARankTTS(_userSettings.ARankTTS);
                 _session.ToggleBRankTTS(_userSettings.BRankTTS);
 
                 Dispatcher.Invoke(() =>
-                {
-                    _listSectionMain = new InfoSectionControl(_session, _nearbyMobs);
-                    _session.CurrentNearbyMobs.CollectionChanged += CurrentNearbyMobs_CollectionChanged;
+                 {
+                   _listSectionMain = new InfoSectionControl(_session, _nearbyMobs);
+                   _session.CurrentNearbyMobs.CollectionChanged += CurrentNearbyMobs_CollectionChanged;
 
-                    _mainMap = new MainMapControl(_session, _settingsManager);
+                   _mainMap = new MainMapControl(_session, _settingsManager);
 
-                    MainGrid2.Children.Add(_mainMap);
-                    ListSection.Children.Add(_listSectionMain);
+                   MainGrid2.Children.Add(_mainMap);
+                   ListSection.Children.Add(_listSectionMain);
 
-                    DataContext = _session;
-                });
-                _session.Start();
+                   DataContext = _session;
+               });
+                _session.Start(ct);
 
             });
         }
 
 
         //info side panel stuff
-        private void CurrentNearbyMobs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private async void CurrentNearbyMobs_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             #region brokenModelID
             //BROKEN MODELID VERSION
@@ -144,7 +153,7 @@ namespace ufht_UI
             if (sender is ObservableCollection<Mob> mobCollection)
             {
 
-                Dispatcher.Invoke(() =>
+                await Dispatcher.InvokeAsync(() =>
                 {
                     var toRemove = new ObservableCollection<Mob>();
                     foreach (var m in _nearbyMobs)
@@ -190,6 +199,18 @@ namespace ufht_UI
                         {
                             priorityMob = m;
                             priorityMob.PropertyChanged += PriorityMob_OnPropertyChanged;
+
+                            Application.Current.Resources["PriorityMobTextRank"] = priorityMob.Rank;
+                            Application.Current.Resources["PriorityMobTextName"] = priorityMob.Name;
+                            Application.Current.Resources["PriorityMobTTText"] = priorityMob.Name;
+                            Application.Current.Resources["PriorityMobTextCoords"] = priorityMob.Coordinates;
+                            Application.Current.Resources["PriorityMobTextHPP"] = $"{priorityMob.HPPercentAsPercentage,0:0}%";
+
+                            Application.Current.Resources["PriorityMobTextVisibility"] = Visibility.Visible;
+                            Application.Current.Resources["PriorityMobGridInnerVisibility"] = Visibility.Visible;
+
+                            Trace.WriteLine("priority mob new");
+                            priorityMobLabelLastUpdate = DateTime.Now;
                         }
                     }
 
@@ -201,17 +222,40 @@ namespace ufht_UI
 
         #region Event Handlers
 
-        //set current into for priority mob
-        private void PriorityMob_OnPropertyChanged(object o, PropertyChangedEventArgs e)
+        //set current info for priority mob - this seems to cause lag when gpu usage is high (e.g. ffxiv unchecked fps limit).
+        //this program itself can spike up to 3-4% gpu usage when rendering these labels on my 1080.
+        //everything is smooth when setting ffxiv refresh rate to 1/2 instead of 144 fps / unchecked. but then the game ain't as smooth.
+        private async void PriorityMob_OnPropertyChanged(object o, PropertyChangedEventArgs e)
         {
-            Application.Current.Resources["PriorityMobTextRank"] = priorityMob.Rank;
+            /*Application.Current.Resources["PriorityMobTextRank"] = priorityMob.Rank;
             Application.Current.Resources["PriorityMobTextName"] = priorityMob.Name;
-            Application.Current.Resources["PriorityMobTTText"] = priorityMob.Name;
-            Application.Current.Resources["PriorityMobTextCoords"] = priorityMob.Coordinates;
-            Application.Current.Resources["PriorityMobTextHPP"] = $"{priorityMob.HPPercentAsPercentage,0:0}%";
+            Application.Current.Resources["PriorityMobTTText"] = priorityMob.Name;*/
 
-            Application.Current.Resources["PriorityMobTextVisibility"] = Visibility.Visible;
-            Application.Current.Resources["PriorityMobGridInnerVisibility"] = Visibility.Visible;
+            //can cause lag to refresh too quickly.
+            /*if ((DateTime.Now - priorityMobLabelLastUpdate).TotalMilliseconds < 100)
+            {
+                Trace.WriteLine("too early");
+                return;
+            }
+
+            Trace.WriteLine("okay!");
+
+            priorityMobLabelLastUpdate = DateTime.Now;
+            */
+
+            var mob = o as Mob;
+
+            await Task.Run(() =>
+            {
+                // Trace.WriteLine("updating coords");
+                // Trace.WriteLine($"{PriorityMobCoords.Content.Equals(priorityMob.Coordinates)} - {PriorityMobCoords.Content} - {priorityMob.Coordinates}");
+                //Application.Current.Resources["PriorityMobTextCoords"] = priorityMob.Coordinates;
+
+                // Trace.WriteLine("updating hp");
+                //  Trace.WriteLine($"{PriorityMobHPP.Content.Equals(priorityMob.HPPercent)} - {PriorityMobHPP.Content} - {HPPasString}");
+                Application.Current.Resources["PriorityMobTextHPP"] = $"{mob.HPPercentAsPercentage,0:0}%";
+            });
+
         }
 
 
@@ -252,6 +296,7 @@ namespace ufht_UI
                 SidePanelToggle_Executed(null, null); //prob bad and should separate into own method but.., turn off side panel
             }
 
+            _session.SetRefreshRate(_userSettings.RefreshRate);
             this.Width = _userSettings.DefaultSizeX;
             this.Height = _userSettings.DefaultSizeY;
             _session.ToggleLogS(_userSettings.LogS);
@@ -397,6 +442,9 @@ namespace ufht_UI
         protected override void OnClosed(EventArgs e)
         {
             GlobalHotkey.OnClosed(this);
+            ct.Cancel();
+
+            Application.Current.Dispatcher.InvokeShutdown();
             base.OnClosed(e);
         }
 
