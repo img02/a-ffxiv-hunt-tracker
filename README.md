@@ -5,7 +5,6 @@
 A standalone program that displays the current map and shows the players position, spawn points, and nearby **A, B, S, SS** Ranks.  
 
 Accurately depicts the location, direction, and movement of the player and any rendered mobs.   
-All at a smooooooth 166.66 refresh rate.
 
 # How do I use it?
 
@@ -79,7 +78,7 @@ The current images and shortcuts are placeholders.
 
 --
 ## Settings Window
-![Settings Window Image](https://i.imgur.com/Ry7ahXk.png)  
+![Settings Window Image](https://i.imgur.com/t7qYabp.png)  
 
 You can open the settings window with CTRL+Q,  
 
@@ -91,6 +90,10 @@ Logging S Ranks saves to a text file on your desktop called "UFHT S Log.txt" in 
 You can toggle Text-to-Speech for individual callouts for separate Rank tiers. This uses your Windows default voice.
 >S Ranks: {Name} in zone.  
 >A and B: {Name} nearby.
+
+The refresh rate is how often FFXIV's memory is scanned. This affects position and hp updates of the player and nearby mobs.  
+
+Lower this to reduce resources used. Increase for a slightly smoother experience.
 
 ![Hotkey Window](https://i.imgur.com/fKs6O1v.png)  
 
