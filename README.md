@@ -129,6 +129,7 @@ https://docs.microsoft.com/en-us/dotnet/api/system.windows.input.modifierkeys
   - ~~Save and load settings~~
   - ~~Click Through~~
   - ~~Global Hotkeys~~
+  - ~~Refresh Rate~~
 - 'Record' and save a list of mob info for 'hunt trains' - Low Prio
 - ~~TTS (suggest using triggernometry tbh)~~
 - ACT plugin version
