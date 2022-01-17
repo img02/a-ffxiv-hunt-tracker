@@ -78,7 +78,7 @@ The current images and shortcuts are placeholders.
 
 --
 ## Settings Window
-![Settings Window Image](https://i.imgur.com/t7qYabp.png)  
+![Settings Window Image](https://i.imgur.com/1WRzQ6f.png)  
 
 You can open the settings window with CTRL+Q,  
 
@@ -94,6 +94,8 @@ You can toggle Text-to-Speech for individual callouts for separate Rank tiers. T
 The refresh rate is how often FFXIV's memory is scanned. This affects position and hp updates of the player and nearby mobs.  
 
 Lower this to reduce resources used. Increase for a slightly smoother experience.
+
+Disabling the Priority mob coordinates update may also slightly improve performance.  
 
 ![Hotkey Window](https://i.imgur.com/fKs6O1v.png)  
 
