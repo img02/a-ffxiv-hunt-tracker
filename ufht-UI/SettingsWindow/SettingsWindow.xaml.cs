@@ -31,6 +31,7 @@ namespace ufht_UI.SettingsWindow
             Application.Current.Resources["ARankTTS"] = _settings.ARankTTS;
             Application.Current.Resources["BRankTTS"] = _settings.BRankTTS;
             Application.Current.Resources["ClickThruWhenOnTop"] = _settings.ClickThruWhenOnTop;
+            Application.Current.Resources["UpdatePriorityMobCoordinates"] = _settings.UpdatePriorityMobCoordinates;
 
             InitializeComponent();
         }
@@ -106,6 +107,7 @@ namespace ufht_UI.SettingsWindow
             _settings.ARankTTS = ARankTTSCHK.IsChecked ?? false;
             _settings.BRankTTS = BRankTTSCHK.IsChecked ?? false;
             _settings.ClickThruWhenOnTop = ClickThruWhenOnTopCHK.IsChecked ?? false;
+            _settings.UpdatePriorityMobCoordinates = UpdatePriorityMobCoordinatesCHK.IsChecked ?? false;
 
             _settingsManager.SaveSettings();
 

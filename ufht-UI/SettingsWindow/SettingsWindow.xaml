@@ -51,6 +51,7 @@
             <Label Grid.Row="7" Grid.Column="0" Content="TTS" FontSize="14" />
             <Label Grid.Row="8" Grid.Column="0" Content="Hotkeys" FontSize="14" />
             <Label Grid.Row="9" Grid.Column="0" Content="Auto-Thru" FontSize="14" />
+            <Label Grid.Row="10" Grid.Column="0" Content="Priority Coords" FontSize="14" />
 
             <!-- Mid Column -->
 
@@ -169,10 +170,19 @@
                       Height="20"
                       Style="{StaticResource chkBullet}"/>
 
+            <CheckBox Grid.Row="10" Grid.Column="1" 
+                      x:Name="UpdatePriorityMobCoordinatesCHK" 
+                      Content="Off" Tag="On"
+                      IsChecked="{DynamicResource UpdatePriorityMobCoordinates}"
+                      HorizontalContentAlignment="Center"
+                      Width="120"
+                      Height="20"
+                      Style="{StaticResource chkBullet}"/>
+
             <!-- Mid Column -->
 
             <Label Grid.Row="0" Grid.Column="2" 
-               Content="Lower if the program is choppy (10-300)  Default: 60" 
+               Content="Rate to scan memory. Lower if the program is choppy (10-300)  Default: 60" 
                FontSize="12" />
             <Label Grid.Row="1" Grid.Column="2" 
                Content="Opacity toggle % (0-99)     Default: 80" 
@@ -200,6 +210,9 @@
                FontSize="12"/>
             <Label Grid.Row="9" Grid.Column="2" 
                Content="Auto-toggle click thru when On Top is toggled"
+               FontSize="12"/>
+            <Label Grid.Row="10" Grid.Column="2" 
+               Content="Updates the priority mob coords in real-time. Disabling may improve performance."
                FontSize="12"/>
         </Grid>
 

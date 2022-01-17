@@ -67,6 +67,10 @@ namespace ufht_UI.UserSettings
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool ClickThruWhenOnTop;
 
+        [DefaultValue(true)]
+        [JsonProperty(DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool UpdatePriorityMobCoordinates;
+
 
         public Hotkey OnTopHotkey;
         public Hotkey OpacityHotKey;
@@ -86,7 +90,7 @@ namespace ufht_UI.UserSettings
             MobIconSize = 64;
             PlayerIconSize = 32;
 
-            LogS = true;
+            LogS = false;
             SRankTTS = true;
             ARankTTS = true;
             BRankTTS = true;
@@ -96,6 +100,7 @@ namespace ufht_UI.UserSettings
             SSMapGlobal = false;
             ClickThruGlobal = false;
             ClickThruWhenOnTop = true;
+            UpdatePriorityMobCoordinates = true;
 
             OnTopHotkey = new Hotkey(Commands.DefaultOnTopKeyGesture);
             OpacityHotKey = new Hotkey(Commands.DefaultOpacityKeyGesture);
@@ -110,7 +115,7 @@ namespace ufht_UI.UserSettings
             double defaultSizeY, double mobIconSize, double playerIconSize,
             bool logS, bool sRankTts, bool aRanktts, bool bRanktts,
             bool opacityGlobal, bool onTopGlobal, bool ssMapGlobal,
-            bool clickThruGlobal, bool clickThruWhenOnTop,
+            bool clickThruGlobal, bool clickThruWhenOnTop, bool updatePriorityMobCoordinates,
             Hotkey onTopHotkey, Hotkey opacityHotKey, Hotkey sidePanelHotKey,
             Hotkey ssMapHotkey, Hotkey settingsHotkey, Hotkey clickThruHotkey)
         {
@@ -132,6 +137,7 @@ namespace ufht_UI.UserSettings
             SSMapGlobal = ssMapGlobal;
             ClickThruGlobal = clickThruGlobal;
             ClickThruWhenOnTop = clickThruWhenOnTop;
+            UpdatePriorityMobCoordinates = updatePriorityMobCoordinates;
 
             OnTopHotkey = onTopHotkey ?? new Hotkey(Commands.DefaultOnTopKeyGesture);
             OpacityHotKey = opacityHotKey ?? new Hotkey(Commands.DefaultOpacityKeyGesture);

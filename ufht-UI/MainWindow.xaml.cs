@@ -232,7 +232,7 @@ namespace ufht_UI
             Application.Current.Resources["PriorityMobTTText"] = priorityMob.Name;*/
 
             //can cause lag to refresh too quickly.
-            /*if ((DateTime.Now - priorityMobLabelLastUpdate).TotalMilliseconds < 100)
+            /*if ((DateTime.Now - priorityMobLabelLastUpdate).TotalMilliseconds > 100)
             {
                 Trace.WriteLine("too early");
                 return;
@@ -249,7 +249,18 @@ namespace ufht_UI
             {
                 // Trace.WriteLine("updating coords");
                 // Trace.WriteLine($"{PriorityMobCoords.Content.Equals(priorityMob.Coordinates)} - {PriorityMobCoords.Content} - {priorityMob.Coordinates}");
+
+                if (_userSettings.UpdatePriorityMobCoordinates && ((DateTime.Now - priorityMobLabelLastUpdate).TotalMilliseconds > 100))
+
+                {
+                    Application.Current.Resources["PriorityMobTextCoords"] = priorityMob.Coordinates.ToString();
+                    priorityMobLabelLastUpdate = DateTime.Now;
+                }
+
                 //Application.Current.Resources["PriorityMobTextCoords"] = priorityMob.Coordinates;
+                
+                
+                
 
                 // Trace.WriteLine("updating hp");
                 //  Trace.WriteLine($"{PriorityMobHPP.Content.Equals(priorityMob.HPPercent)} - {PriorityMobHPP.Content} - {HPPasString}");
