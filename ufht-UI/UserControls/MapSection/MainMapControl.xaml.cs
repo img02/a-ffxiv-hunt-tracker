@@ -121,25 +121,25 @@ namespace ufht_UI.UserControls
         {
             List<String> namesList = new List<string>();
 
-            var moblist = o as ObservableCollection<Mob>;
-
-            //adding mobs
-            foreach (var m in moblist)
+            await Dispatcher.InvokeAsync(() =>
             {
-                var cleanedName = RemoveSpecialCharacters(m.Name);
+                var moblist = o as ObservableCollection<Mob>;
 
-                namesList.Add(cleanedName);
-                Image mobIcon;
-
-                //if the mob icon already exists, update tooltip and skip
-                if (_mobIconList.FirstOrDefault(i => i.Name == cleanedName) != null)
+                //adding mobs
+                foreach (var m in moblist)
                 {
-                    continue;
-                }
-                var iconSize = _settingsManager.UserSettings.MobIconSize;
+                    var cleanedName = RemoveSpecialCharacters(m.Name);
 
-                await Dispatcher.InvokeAsync(() =>
-                {
+                    namesList.Add(cleanedName);
+                    Image mobIcon;
+
+                    //if the mob icon already exists, update tooltip and skip
+                    if (_mobIconList.FirstOrDefault(i => i.Name == cleanedName) != null)
+                    {
+                        continue;
+                    }
+                    var iconSize = _settingsManager.UserSettings.MobIconSize;
+
                     mobIcon = m.Rank switch
                     {
                         "A" => new Image
@@ -152,7 +152,6 @@ namespace ufht_UI.UserControls
                         { Source = _mobIconB, Name = cleanedName, Height = iconSize, Width = iconSize }
                     };
 
-
                     mobIcon.MouseMove += Mob_OnMouseMove;
                     mobIcon.MouseLeave += Mob_OnMouseLeave;
 
@@ -161,27 +160,19 @@ namespace ufht_UI.UserControls
                     _mobIconList.Add(mobIcon);
                     _toolTipList.Add(tt);
 
-
                     PlayerIconCanvas.Children.Add(mobIcon);
                     PlayerIconCanvas.Children.Add(tt);
 
                     Panel.SetZIndex(mobIcon, GetZIndex(m.Rank));
 
+                    m.CoordsChanged += UpdateNearbyMobIcon;
+                }
 
-                });
+                var toRemove = new List<Image>();
+                var toRemoveTT = new List<Popup>();
 
-                m.CoordsChanged += UpdateNearbyMobIcon;
-
-
-            }
-
-            var toRemove = new List<Image>();
-            var toRemoveTT = new List<Popup>();
-
-            //remove old mobs that aren't nearby anymore
-            foreach (var img in _mobIconList)
-            {
-                await Dispatcher.InvokeAsync(() =>
+                //remove old mobs that aren't nearby anymore
+                foreach (var img in _mobIconList)
                 {
                     if (!namesList.Contains(img.Name))
                     {
@@ -190,26 +181,22 @@ namespace ufht_UI.UserControls
                         toRemove.Add(img);
                         toRemoveTT.Add(tt);
                     }
-                });
-            }
+                }
 
-            foreach (var imgToRemove in toRemove)
-            {
-                await Dispatcher.InvokeAsync(() =>
+                foreach (var imgToRemove in toRemove)
                 {
+
                     _mobIconList.Remove(imgToRemove);
                     PlayerIconCanvas.Children.Remove(imgToRemove);
-                });
-            }
 
-            foreach (var popup in toRemoveTT)
-            {
-                await Dispatcher.InvokeAsync(() =>
+                }
+
+                foreach (var popup in toRemoveTT)
                 {
                     _toolTipList.Remove(popup);
                     PlayerIconCanvas.Children.Remove(popup);
-                });
-            }
+                }
+            });
         }
 
         private void UpdateNearbyMobIcon(object o, Coords coords)
@@ -232,8 +219,8 @@ namespace ufht_UI.UserControls
                        return;
                    }
 
-                    //only update if moved
-                    if (Canvas.GetLeft(mobIconToUpdate) != iconX || Canvas.GetTop(mobIconToUpdate) != iconY)
+                   //only update if moved
+                   if (Canvas.GetLeft(mobIconToUpdate) != iconX || Canvas.GetTop(mobIconToUpdate) != iconY)
                    {
                        //Trace.WriteLine("update mob");
                        Canvas.SetLeft(mobIconToUpdate, iconX);
