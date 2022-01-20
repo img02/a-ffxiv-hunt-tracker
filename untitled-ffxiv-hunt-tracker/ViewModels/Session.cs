@@ -44,6 +44,7 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
         public Player CurrentPlayer { get; set; }
 
 
+
         public Session(MemoryReader memoryReader, SpeechSynthesizer tts, int refreshRate)
         {
             _memoryReader = memoryReader;
@@ -103,20 +104,31 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                 {
                     break;
                 }
+
                 //Trace.WriteLine($"1inside loop can get process? {_memoryReader.CanGetProcess} has exited? {_memoryReader.ProcessHasExited}");
                 //this is really messy but it works. so...
                 if (!_memoryReader.CanGetProcess || _memoryReader.ProcessHasExited)
                 {
-                    Trace.WriteLine($"1inside loop can get process? {_memoryReader.CanGetProcess} has exited? {_memoryReader.ProcessHasExited}");
+                    Trace.WriteLine(
+                        $"1inside loop can get process? {_memoryReader.CanGetProcess} has exited? {_memoryReader.ProcessHasExited}");
                     Thread.Sleep(2000);
                     SetUpMemReader();
                 }
 
                 GetUser();
+
+                //if not in a valid hunt map, only refresh every 250ms. Skip searching for mobs.
+                if (!Enum.IsDefined(typeof(MapID), (int) CurrentPlayer.MapTerritory))
+                {
+                Thread.Sleep(250);   
+                continue;
+                }
+
                 SearchNearbyMobs();
 
                 //1000/144 = 6.94 - so this should refresh a bit more than 144 times per sec, so animation should be 144+fps, right? seems legit. def smoother. cpu usage low.
                 Thread.Sleep(_refreshRate);
+
             }
         }
 
@@ -261,14 +273,14 @@ namespace untitled_ffxiv_hunt_tracker.ViewModels
                     var mob = CurrentNearbyMobs.FirstOrDefault(m => m.Name.ToLower() == tMob.Name.ToLower());
 
                     //if (mob.Coordinates.X != tMob.Coordinates.X || mob.Coordinates.Y != tMob.Coordinates.Y)
-                    
-                        mob.Coordinates = tMob.Coordinates;
-                    
+
+                    mob.Coordinates = tMob.Coordinates;
+
 
                     //if (mob.HPPercent != tMob.HPPercent)
-                    
-                        mob.HPPercent = tMob.HPPercent;
-                    
+
+                    mob.HPPercent = tMob.HPPercent;
+
                 }
             }
 

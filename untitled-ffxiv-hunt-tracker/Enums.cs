@@ -1,6 +1,6 @@
 ﻿namespace untitled_ffxiv_hunt_tracker
 {
-    //I don't need these enums anymore. sharlayan.utilities.getzoneinfo
+    //I don't need these enums anymore. sharlayan.utilities.getzoneinfo idk
 
     public enum HuntRank
     {
@@ -13,7 +13,6 @@
 
     public enum MapID
     {
-        //https://stackoverflow.com/questions/5582228/insert-space-before-capital-letters
         //assign map values here.
         //ARR
         MiddleLaNoscea = 134,

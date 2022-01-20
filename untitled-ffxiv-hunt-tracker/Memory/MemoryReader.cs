@@ -57,7 +57,7 @@ namespace untitled_ffxiv_hunt_tracker.Memory
                 Console.WriteLine(processModel.ProcessID);
 
                 //wait a mo' for things to load
-                Thread.Sleep(2000);
+                Thread.Sleep(1000);
 
                 return true;
             }
