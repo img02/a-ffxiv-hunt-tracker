@@ -14,7 +14,7 @@ When in a map with hunt mobs, the relevant map image will appear and a player ic
 
 This detection circle covers 2 in-game coordinates in either direction around the player, and through personal testing is quite accurate.
 
-When an **A / B / S / SS** rank mob is found, a mob icon will be displayed corresponding to it's position.
+When an **A / B / S / SS** rank mob is found, a mob icon will be displayed corresponding to its position.
 
 
 ![Image of S and B, showing Rank Priority](https://i.imgur.com/kIjmPkI.png)
