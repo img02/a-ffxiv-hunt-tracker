@@ -1,6 +1,6 @@
 # a-ffxiv-hunt-tracker [WIP]
 
-### A(n) FFXIV Hunt Map / Radar
+### A(n) FFXIV Hunt Map / Radar  [(Now with ACT companion plugin)](https://github.com/imaginary-png/a-ffxiv-hunt-tracker.ACT)
 
 A standalone program that displays the current map and shows the players position, spawn points, and nearby **A, B, S, SS** Ranks.  
 
