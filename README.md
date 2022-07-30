@@ -1,6 +1,6 @@
 # a-ffxiv-hunt-tracker [WIP]
 
-### A(n) FFXIV Hunt Map / Radar
+### A(n) FFXIV Hunt Map / Radar  [(Now with ACT companion plugin)](https://github.com/imaginary-png/a-ffxiv-hunt-tracker.ACT)
 
 A standalone program that displays the current map and shows the players position, spawn points, and nearby **A, B, S, SS** Ranks.  
 
@@ -10,11 +10,15 @@ Accurately depicts the location, direction, and movement of the player and any r
 
 [GFYCAT OF THIS PROGRAM IN ACTION, CLICK HD](https://gfycat.com/ifr/BigYoungIcefish)
 
+
+https://user-images.githubusercontent.com/70348218/164956167-eee6cb1d-9227-47b3-9561-b24219b34ba2.mp4
+
+
 When in a map with hunt mobs, the relevant map image will appear and a player icon with a detection circle will appear in relation to the players position.
 
 This detection circle covers 2 in-game coordinates in either direction around the player, and through personal testing is quite accurate.
 
-When an **A / B / S / SS** rank mob is found, a mob icon will be displayed corresponding to it's position.
+When an **A / B / S / SS** rank mob is found, a mob icon will be displayed corresponding to its position.
 
 
 ![Image of S and B, showing Rank Priority](https://i.imgur.com/kIjmPkI.png)
