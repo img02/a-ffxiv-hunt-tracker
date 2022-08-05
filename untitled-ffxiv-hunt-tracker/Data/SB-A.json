@@ -48,6 +48,12 @@
 		"MapTerritory": "TheRubySea"
 	},
 	{
+		"Name": " Gajasura",
+		"ModelID": 5998,
+		"Rank": "A",
+		"IsEnabled": "true"
+	},
+	{
 		"Name": "Angada",
 		"ModelID": 5999,
 		"Rank": "A",
