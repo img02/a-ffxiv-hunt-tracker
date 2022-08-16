@@ -1,4 +1,4 @@
-# a-ffxiv-hunt-tracker [WIP]
+# a-ffxiv-hunt-tracker [WIP] ![downloads count](https://img.shields.io/github/downloads/imaginary-png/a-ffxiv-hunt-tracker/total.svg)
 
 ### A(n) FFXIV Hunt Map / Radar  [(Now with ACT companion plugin)](https://github.com/imaginary-png/a-ffxiv-hunt-tracker.ACT)
 
