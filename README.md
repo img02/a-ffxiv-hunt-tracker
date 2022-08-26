@@ -1,4 +1,6 @@
-# a-ffxiv-hunt-tracker [WIP] ![downloads count](https://img.shields.io/github/downloads/imaginary-png/a-ffxiv-hunt-tracker/total.svg)
+# a-ffxiv-hunt-tracker ~[WIP]~ ![downloads count](https://img.shields.io/github/downloads/imaginary-png/a-ffxiv-hunt-tracker/total.svg)
+
+*I've made a better version of a hunt radar that is available via [Xivlauncher / Dalamud plugins](https://github.com/goatcorp/FFXIVQuickLauncher) - [HuntHelper](https://github.com/imaginary-png/HuntHelper)
 
 ### A(n) FFXIV Hunt Map / Radar  [(Now with ACT companion plugin)](https://github.com/imaginary-png/a-ffxiv-hunt-tracker.ACT)
 
